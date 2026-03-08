@@ -30,6 +30,11 @@ if ($secret !== CHAT_CRON_SECRET) {
     exit;
 }
 
+// Ensure is_ai column exists in messages table (migration)
+$db = getDB();
+try { $db->exec("ALTER TABLE messages ADD COLUMN is_ai INTEGER DEFAULT 0"); } catch (Exception $e) { /* column already exists */ }
+$db->close();
+
 // Ensure queue table exists
 $db = getDB();
 $db->exec("CREATE TABLE IF NOT EXISTS chat_queue (
