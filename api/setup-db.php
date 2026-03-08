@@ -106,6 +106,7 @@ try {
         relationship_status TEXT,
         favorite_teams TEXT,
         has_kids INTEGER DEFAULT 0,
+        vibe_type TEXT DEFAULT 'unknown',
         notes TEXT,
         last_topic TEXT,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
