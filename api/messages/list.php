@@ -62,7 +62,31 @@ $db->close();
 // Reverse so oldest first (for chat display)
 $messages = array_reverse($messages);
 
+// Check for pending AI responses in the queue
+$hasPending = false;
+$isTyping = false;
+try {
+    $db2 = getDB();
+    $qStmt = $db2->prepare("SELECT COUNT(*) as cnt FROM chat_queue WHERE fan_user_id = :uid AND status = 'scheduled'");
+    $qStmt->bindValue(':uid', $user['id'], SQLITE3_INTEGER);
+    $qResult = $qStmt->execute();
+    $qRow = $qResult->fetchArray(SQLITE3_ASSOC);
+    $hasPending = intval($qRow['cnt'] ?? 0) > 0;
+
+    // "Typing" if response due within 2 minutes
+    $tStmt = $db2->prepare("SELECT COUNT(*) as cnt FROM chat_queue WHERE fan_user_id = :uid AND status = 'scheduled' AND scheduled_at <= datetime('now', '+2 minutes')");
+    $tStmt->bindValue(':uid', $user['id'], SQLITE3_INTEGER);
+    $tResult = $tStmt->execute();
+    $tRow = $tResult->fetchArray(SQLITE3_ASSOC);
+    $isTyping = intval($tRow['cnt'] ?? 0) > 0;
+    $db2->close();
+} catch (Exception $e) {
+    // chat_queue table may not exist yet — that's fine
+}
+
 jsonResponse([
     'ok' => true,
     'messages' => $messages,
+    'has_pending' => $hasPending,
+    'is_typing' => $isTyping,
 ]);
