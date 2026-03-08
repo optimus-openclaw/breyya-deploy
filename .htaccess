@@ -1,0 +1,20 @@
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# API routes — pass to PHP
+RewriteRule ^api/ - [L]
+
+# Existing files/directories — serve directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# SPA routes — serve the matching static HTML if it exists
+# /feed -> /feed.html, /gallery -> /gallery.html, etc.
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
+RewriteRule ^(.+)$ /$1.html [L]
+
+# Fallback to index.html for unknown routes
+RewriteRule ^ /index.html [L]
