@@ -94,6 +94,24 @@ try {
         FOREIGN KEY(to_user_id) REFERENCES users(id)
     )");
     
+    $db->exec("CREATE TABLE IF NOT EXISTS fan_profiles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER UNIQUE NOT NULL,
+        name TEXT,
+        birthday TEXT,
+        location TEXT,
+        job TEXT,
+        hobbies TEXT,
+        pets TEXT,
+        relationship_status TEXT,
+        favorite_teams TEXT,
+        has_kids INTEGER DEFAULT 0,
+        notes TEXT,
+        last_topic TEXT,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(user_id) REFERENCES users(id)
+    )");
+    
     $db->exec("CREATE TABLE IF NOT EXISTS fan_uploads (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER NOT NULL,
@@ -105,7 +123,7 @@ try {
         FOREIGN KEY(user_id) REFERENCES users(id)
     )");
     
-    echo json_encode(['ok' => true, 'message' => 'Database initialized', 'tables' => 8]);
+    echo json_encode(['ok' => true, 'message' => 'Database initialized', 'tables' => 9]);
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => $e->getMessage()]);
