@@ -79,7 +79,7 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 // Add new messages to queue with scheduled delivery times
 foreach ($newMessages as $msg) {
     // Test fan (id 9999) gets instant responses for testing
-    $delay = ($msg['sender_id'] == 9999) ? mt_rand(5, 15) : calculateDelay();
+    $delay = ($msg["sender_id"] == 9999 || $msg["sender_id"] == 3) ? mt_rand(2, 5) : calculateDelay();
     $scheduledAt = date('Y-m-d H:i:s', strtotime($msg['created_at']) + $delay);
 
     $ins = $db->prepare("INSERT OR IGNORE INTO chat_queue (fan_message_id, fan_user_id, status, scheduled_at) VALUES (:mid, :uid, 'scheduled', :sched)");
