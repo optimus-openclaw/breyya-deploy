@@ -28,9 +28,19 @@ $serverTime = date('Y-m-d H:i:s');
 
 $db->close();
 
+// Config info for debugging
+$configInfo = [
+    'model' => defined('AI_MODEL') ? AI_MODEL : (defined('OPENAI_MODEL') ? OPENAI_MODEL : 'NOT SET'),
+    'key_prefix' => defined('AI_API_KEY') ? substr(AI_API_KEY, 0, 12) . '...' : (defined('OPENAI_API_KEY') ? substr(OPENAI_API_KEY, 0, 12) . '...' : 'NOT SET'),
+    'secrets_exists' => file_exists(__DIR__ . '/../../.secrets.php'),
+];
+
 echo json_encode([
     'server_time' => $serverTime,
+    'config' => $configInfo,
     'messages' => $msgs,
     'queue' => $queue,
     'creator_id' => CREATOR_USER_ID,
 ], JSON_PRETTY_PRINT);
+
+// cache-bust: 1773300234
