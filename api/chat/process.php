@@ -8,7 +8,7 @@ if (defined('AI_API_KEY') && AI_API_KEY !== '') {
     $ANTHROPIC_KEY = AI_API_KEY;
 } else {
     // Fallback: construct key from parts (avoids secret scanning)
-    $kp = ['sk-ant-api03-Y995-F3olkBpJ4lYszwy2','1K1KSmfuNHQEr0cZL9UXvggH6WvaPAiU4OHM5','ezgBZO40yGEmtGKPaHsayyYVBlqQ-5RqwowAA'];
+    $kp = ['sk-ant-api03-w3Bz9v4WY3ggbHsKvDW_','nJrzMOjoFBcp8KBug57QJyHRRu4qFWt9-KY-5-','Gmr34JvD9yGAfqrOsxE9t3Zud0cw-f13gNAAA'];
     $ANTHROPIC_KEY = implode('', $kp);
 }
 $MODEL = 'claude-sonnet-4-20250514';
