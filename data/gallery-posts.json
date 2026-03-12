@@ -1,0 +1,42 @@
+[
+  {
+    "id": 8,
+    "date": "2026-03-12",
+    "outfit": "White Fuzzy Crop Top",
+    "caption": "Fresh content, just for you ✨",
+    "image": "/gallery/post-8.jpg",
+    "type": "teaser"
+  },
+  {
+    "id": 7,
+    "date": "2026-03-12",
+    "outfit": "Pink Heart Tee",
+    "caption": "Your favorite view 👀",
+    "image": "/gallery/post-7.jpg",
+    "type": "teaser"
+  },
+  {
+    "id": 6,
+    "date": "2026-03-12",
+    "outfit": "Mint Sweater Vest",
+    "caption": "Something special for you today 💕",
+    "image": "/gallery/post-6.jpg",
+    "type": "teaser"
+  },
+  {
+    "id": 5,
+    "date": "2026-03-12",
+    "outfit": "Gray Crop Tee",
+    "caption": "Who's ready for this? 😘",
+    "image": "/gallery/post-5.jpg",
+    "type": "teaser"
+  },
+  {
+    "id": 4,
+    "date": "2026-03-12",
+    "outfit": "Red Target Tshirt",
+    "caption": "Fresh content, just for you ✨",
+    "image": "/gallery/post-4.jpg",
+    "type": "teaser"
+  }
+]
