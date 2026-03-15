@@ -83,9 +83,7 @@ function getCurrentUser(): ?array {
 function requireAuth(): array {
     $user = getCurrentUser();
     if (!$user) {
-        http_response_code(401);
-        echo json_encode(['error' => 'Authentication required']);
-        exit;
+        jsonResponse(['error' => 'Authentication required'], 401);
     }
     return $user;
 }
@@ -96,9 +94,7 @@ function requireAuth(): array {
 function requireCreator(): array {
     $user = requireAuth();
     if ($user['role'] !== 'creator' && $user['role'] !== 'admin') {
-        http_response_code(403);
-        echo json_encode(['error' => 'Creator access required']);
-        exit;
+        jsonResponse(['error' => 'Creator access required'], 403);
     }
     return $user;
 }
