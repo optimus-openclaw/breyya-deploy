@@ -50,13 +50,6 @@ if ($testFanMode && ($user['role'] === 'creator' || $user['role'] === 'admin')) 
 
 $db = getDB();
 
-// Ensure ppv_preview_url column exists (safe migration)
-try {
-    $db->exec("ALTER TABLE messages ADD COLUMN ppv_preview_url TEXT DEFAULT ''");
-} catch (Exception $e) {
-    // Column already exists — ignore
-}
-
 // Get messages in this conversation
 $stmt = $db->prepare("
     SELECT m.*, 
@@ -80,12 +73,8 @@ $result = $stmt->execute();
 
 $messages = [];
 while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-    // Always include ppv_preview_url
-    $row['ppv_preview_url'] = $row['ppv_preview_url'] ?? '';
-    
-    // If PPV and not unlocked and not the sender, hide full media but keep preview
+    // If PPV and not unlocked and not the sender, hide media
     if ($row['is_ppv'] && !$row['is_unlocked'] && $row['sender_id'] != $user['id']) {
-        // Keep ppv_preview_url for the blurred teaser, hide real media
         $row['media_url'] = '';
         $row['locked'] = true;
     } else {
