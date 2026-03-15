@@ -10,9 +10,15 @@ if (($_GET['secret'] ?? '') !== $SECRET) {
     die(json_encode(['error' => 'no']));
 }
 
-$db = new SQLite3($DB_PATH);
+try {
+    $db = new SQLite3($DB_PATH);
+} catch (Exception $e) {
+    die(json_encode(['ok' => false, 'error' => 'db_connect_failed']));
+}
 $db->busyTimeout(5000);
 $db->exec("CREATE TABLE IF NOT EXISTS churn_reengagement (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_user_id INTEGER NOT NULL, sent_at TEXT DEFAULT (datetime('now')), message_text TEXT DEFAULT '')");
+$db->exec("CREATE TABLE IF NOT EXISTS fan_profiles (fan_user_id INTEGER PRIMARY KEY, display_name TEXT DEFAULT '', preferences TEXT DEFAULT '', topics_discussed TEXT DEFAULT '', ppv_purchases_total INTEGER DEFAULT 0, total_messages INTEGER DEFAULT 0, last_active TEXT DEFAULT '', notes TEXT DEFAULT '', whale_score INTEGER DEFAULT 0, updated_at TEXT DEFAULT (datetime('now')))");
+@$db->exec("ALTER TABLE fan_profiles ADD COLUMN whale_score INTEGER DEFAULT 0");
 
 // Re-engagement message templates — warm, personal, not spammy
 $templates = [
