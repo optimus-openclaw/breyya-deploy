@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 header('Content-Type: application/json');
 
 $SECRET = 'breyya-chat-cron-2026';
@@ -78,4 +80,3 @@ echo json_encode([
     'errors' => $errors,
     'ts' => date('Y-m-d H:i:s')
 ]);
-// cache-bust 1773589288
