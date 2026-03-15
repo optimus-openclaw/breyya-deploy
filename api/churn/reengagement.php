@@ -33,18 +33,24 @@ $templates = [
 ];
 
 // Find churned fans: 5+ messages, last active 14-60 days ago, no re-engagement this month
-$churned = $db->query(" 
-    SELECT fp.fan_user_id FROM fan_profiles fp
-    WHERE fp.total_messages >= 5
-      AND fp.last_active IS NOT NULL
-      AND fp.last_active != ''
-      AND julianday('now') - julianday(fp.last_active) BETWEEN 14 AND 60
-      AND fp.fan_user_id NOT IN (
+$churned = @$db->query("
+    SELECT fan_user_id FROM fan_profiles
+    WHERE total_messages >= 5
+      AND last_active IS NOT NULL
+      AND last_active != ''
+      AND julianday('now') - julianday(last_active) BETWEEN 14 AND 60
+      AND fan_user_id NOT IN (
           SELECT fan_user_id FROM churn_reengagement WHERE strftime('%Y-%m', sent_at) = strftime('%Y-%m', 'now')
       )
-    ORDER BY fp.whale_score DESC, fp.total_messages DESC
+    ORDER BY whale_score DESC, total_messages DESC
     LIMIT 5
 ");
+
+if (!$churned) {
+    $db->close();
+    echo json_encode(['ok' => true, 'churned_fans_messaged' => 0, 'errors' => 0, 'note' => 'no fan_profiles data yet', 'ts' => date('Y-m-d H:i:s')]);
+    exit;
+}
 
 $sent = 0;
 $errors = 0;
