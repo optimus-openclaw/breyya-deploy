@@ -23,7 +23,7 @@
   /* Profile */
   .profile-wrap { position: relative; display: inline-block; margin-bottom: 20px; }
   .profile-ring {
-    width: 162px; height: 162px; border-radius: 50%;
+    width: 243px; height: 243px; border-radius: 50%;
     background: linear-gradient(135deg, #00b4d8, #7dd8f0);
     padding: 3px; display: inline-block;
   }
@@ -111,6 +111,21 @@
   .footer { font-size: 12px; color: #3d5368; }
   .footer a { color: #3d5368; text-decoration: none; margin: 0 8px; }
   .footer a:hover { color: #7a93a8; }
+
+  @media (min-width: 768px) {
+    .container { max-width: 600px; }
+    .profile-ring { width: 280px; height: 280px; }
+    h1 { font-size: 36px; }
+    .tagline { font-size: 15px; }
+    .bio { font-size: 18px; }
+    .benefits { padding: 28px; }
+    .benefit { font-size: 18px; padding: 14px 0; }
+    .benefit-icon { font-size: 24px; }
+    .btn-primary { font-size: 18px; padding: 20px; }
+    .btn-secondary { font-size: 17px; padding: 18px; }
+    .socials a { width: 52px; height: 52px; font-size: 22px; }
+    .proof-text { font-size: 15px; }
+  }
 </style>
 </head>
 <body>
