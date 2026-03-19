@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breyya — Log In</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: #0d1b2a;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .container { width: 100%; max-width: 400px; text-align: center; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: #7a93a8; margin-bottom: 32px; }
+  .form-group { margin-bottom: 16px; text-align: left; }
+  label { display: block; font-size: 13px; color: #7a93a8; margin-bottom: 6px; }
+  input {
+    width: 100%; padding: 14px 16px;
+    background: #13243a; border: 1px solid #1e3350;
+    border-radius: 12px; color: #fff; font-family: inherit; font-size: 15px;
+    outline: none; transition: border-color 0.2s;
+  }
+  input:focus { border-color: #00b4d8; }
+  input::placeholder { color: #3d5368; }
+  .btn {
+    display: block; width: 100%;
+    background: #00b4d8; color: #fff;
+    font-family: inherit; font-size: 16px; font-weight: 700;
+    padding: 16px; border-radius: 50px; border: none;
+    cursor: pointer; letter-spacing: 0.5px;
+    margin-top: 24px; transition: background 0.2s, transform 0.1s;
+  }
+  .btn:hover { background: #0090b0; transform: scale(1.02); }
+  .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .error { color: #ff6b6b; font-size: 13px; margin-top: 12px; display: none; }
+  .back { display: block; margin-top: 24px; font-size: 13px; color: #7a93a8; text-decoration: none; }
+  .back:hover { color: #00b4d8; }
+  .signup-link { margin-top: 16px; font-size: 13px; color: #7a93a8; }
+  .signup-link a { color: #00b4d8; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Welcome back</h1>
+  <p class="subtitle">Log in to your account</p>
+
+  <form id="loginForm">
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="••••••••" required>
+    </div>
+    <button type="submit" class="btn" id="submitBtn">LOG IN</button>
+    <p class="error" id="errorMsg"></p>
+  </form>
+
+  <p class="signup-link">Don't have an account? <a href="/join">Join now</a></p>
+  <a href="/" class="back">← Back to home</a>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const errorEl = document.getElementById('errorMsg');
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  btn.disabled = true;
+  btn.textContent = 'LOGGING IN...';
+  errorEl.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/auth/login.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+
+    if (data.ok && data.token) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      window.location.href = '/feed';
+    } else {
+      errorEl.textContent = data.error || 'Invalid email or password';
+      errorEl.style.display = 'block';
+    }
+  } catch (err) {
+    errorEl.textContent = 'Something went wrong. Try again.';
+    errorEl.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'LOG IN';
+});
+</script>
+</body>
+</html>
