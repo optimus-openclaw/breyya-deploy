@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
   body {
     font-family: 'DM Sans', -apple-system, sans-serif;
     background: #0d1b2a;
@@ -18,7 +19,25 @@
     justify-content: center;
     padding: 80px 20px 60px;
   }
-  .container { width: 100%; max-width: 480px; text-align: center; }
+  .container { width: 100%; max-width: 480px; text-align: center; visibility: hidden; }
+
+  /* Age gate overlay */
+  #age-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(13,27,42,0.95);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+  #age-card {
+    background: #0d1b2a; color: #fff; padding: 28px; border-radius: 12px;
+    max-width: 420px; width: calc(100% - 40px); text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  }
+  #age-card h2 { color: #00b4d8; margin-bottom: 12px; font-size: 22px; }
+  #age-card p { color: #bcd8e6; margin-bottom: 18px; }
+  .age-actions { display:flex; gap:12px; justify-content:center; }
+  .age-btn { padding:12px 18px; border-radius: 10px; font-weight:700; cursor:pointer; border:none; }
+  .age-yes { background:#00b4d8; color:#012; }
+  .age-no { background:transparent; border:2px solid #00b4d8; color:#00b4d8; }
 
   /* Profile */
   .profile-wrap { position: relative; display: inline-block; margin-bottom: 20px; }
@@ -129,7 +148,18 @@
 </style>
 </head>
 <body>
-<div class="container">
+<div id="age-overlay" aria-hidden="false">
+  <div id="age-card" role="dialog" aria-modal="true" aria-labelledby="age-heading">
+    <h2 id="age-heading">Are you 18 or older?</h2>
+    <p>By entering this site you confirm that you are at least 18 years of age.</p>
+    <div class="age-actions">
+      <button class="age-btn age-yes" id="age-yes">Yes, I'm 18+</button>
+      <button class="age-btn age-no" id="age-no">No, take me back</button>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="main-content">
 
   <!-- Profile photo -->
   <div class="profile-wrap">
@@ -141,7 +171,6 @@
   </div>
 
   <!-- Name -->
-  <!-- REPLACE: update creator name if needed -->
   <h1>Breyya</h1>
 
   <!-- Tagline -->
@@ -155,7 +184,6 @@
     <div class="avatar-stack">
       <span>👤</span><span>👤</span><span>👤</span>
     </div>
-    <!-- REPLACE: update member count when real data available -->
     <span class="proof-text"><strong>183 members</strong> joined</span>
   </div>
 
@@ -172,17 +200,15 @@
   </div>
 
   <!-- CTA -->
-  <!-- REPLACE: update href to real subscription/signup URL when CCBill approved -->
   <a href="/join" class="btn-primary">JOIN MY WORLD</a>
 
   <!-- Social icons (SVG-free simple text icons) -->
   <div class="socials">
-    <!-- REPLACE: update href with real social URLs -->
-    <a href="https://www.instagram.com/msbreyya" title="Instagram" aria-label="Instagram">📷</a>
-    <a href="https://www.tiktok.com/@breyya.com" title="TikTok" aria-label="TikTok">🎵</a>
-    <a href="https://x.com/TheBreyya" title="X / Twitter" aria-label="X">𝕏</a>
-    <a href="https://www.youtube.com/@msbreyya" title="YouTube" aria-label="YouTube">▶</a>
-    <a href="https://www.reddit.com/u/Breyya_" title="Reddit" aria-label="Reddit">🤖</a>
+    <a href="https://www.instagram.com/msbreyya" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener noreferrer">📷</a>
+    <a href="https://www.tiktok.com/@breyya.com" title="TikTok" aria-label="TikTok" target="_blank" rel="noopener noreferrer">🎵</a>
+    <a href="https://x.com/TheBreyya" title="X / Twitter" aria-label="X" target="_blank" rel="noopener noreferrer">𝕏</a>
+    <a href="https://www.youtube.com/@msbreyya" title="YouTube" aria-label="YouTube" target="_blank" rel="noopener noreferrer">▶</a>
+    <a href="https://www.reddit.com/u/Breyya_" title="Reddit" aria-label="Reddit" target="_blank" rel="noopener noreferrer">🤖</a>
   </div>
 
   <!-- Login -->
@@ -193,8 +219,40 @@
     <a href="/terms">Terms</a>
     <a href="/privacy">Privacy</a>
     <a href="/contact">Contact</a>
+    <a href="/2257">2257</a>
+    <a href="/anti-trafficking">Anti-Trafficking</a>
   </p>
 
 </div>
+
+<script>
+(function(){
+  try{
+    var shown = localStorage.getItem('breyya_age_verified');
+    var overlay = document.getElementById('age-overlay');
+    var content = document.getElementById('main-content');
+    function showContent(){ content.style.visibility = 'visible'; overlay.style.display='none'; }
+    function hideContent(){ content.style.visibility = 'hidden'; overlay.style.display='flex'; }
+    if(shown === 'yes'){
+      showContent();
+    } else {
+      hideContent();
+    }
+    document.getElementById('age-yes').addEventListener('click', function(){
+      localStorage.setItem('breyya_age_verified','yes');
+      showContent();
+    });
+    document.getElementById('age-no').addEventListener('click', function(){
+      window.location.href = 'https://www.google.com';
+    });
+    // Prevent flash of content before script runs
+    document.documentElement.style.background = '#0d1b2a';
+  }catch(e){
+    // if anything fails, reveal content
+    document.getElementById('main-content').style.visibility='visible';
+    var o = document.getElementById('age-overlay'); if(o) o.style.display='none';
+  }
+})();
+</script>
 </body>
 </html>

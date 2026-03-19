@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Logout — Breyya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>body{font-family:'DM Sans',system-ui;background:#0d1b2a;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;margin:0} .card{max-width:600px;padding:24px;text-align:center}</style>
+</head>
+<body>
+<div class="card">
+  <p>Logging out…</p>
+  <p id="link-area" style="margin-top:12px"></p>
+</div>
+<script>
+(function(){
+  try{
+    // Clear common localStorage keys
+    try{ localStorage.removeItem('token'); }catch(e){}
+    try{ localStorage.removeItem('user'); }catch(e){}
+    try{ localStorage.clear(); }catch(e){}
+    // If server-side logout exists, show link
+    var linkArea = document.getElementById('link-area');
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD','/api/auth/logout.php',true);
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState===4){
+        if(xhr.status===200){
+          linkArea.innerHTML = '<a href="/api/auth/logout.php" style="color:#00b4d8">Also log out from server</a>';
+        } else {
+          linkArea.innerHTML = '';
+        }
+        setTimeout(function(){ window.location.href = '/'; },800);
+      }
+    };
+    xhr.send(null);
+  }catch(e){ window.location.href = '/'; }
+})();
+</script>
+</body>
+</html>
