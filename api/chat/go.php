@@ -30,7 +30,7 @@ try {
     $processed = 0; $queued = 0; $errors = 0; $debug = [];
 
     // Queue new messages
-    $r = $db->query("SELECT m.id, m.sender_id, m.content, m.created_at FROM messages m WHERE m.receiver_id = $CREATOR_ID AND m.sender_id != $CREATOR_ID AND m.is_ai = 0 AND m.id NOT IN (SELECT fan_message_id FROM chat_queue) ORDER BY m.created_at ASC LIMIT 20");
+    $r = $db->query("SELECT m.id, m.sender_id, m.content, m.created_at FROM messages m WHERE m.receiver_id = $CREATOR_ID AND m.sender_id != $CREATOR_ID AND m.is_ai = 0 AND m.id NOT IN (SELECT fan_message_id FROM chat_queue) ORDER BY m.created_at DESC LIMIT 6");
     while ($row = $r->fetchArray(SQLITE3_ASSOC)) {
         $delay = ($row['sender_id'] == 3 || $row['sender_id'] == 9999) ? 3 : 1800;
         $sched = date('Y-m-d H:i:s', strtotime($row['created_at']) + $delay);
