@@ -45,7 +45,28 @@ try {
 
     $debug[] = 'ready=' . count($items);
 
+    // Group by fan - only process latest message per fan (combine multiple)
+    $fanItems = [];
     foreach ($items as $item) {
+        $fid = intval($item['fan_id']);
+        $fanItems[$fid][] = $item;
+    }
+    
+    // For each fan, mark all but the last as delivered (skip them)
+    $processItems = [];
+    foreach ($fanItems as $fid => $msgs) {
+        if (count($msgs) > 1) {
+            // Mark earlier messages as delivered without response
+            for ($i = 0; $i < count($msgs) - 1; $i++) {
+                $qid = intval($msgs[$i]['qid']);
+                $db->exec("UPDATE chat_queue SET status='delivered', ai_response='(combined)', delivered_at=datetime('now') WHERE id=$qid");
+            }
+        }
+        // Only process the last message
+        $processItems[] = end($msgs);
+    }
+
+    foreach ($processItems as $item) {
         // Get history
         $fid = intval($item['fan_id']);
         $hr = $db->query("SELECT sender_id, content FROM messages WHERE (sender_id=$fid AND receiver_id=$CREATOR_ID) OR (sender_id=$CREATOR_ID AND receiver_id=$fid) ORDER BY created_at ASC LIMIT 20");
