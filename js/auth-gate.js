@@ -28,11 +28,11 @@
         document.documentElement.style.visibility = 'visible';
       } else {
         // Not logged in — redirect
-        window.location.href = '/login/';
+        window.location.href = '/';
       }
     })
     .catch(function() {
       // API error — redirect to be safe
-      window.location.href = '/login/';
+      window.location.href = '/';
     });
 })();
