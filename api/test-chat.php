@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-// Test the specific tables and operations the chat processor needs
+// Test the chat processor parts that might be failing
 $SECRET = 'breyya-chat-cron-2026';
 $secret = $_GET['secret'] ?? '';
 
@@ -11,39 +11,54 @@ if ($secret !== $SECRET) {
 }
 
 try {
+    // Test secrets loading
+    $_sf = __DIR__ . '/../.secrets.php';
+    echo json_encode(['step' => 1, 'secrets_file' => $_sf, 'exists' => file_exists($_sf)]);
+    
+    if (file_exists($_sf)) require_once $_sf;
+    if (defined('AI_API_KEY') && AI_API_KEY !== '') {
+        $ANTHROPIC_KEY = AI_API_KEY;
+        echo json_encode(['step' => 2, 'key_loaded' => substr($ANTHROPIC_KEY, 0, 10) . '...']);
+    } else {
+        $ANTHROPIC_KEY = '';
+        echo json_encode(['step' => 2, 'key_loaded' => false]);
+    }
+    
+    // Test inventory paths
+    $INVENTORY_PATHS = [
+        '/Users/optimus/.openclaw/workspace/skills/breyya-site/r2-inventory.json',
+        __DIR__ . '/../../data/r2-inventory.json',
+    ];
+    
+    $inventoryStatus = [];
+    foreach ($INVENTORY_PATHS as $p) {
+        $inventoryStatus[] = ['path' => $p, 'exists' => file_exists($p)];
+    }
+    echo json_encode(['step' => 3, 'inventory_paths' => $inventoryStatus]);
+    
+    // Test timezone operations
+    $pt = new DateTimeZone('America/Los_Angeles');
+    $now = new DateTime('now', $pt);
+    $hour = (int)$now->format('G');
+    echo json_encode(['step' => 4, 'timezone_test' => 'OK', 'current_hour_pt' => $hour]);
+    
+    // Test database operations
     $DB_PATH = __DIR__ . '/../data/breyya.db';
     $db = new SQLite3($DB_PATH);
     $db->busyTimeout(5000);
+    echo json_encode(['step' => 5, 'database' => 'OK']);
     
-    echo json_encode(['step' => 1, 'msg' => 'DB connection OK']);
-
-    // Test all the table creations from the chat processor
-    $db->exec("CREATE TABLE IF NOT EXISTS chat_queue (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_message_id INTEGER NOT NULL, fan_user_id INTEGER NOT NULL, status TEXT DEFAULT 'pending', scheduled_at TEXT, ai_response TEXT DEFAULT '', delivered_at TEXT, created_at TEXT DEFAULT (datetime('now')), UNIQUE(fan_message_id))");
-    echo json_encode(['step' => 2, 'msg' => 'chat_queue table OK']);
-    
-    $db->exec("CREATE TABLE IF NOT EXISTS ppv_sales (id INTEGER PRIMARY KEY, fan_user_id INTEGER, content_key TEXT, price_cents INTEGER, sold_at TEXT DEFAULT (datetime('now')))");
-    echo json_encode(['step' => 3, 'msg' => 'ppv_sales table OK']);
-    
-    $db->exec("CREATE TABLE IF NOT EXISTS daily_engagement (id INTEGER PRIMARY KEY, fan_user_id INTEGER, date TEXT, message_count INTEGER DEFAULT 0, bonus_messages INTEGER DEFAULT 0, UNIQUE(fan_user_id, date))");
-    echo json_encode(['step' => 4, 'msg' => 'daily_engagement table OK']);
-    
-    $db->exec("CREATE TABLE IF NOT EXISTS fan_profiles (fan_user_id INTEGER PRIMARY KEY, display_name TEXT DEFAULT '', preferences TEXT DEFAULT '', topics_discussed TEXT DEFAULT '', ppv_purchases_total INTEGER DEFAULT 0, total_messages INTEGER DEFAULT 0, last_active TEXT DEFAULT '', notes TEXT DEFAULT '', whale_score INTEGER DEFAULT 0, updated_at TEXT DEFAULT (datetime('now')))" );
-    echo json_encode(['step' => 5, 'msg' => 'fan_profiles table OK']);
-
-    // Test column additions (these might fail silently)
-    @$db->exec("ALTER TABLE messages ADD COLUMN is_ai INTEGER DEFAULT 0");
-    @$db->exec("ALTER TABLE messages ADD COLUMN is_ppv INTEGER DEFAULT 0");
-    @$db->exec("ALTER TABLE messages ADD COLUMN ppv_price_cents INTEGER DEFAULT 0");
-    @$db->exec("ALTER TABLE messages ADD COLUMN media_url TEXT DEFAULT ''");
-    @$db->exec("ALTER TABLE messages ADD COLUMN ppv_content_key TEXT DEFAULT ''");
-    echo json_encode(['step' => 6, 'msg' => 'message table alterations OK']);
-    
-    // Test a simple query that the processor does
-    $r = $db->query("SELECT COUNT(*) FROM messages");
-    echo json_encode(['step' => 7, 'msg' => 'query test OK']);
+    // Test the main query from chat processor
+    $CREATOR_ID = 1;
+    $r = $db->query("SELECT m.id, m.sender_id, m.content, m.created_at FROM messages m WHERE m.receiver_id = $CREATOR_ID AND m.sender_id != $CREATOR_ID AND m.is_ai = 0 AND m.id NOT IN (SELECT fan_message_id FROM chat_queue) ORDER BY m.created_at ASC LIMIT 20");
+    $count = 0;
+    while ($row = $r->fetchArray(SQLITE3_ASSOC)) {
+        $count++;
+    }
+    echo json_encode(['step' => 6, 'query_test' => 'OK', 'new_messages' => $count]);
     
     $db->close();
-    echo json_encode(['step' => 8, 'msg' => 'All tests passed - chat processor should work now']);
+    echo json_encode(['step' => 7, 'msg' => 'All chat processor components tested successfully']);
     
 } catch (Throwable $e) {
     echo json_encode(['error' => $e->getMessage(), 'line' => $e->getLine(), 'file' => $e->getFile()]);
