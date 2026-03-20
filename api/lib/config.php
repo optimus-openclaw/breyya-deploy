@@ -1,27 +1,36 @@
 <?php
 /**
- * Breyya.com — Configuration
- * API keys loaded from environment or local secrets file
+ * Breyya.com Configuration
  */
 
-// Load secrets from a .gitignored file if it exists
-$secretsFile = __DIR__ . '/../../.secrets.php';
-if (file_exists($secretsFile)) {
-    require_once $secretsFile;
-}
+// Environment
+define('ENV', 'production'); // 'development' or 'production'
+
+// Database
+define('DATABASE_PATH', '/home/u726473634/domains/breyya.com/site_database.db');
 
 // OpenAI
-if (!defined('OPENAI_API_KEY')) {
-    define('OPENAI_API_KEY', getenv('OPENAI_API_KEY') ?: '');
-}
-define('OPENAI_MODEL', 'gpt-4.1-mini');
-define('OPENAI_MAX_TOKENS', 150);
-define('OPENAI_TEMPERATURE', 0.8);
+define('OPENAI_API_KEY', getenv('OPENAI_API_KEY') ?: 'sk-PLACEHOLDER');
+define('OPENAI_MODEL', 'gpt-4o-mini');
 
-// Chat processing secret (protect cron endpoint)
-if (!defined('CHAT_CRON_SECRET')) {
-    define('CHAT_CRON_SECRET', getenv('CHAT_CRON_SECRET') ?: 'breyya-cron-2026-q7z');
-}
+// Cron secrets
+define('CHAT_CRON_SECRET', 'breyya-chat-cron-2026');
 
-// Creator user ID (convention: first user created is the creator)
-define('CREATOR_USER_ID', 1);
+// User IDs
+define('CREATOR_USER_ID', 1); // Breyya's user ID
+
+// Auth
+define('JWT_SECRET', getenv('JWT_SECRET') ?: 'breyya-jwt-secret-2026');
+define('SESSION_TIMEOUT', 3600 * 24 * 30); // 30 days
+
+// CCBill
+define('CCBILL_ACCOUNT', '951821');
+define('CCBILL_SUBACCOUNT', '0000');
+define('CCBILL_FLEXFORMS_ID', '08c1b7e7-4885-4b46-8f30-5e0aa0df0b83');
+define('CCBILL_SALT_KEY', getenv('CCBILL_SALT_KEY') ?: 'PLACEHOLDER');
+
+// Site settings
+define('SITE_NAME', 'Breyya');
+define('SITE_URL', 'https://breyya.com');
+define('SUPPORT_EMAIL', 'support@breyya.com');
+define('SUBSCRIPTION_PRICE', 20.00);

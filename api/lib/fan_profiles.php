@@ -1,174 +1,139 @@
 <?php
 /**
- * Breyya.com — Fan Profile Management
- * Tracks fan data, classification, and vibe types
+ * Fan profile and classification utilities
  */
 
 require_once __DIR__ . '/database.php';
-require_once __DIR__ . '/config.php';
 
 /**
- * Get or create a fan profile
+ * Get fan profile data
+ * @param int $fanId Fan user ID
+ * @return array Profile data
  */
-function getFanProfile(int $userId): array {
+function getFanProfile(int $fanId): array {
     $db = getDB();
-
-    // Ensure fan_profiles table exists (migration)
-    $db->exec("CREATE TABLE IF NOT EXISTS fan_profiles (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER UNIQUE NOT NULL,
-        name TEXT DEFAULT '',
-        birthday TEXT DEFAULT '',
-        location TEXT DEFAULT '',
-        job TEXT DEFAULT '',
-        hobbies TEXT DEFAULT '',
-        pets TEXT DEFAULT '',
-        relationship_status TEXT DEFAULT '',
-        favorite_teams TEXT DEFAULT '',
-        has_kids INTEGER DEFAULT 0,
-        vibe_type TEXT DEFAULT 'unknown',
-        notes TEXT DEFAULT '',
-        last_topic TEXT DEFAULT '',
-        message_count INTEGER DEFAULT 0,
-        last_active TEXT DEFAULT (datetime('now')),
-        updated_at TEXT DEFAULT (datetime('now')),
-        FOREIGN KEY(user_id) REFERENCES users(id)
-    )");
-
-    $stmt = $db->prepare('SELECT * FROM fan_profiles WHERE user_id = :uid');
-    $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
+    
+    // Get basic user data
+    $stmt = $db->prepare("SELECT * FROM users WHERE id = :id");
+    $stmt->bindValue(':id', $fanId, SQLITE3_INTEGER);
     $result = $stmt->execute();
-    $profile = $result->fetchArray(SQLITE3_ASSOC);
-
-    if (!$profile) {
-        // Create new profile
-        $stmt = $db->prepare("INSERT INTO fan_profiles (user_id) VALUES (:uid)");
-        $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
-        $stmt->execute();
-
-        $stmt = $db->prepare('SELECT * FROM fan_profiles WHERE user_id = :uid');
-        $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
-        $result = $stmt->execute();
-        $profile = $result->fetchArray(SQLITE3_ASSOC);
-    }
-
-    $db->close();
-    return $profile ?: [];
-}
-
-/**
- * Update fan profile fields
- */
-function updateFanProfile(int $userId, array $fields): void {
-    $db = getDB();
-
-    // Ensure profile exists
-    getFanProfile($userId);
-
-    $allowed = ['name', 'birthday', 'location', 'job', 'hobbies', 'pets',
-                'relationship_status', 'favorite_teams', 'has_kids',
-                'vibe_type', 'notes', 'last_topic', 'message_count', 'last_active'];
-
-    $sets = ["updated_at = datetime('now')"];
-    $params = [];
-    foreach ($fields as $key => $value) {
-        if (in_array($key, $allowed)) {
-            $sets[] = "$key = :$key";
-            $params[":$key"] = $value;
-        }
-    }
-
-    if (count($sets) <= 1) {
+    $user = $result->fetchArray(SQLITE3_ASSOC);
+    
+    if (!$user) {
         $db->close();
-        return;
+        return ['id' => $fanId, 'username' => 'Unknown', 'email' => '', 'created_at' => date('Y-m-d H:i:s')];
     }
-
-    $sql = "UPDATE fan_profiles SET " . implode(', ', $sets) . " WHERE user_id = :uid";
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
-    foreach ($params as $k => $v) {
-        $stmt->bindValue($k, $v, is_int($v) ? SQLITE3_INTEGER : SQLITE3_TEXT);
+    
+    // Get spend data if payments table exists
+    $spend = 0;
+    try {
+        $spendStmt = $db->prepare("SELECT COALESCE(SUM(amount), 0) as total FROM payments WHERE user_id = :id AND status = 'completed'");
+        $spendStmt->bindValue(':id', $fanId, SQLITE3_INTEGER);
+        $spendResult = $spendStmt->execute();
+        $spendData = $spendResult->fetchArray(SQLITE3_ASSOC);
+        $spend = $spendData['total'] ?? 0;
+    } catch (Exception $e) {
+        // Payments table might not exist yet
+        $spend = 0;
     }
-    $stmt->execute();
+    
     $db->close();
+    
+    return [
+        'id' => $user['id'],
+        'username' => $user['username'],
+        'email' => $user['email'],
+        'created_at' => $user['created_at'],
+        'total_spend' => $spend,
+    ];
 }
 
 /**
- * Increment message count and update last_active
+ * Classify fan based on behavior and spending
+ * @param int $fanId Fan user ID
+ * @return string Classification: new, regular, whale, inactive
  */
-function incrementFanMessageCount(int $userId): void {
-    $db = getDB();
-
-    // Ensure fan_profiles table + row exist
-    getFanProfile($userId);
-
-    $stmt = $db->prepare("UPDATE fan_profiles SET message_count = message_count + 1, last_active = datetime('now'), updated_at = datetime('now') WHERE user_id = :uid");
-    $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
-    $stmt->execute();
-    $db->close();
+function classifyFan(int $fanId): string {
+    $profile = getFanProfile($fanId);
+    $messageCount = getConversationCount($fanId);
+    $spend = $profile['total_spend'] ?? 0;
+    
+    // Account age in days
+    $accountAge = (time() - strtotime($profile['created_at'])) / 86400;
+    
+    // Whale: high spend
+    if ($spend >= 100) {
+        return 'whale';
+    }
+    
+    // Regular: consistent interaction
+    if ($messageCount >= 10 && $spend >= 20) {
+        return 'regular';
+    }
+    
+    // New: recent account or low interaction
+    if ($accountAge <= 7 || $messageCount <= 3) {
+        return 'new';
+    }
+    
+    // Inactive: old account, low interaction, no spend
+    if ($accountAge > 30 && $messageCount <= 5 && $spend == 0) {
+        return 'inactive';
+    }
+    
+    return 'regular'; // Default
 }
 
 /**
- * Classify fan based on message count and tip total
- * Returns: 'new', 'regular', 'engaged', 'whale'
+ * Get total conversation count for a fan
+ * @param int $fanId Fan user ID
+ * @return int Message count
  */
-function classifyFan(int $userId): string {
+function getConversationCount(int $fanId): int {
     $db = getDB();
-
-    // Get message count
-    $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM messages WHERE sender_id = :uid");
-    $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
-    $result = $stmt->execute();
-    $msgCount = intval($result->fetchArray(SQLITE3_ASSOC)['cnt'] ?? 0);
-
-    // Get tip total
-    $tipTotal = 0;
-    // Check if tips table uses user_id or from_user_id
-    $stmt = $db->prepare("SELECT COALESCE(SUM(amount_cents), 0) as total FROM tips WHERE user_id = :uid");
-    $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
+    $stmt = $db->prepare("
+        SELECT COUNT(*) as count 
+        FROM messages 
+        WHERE (sender_id = :fan AND receiver_id = :creator) 
+           OR (sender_id = :creator2 AND receiver_id = :fan2)
+    ");
+    $stmt->bindValue(':fan', $fanId, SQLITE3_INTEGER);
+    $stmt->bindValue(':fan2', $fanId, SQLITE3_INTEGER);
+    $stmt->bindValue(':creator', CREATOR_USER_ID, SQLITE3_INTEGER);
+    $stmt->bindValue(':creator2', CREATOR_USER_ID, SQLITE3_INTEGER);
     $result = $stmt->execute();
     $row = $result->fetchArray(SQLITE3_ASSOC);
-    $tipTotal = intval($row['total'] ?? 0);
-
-    // PPV unlocks count
-    $stmt = $db->prepare("SELECT COUNT(*) as cnt FROM transactions WHERE user_id = :uid AND type = 'ppv' AND status = 'completed'");
-    $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
-    $result = $stmt->execute();
-    $ppvCount = intval($result->fetchArray(SQLITE3_ASSOC)['cnt'] ?? 0);
-
     $db->close();
-
-    // Classification logic
-    if ($tipTotal >= 5000 || $ppvCount >= 3) {
-        return 'whale';  // $50+ in tips OR 3+ PPVs unlocked
-    }
-    if ($msgCount >= 15 || $tipTotal > 0) {
-        return 'engaged'; // 15+ messages OR has tipped
-    }
-    if ($msgCount >= 4) {
-        return 'regular'; // 4-14 messages
-    }
-    return 'new'; // 0-3 messages
+    
+    return $row['count'] ?? 0;
 }
 
 /**
- * Get conversation count (number of distinct "sessions" — gaps > 4 hours)
+ * Increment fan message count (for tracking engagement)
+ * @param int $fanId Fan user ID
  */
-function getConversationCount(int $userId): int {
+function incrementFanMessageCount(int $fanId): void {
     $db = getDB();
-    $stmt = $db->prepare("SELECT created_at FROM messages WHERE sender_id = :uid ORDER BY created_at ASC");
-    $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
-    $result = $stmt->execute();
-
-    $convos = 0;
-    $lastTime = null;
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-        $time = strtotime($row['created_at']);
-        if ($lastTime === null || ($time - $lastTime) > 14400) { // 4 hour gap = new conversation
-            $convos++;
-        }
-        $lastTime = $time;
-    }
+    
+    // Create fan_stats table if it doesn't exist
+    $db->exec("CREATE TABLE IF NOT EXISTS fan_stats (
+        fan_id INTEGER PRIMARY KEY,
+        message_count INTEGER DEFAULT 0,
+        last_message_at TEXT DEFAULT (datetime('now')),
+        total_spend REAL DEFAULT 0.0,
+        created_at TEXT DEFAULT (datetime('now'))
+    )");
+    
+    // Insert or update
+    $stmt = $db->prepare("
+        INSERT INTO fan_stats (fan_id, message_count, last_message_at) 
+        VALUES (:fan_id, 1, datetime('now'))
+        ON CONFLICT(fan_id) DO UPDATE SET 
+            message_count = message_count + 1,
+            last_message_at = datetime('now')
+    ");
+    $stmt->bindValue(':fan_id', $fanId, SQLITE3_INTEGER);
+    $stmt->execute();
+    
     $db->close();
-    return max(1, $convos);
 }
