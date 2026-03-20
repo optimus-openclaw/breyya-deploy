@@ -38,49 +38,58 @@
         
         if (isHeart) {
           btn.style.cursor = 'pointer';
-          btn.addEventListener('click', function(e) {
+          btn.style.transition = 'transform 0.2s';
+          
+          // Set initial state from data attribute
+          var isLiked = post.dataset.liked === '1';
+          if (isLiked) {
+            svg.setAttribute('fill', '#ff4757');
+            svg.setAttribute('stroke', '#ff4757');
+            btn.dataset.liked = '1';
+          }
+          
+          // Clone button to remove ALL existing event listeners (including React's)
+          var newBtn = btn.cloneNode(true);
+          btn.parentNode.replaceChild(newBtn, btn);
+          var newSvg = newBtn.querySelector('svg');
+          
+          newBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
             
-            // Toggle heart
-            var liked = btn.dataset.liked === '1' || post.dataset.liked === '1';
-            var countEl = btn.querySelector('span');
+            var liked = newBtn.dataset.liked === '1';
+            var countEl = newBtn.querySelector('span');
             var count = countEl ? parseInt(countEl.textContent) || 0 : 0;
             
             if (liked) {
-              // Unlike
-              btn.dataset.liked = '0'; post.dataset.liked = '0';
-              svg.setAttribute('fill', 'none');
-              svg.style.color = '';
+              newBtn.dataset.liked = '0';
+              post.dataset.liked = '0';
+              newSvg.setAttribute('fill', 'none');
+              newSvg.setAttribute('stroke', 'currentColor');
               if (countEl) countEl.textContent = Math.max(0, count - 1);
             } else {
-              // Like — animate
-              btn.dataset.liked = '1'; post.dataset.liked = '1';
-              svg.setAttribute('fill', '#ff4757');
-              svg.style.color = '#ff4757';
+              newBtn.dataset.liked = '1';
+              post.dataset.liked = '1';
+              newSvg.setAttribute('fill', '#ff4757');
+              newSvg.setAttribute('stroke', '#ff4757');
               if (countEl) countEl.textContent = count + 1;
-              
-              // Quick pulse animation
-              btn.style.transform = 'scale(1.3)';
-              setTimeout(function() { btn.style.transform = 'scale(1)'; }, 200);
+              newBtn.style.transform = 'scale(1.3)';
+              setTimeout(function() { newBtn.style.transform = 'scale(1)'; }, 200);
             }
-            btn.style.transition = 'transform 0.2s';
-
-            // Save to API if post has an ID
+            
+            // Save to API
             var postId = post.dataset.postId;
             if (postId) {
               var token = getToken();
               fetch('/api/posts/like.php', {
                 method: 'POST',
                 credentials: 'include',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + token
-                },
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
                 body: JSON.stringify({ post_id: parseInt(postId) })
               }).catch(function() {});
             }
-          });
+          }, true);
         }
         
         if (isTip) {
