@@ -51,7 +51,13 @@
   }
 
   function loadFeed() {
-    fetch('/api/posts/list.php?limit=50')
+    (function(){
+        var token = '';
+        try { token = localStorage.getItem('breyya_token') || localStorage.getItem('token') || ''; } catch(e){}
+        var headers = {};
+        if (token) headers['Authorization'] = 'Bearer ' + token;
+        return fetch('/api/posts/list.php?limit=50', { credentials: 'include', headers: headers });
+      })()
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (!data.ok || !data.posts || data.posts.length === 0) return;
