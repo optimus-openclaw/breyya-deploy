@@ -1,80 +1,80 @@
 /**
- * Delivered/Seen indicator for chat.
- * Always shows "Delivered ✓" after fan's last message.
- * Shows "Seen ✓✓" when typing indicator appears.
+ * Chat UI fixes:
+ * 1. "Delivered ✓" always shows under the LATEST fan message
+ * 2. Changes to "Seen ✓✓" when typing
+ * 3. Hides lock icons on non-PPV messages
  */
 (function() {
   if (window.location.pathname.indexOf('/chat') !== 0) return;
 
-  // Hide lock icons on non-PPV messages
-  var lockStyle = document.createElement('style');
-  lockStyle.textContent = '[class*="received"] [class*="bubble"] + div { display: none !important; }';
-  document.head.appendChild(lockStyle);
+  // CSS: hide lock icons globally
+  var s = document.createElement('style');
+  s.textContent = '[class*="bubble"] ~ div:not([id]):not([class*="msgTime"]) { display:none !important; }';
+  document.head.appendChild(s);
 
   setInterval(function() {
-    // Find the last message in the chat
-    var messages = document.querySelectorAll('[class*="message"]');
-    if (messages.length === 0) return;
-    var lastMsg = messages[messages.length - 1];
+    // Remove any old delivery status
+    var old = document.getElementById('delivery-status');
     
-    // Check if it's a sent message (fan's message, right side)
-    var isSent = lastMsg.className.includes('sent');
-    if (!isSent) return; // Breyya replied last, no need for status
+    // Find all messages
+    var allMsgs = document.querySelectorAll('[class*="message"]');
+    if (allMsgs.length === 0) return;
 
-    // Check if we already injected a status
-    var existingStatus = document.getElementById('delivery-status');
-    var hasTyping = !!document.querySelector('[class*="typingDots"], [class*="typingBubble"]');
+    // Find the LAST fan message (sent = right side)  
+    var lastSentMsg = null;
+    var lastSentIndex = -1;
+    for (var i = allMsgs.length - 1; i >= 0; i--) {
+      if (allMsgs[i].className.includes('sent')) {
+        lastSentMsg = allMsgs[i];
+        lastSentIndex = i;
+        break;
+      }
+    }
     
-    // Also check for React's built-in "Seen ✓✓"
-    var reactSeen = null;
-    document.querySelectorAll('div').forEach(function(el) {
-      if (el.textContent.trim() === 'Seen ✓✓' && el.style.fontSize === '11px') {
-        reactSeen = el;
+    if (!lastSentMsg) { if (old) old.remove(); return; }
+
+    // Check if there's a Breyya reply AFTER the last fan message
+    var hasReplyAfter = false;
+    for (var j = lastSentIndex + 1; j < allMsgs.length; j++) {
+      if (allMsgs[j].className.includes('received')) { hasReplyAfter = true; break; }
+    }
+
+    // If Breyya already replied after the last fan msg, remove status
+    if (hasReplyAfter) { if (old) old.remove(); return; }
+
+    // Show Delivered or Seen
+    var hasTyping = !!document.querySelector('[class*="typingDots"], [class*="typingBubble"]');
+    var text = hasTyping ? 'Seen ✓✓' : 'Delivered ✓';
+    var color = hasTyping ? '#00b4ff' : '#556677';
+
+    if (old) {
+      old.textContent = text;
+      old.style.color = color;
+      // Make sure it's positioned after the correct message
+      if (old.previousElementSibling !== lastSentMsg) {
+        old.remove();
+        old = null;
+      }
+    }
+
+    if (!old) {
+      var el = document.createElement('div');
+      el.id = 'delivery-status';
+      el.textContent = text;
+      el.style.cssText = 'text-align:right;padding:2px 16px 6px;font-size:11px;color:' + color + ';';
+      // Insert right after the last sent message
+      if (lastSentMsg.nextSibling) {
+        lastSentMsg.parentElement.insertBefore(el, lastSentMsg.nextSibling);
+      } else {
+        lastSentMsg.parentElement.appendChild(el);
+      }
+    }
+
+    // Also hide React's built-in "Seen ✓✓" to avoid duplicates
+    document.querySelectorAll('div').forEach(function(d) {
+      if (d.id !== 'delivery-status' && d.textContent.trim() === 'Seen ✓✓' && d.style.fontSize === '11px') {
+        d.style.display = 'none';
       }
     });
-
-    if (reactSeen) {
-      // Replace React's "Seen" with our status
-      if (hasTyping) {
-        reactSeen.textContent = 'Seen ✓✓';
-        reactSeen.style.color = '#00b4ff';
-      } else {
-        reactSeen.textContent = 'Delivered ✓';
-        reactSeen.style.color = '#556677';
-      }
-      // Remove our injected one if React's is showing
-      if (existingStatus) existingStatus.remove();
-      return;
-    }
-
-    // No React status — inject our own
-    if (existingStatus) {
-      // Update existing
-      if (hasTyping) {
-        existingStatus.textContent = 'Seen ✓✓';
-        existingStatus.style.color = '#00b4ff';
-      } else {
-        existingStatus.textContent = 'Delivered ✓';
-        existingStatus.style.color = '#556677';
-      }
-    } else {
-      // Create new status element after the last sent message
-      var status = document.createElement('div');
-      status.id = 'delivery-status';
-      status.textContent = hasTyping ? 'Seen ✓✓' : 'Delivered ✓';
-      status.style.cssText = 'text-align:right;padding:2px 12px;font-size:11px;color:' + 
-        (hasTyping ? '#00b4ff' : '#556677') + ';';
-      
-      // Insert after the last message
-      var messagesContainer = lastMsg.parentElement;
-      if (messagesContainer) {
-        // Insert after lastMsg
-        if (lastMsg.nextSibling) {
-          messagesContainer.insertBefore(status, lastMsg.nextSibling);
-        } else {
-          messagesContainer.appendChild(status);
-        }
-      }
-    }
-  }, 500);
+  }, 400);
 })();
