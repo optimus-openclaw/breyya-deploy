@@ -67,7 +67,7 @@ try {
         }
 
         // Call Anthropic
-        $payload = json_encode(['model'=>$MODEL,'max_tokens'=>150,'temperature'=>0.8,'system'=>getBreyyaSystemPrompt(),'messages'=>$msgs]);
+        $payload = json_encode(['model'=>$MODEL,'max_tokens'=>300,'temperature'=>0.9,'system'=>getBreyyaSystemPrompt(),'messages'=>$msgs]);
 
         $ch = curl_init('https://api.anthropic.com/v1/messages');
         curl_setopt_array($ch, [CURLOPT_POST=>true, CURLOPT_HTTPHEADER=>['Content-Type: application/json','x-api-key: '.$ANTHROPIC_KEY,'anthropic-version: 2023-06-01'], CURLOPT_POSTFIELDS=>$payload, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>25]);
