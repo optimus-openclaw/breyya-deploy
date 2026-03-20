@@ -95,7 +95,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e)=>{
     credentials: 'include'
   });
   const data = await resp.json();
-  if (resp.status === 201) {
+  if (data.ok || data.post) {
     document.getElementById('message').innerHTML = '<div class="success">Post uploaded successfully.</div>';
     document.getElementById('uploadForm').reset(); preview.innerHTML='';
   } else {
