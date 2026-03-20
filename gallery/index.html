@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="/js/auth-gate.js?v=1"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Gallery — Breyya</title>
+  <style>
+    :root{--bg:#0d1b2a;--card:#0f2130;--muted:#556677;--accent:#00b4ff}
+    html,body{height:100%;margin:0;font-family:'Inter',-apple-system,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:#dbeefe}
+    .page{min-height:100vh;display:flex;flex-direction:column}
+    .header{padding:14px 16px 10px;font-weight:700;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.02);position:sticky;top:0;background:linear-gradient(180deg,rgba(13,27,42,0.95),rgba(13,27,42,0.85));z-index:40}
+    .container{width:100%;max-width:800px;margin:12px auto 80px;padding:0 6px;box-sizing:border-box}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+    .thumb{background:var(--card);position:relative;overflow:hidden;padding-top:100%;border-radius:6px}
+    .thumb img, .thumb video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
+    .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:999px;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center}
+    .play svg{color:#fff;opacity:0.95}
+    .lightbox{position:fixed;inset:0;background:rgba(2,6,11,0.85);display:none;align-items:center;justify-content:center;z-index:120;padding:20px}
+    .lightbox.open{display:flex}
+    .lightbox .inner{max-width:calc(100% - 40px);max-height:calc(100% - 80px);display:flex;align-items:center;justify-content:center}
+    .lightbox img, .lightbox video{max-width:100%;max-height:100%;border-radius:8px}
+    .close-btn{position:fixed;top:18px;right:18px;background:rgba(0,0,0,0.5);border-radius:999px;padding:8px;color:#fff;z-index:130}
+    @media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr);gap:8px}.container{padding:0}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">Gallery</div>
+    <div class="container">
+      <div id="grid" class="grid"></div>
+    </div>
+
+    <!-- bottom nav -->
+    <nav style="position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;background:#111d32;border-top:1px solid rgba(255,255,255,0.06);padding:8px 0 max(8px, env(safe-area-inset-bottom));z-index:100">
+      <a href="/feed" style="display:flex;flex-direction:column;align-items:center;gap:2px;color:#556677;text-decoration:none;font-size:11px;padding:4px 12px;font-weight:600">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z"></path></svg>
+        Feed
+      </a>
+      <a href="/gallery" style="display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--accent);text-decoration:none;font-size:11px;padding:4px 12px;font-weight:600">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Gallery
+      </a>
+      <a href="/chat" style="display:flex;flex-direction:column;align-items:center;gap:2px;color:#556677;text-decoration:none;font-size:11px;padding:4px 16px;background:linear-gradient(135deg,rgba(0,180,255,0.15),rgba(0,180,255,0.05));border-radius:12px">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg>
+        <span style="font-weight:600;color:var(--accent)">Chat</span>
+      </a>
+    </nav>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+      <button id="lb-close" class="close-btn" aria-label="Close">✕</button>
+      <div class="inner" id="lightbox-inner"></div>
+    </div>
+
+  </div>
+
+  <script src="/js/logout-btn.js?v=6" defer></script>
+  <script src="/js/admin-nav.js?v=11" defer></script>
+  <script src="/js/content-protection.js?v=1" defer></script>
+  <script src="/js/chat-timestamps.js?v=3" defer></script>
+  <script>
+    // fetch posts and render grid
+    async function loadGallery(){
+      const token = localStorage.getItem('breyya_token') || localStorage.getItem('token') || '';
+      try{
+        const res = await fetch('/api/posts/list.php?limit=100',{credentials:'include',headers:{'authorization': token}});
+        const data = await res.json();
+        const posts = Array.isArray(data)||data.posts? (data.posts||data) : [];
+        const grid = document.getElementById('grid');
+        posts.forEach(p=>{
+          const el=document.createElement('a');
+          el.className='thumb';
+          el.href='#';
+          el.dataset.full = p.media_url || p.file || p.url || '';
+          const mediaType = (p.type||'image').includes('video') || (p.is_video||p.video)?'video':'image';
+          if(mediaType==='image'){
+            const img=document.createElement('img'); img.src=p.thumb || p.preview || p.media_url || p.file || p.url || '';
+            el.appendChild(img);
+          } else {
+            const img=document.createElement('img'); img.src=p.thumb || p.preview || p.poster || p.media_url || p.file || p.url || '';
+            el.appendChild(img);
+            const play=document.createElement('div'); play.className='play'; play.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v18l15-9L5 3z"></path></svg>';
+            el.appendChild(play);
+            el.dataset.video='1';
+          }
+          el.addEventListener('click',e=>{e.preventDefault();openLightbox(el.dataset.full,el.dataset.video)});
+          grid.appendChild(el);
+        })
+      }catch(err){console.error('gallery load',err)}
+    }
+    function openLightbox(src,isVideo){
+      const lb=document.getElementById('lightbox'); const inner=document.getElementById('lightbox-inner'); inner.innerHTML='';
+      if(isVideo){const v=document.createElement('video');v.src=src;v.controls=true;v.autoplay=true;inner.appendChild(v);} else {const i=document.createElement('img');i.src=src;inner.appendChild(i);} lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
+    }
+    document.getElementById('lb-close').addEventListener('click',()=>{document.getElementById('lightbox').classList.remove('open');document.getElementById('lightbox').setAttribute('aria-hidden','true');});
+    document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox') {document.getElementById('lb-close').click()}});
+    loadGallery();
+  </script>
+</body>
+</html>
