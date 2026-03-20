@@ -35,3 +35,10 @@
     });
   }, 300);
 })();
+
+// CSS override to hide all lock icons in chat messages
+(function() {
+  var style = document.createElement('style');
+  style.textContent = '[class*="received"] [class*="bubble"] + div { display: none !important; }';
+  document.head.appendChild(style);
+})();
