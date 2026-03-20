@@ -99,6 +99,13 @@
   else { window.addEventListener('load', function() { setTimeout(checkAdmin, 500); }); }
   setInterval(checkAdmin, 3000);
 
+  // Force 2x2 grid layout on backstage hub
+  if (path === '/backstage' || path === '/backstage/') {
+    var gridStyle = document.createElement('style');
+    gridStyle.textContent = '[style*="grid-template-columns"] { grid-template-columns: repeat(2, 1fr) !important; max-width: 700px !important; margin: 0 auto !important; }';
+    document.head.appendChild(gridStyle);
+  }
+
   // Inject Earnings + Upload cards on backstage hub
   if (path === '/backstage' || path === '/backstage/') {
     setInterval(function() {
