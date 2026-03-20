@@ -5,6 +5,7 @@
  * Accepts both JSON (with media_url) and multipart/form-data (with file upload)
  */
 
+date_default_timezone_set('America/Los_Angeles');
 require_once __DIR__ . '/../lib/auth.php';
 require_once __DIR__ . '/../lib/database.php';
 setCorsHeaders();
