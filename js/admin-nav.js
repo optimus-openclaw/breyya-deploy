@@ -1,48 +1,76 @@
 /**
  * Admin nav: Backstage + Home buttons on ALL pages for admin/creator only.
+ * On chat page: injects into the header bar. On other pages: fixed position.
  */
 (function() {
   var path = window.location.pathname;
   var isChat = path.indexOf('/chat') === 0;
-  var isDashboard = path.indexOf('/dashboard') === 0 || path.indexOf('/backstage/dashboard') === 0;
-  var isBackstageInventory = path.indexOf('/backstage/inventory') === 0;
+  var hasHeader = path.indexOf('/dashboard') === 0 || 
+                  path.indexOf('/backstage/dashboard') === 0 ||
+                  path.indexOf('/backstage/inventory') === 0;
 
-  function showAdminNav() {
+  var btnStyle = 
+    'font-family:"DM Sans","Inter",-apple-system,sans-serif;' +
+    'font-size:11px;font-weight:600;padding:5px 12px;' +
+    'border-radius:16px;text-decoration:none;white-space:nowrap;';
+
+  function createBtns() {
+    var bs = document.createElement('a');
+    bs.href = '/backstage/';
+    bs.textContent = '🔒 Backstage';
+    bs.setAttribute('style', btnStyle + 'color:#e91e8c;border:1px solid rgba(233,30,140,0.3);background:rgba(19,36,58,0.8);');
+    
+    var hm = document.createElement('a');
+    hm.href = '/feed/';
+    hm.textContent = '🏠 Home';
+    hm.setAttribute('style', btnStyle + 'color:#00b4d8;border:1px solid rgba(0,180,216,0.3);background:rgba(19,36,58,0.8);margin-left:6px;');
+    
+    return [bs, hm];
+  }
+
+  function injectChat() {
     if (document.getElementById('admin-nav-wrap')) return;
-
+    // Find the chat header's navLinks area or the header itself
+    var header = document.querySelector('[class*="header"]');
+    if (!header) return;
+    
     var wrap = document.createElement('div');
     wrap.id = 'admin-nav-wrap';
-    var topPos = (isChat || isDashboard || isBackstageInventory) ? '56px' : '12px';
+    wrap.setAttribute('style', 'display:flex;align-items:center;gap:6px;margin-left:auto;margin-right:8px;');
+    var btns = createBtns();
+    wrap.appendChild(btns[0]);
+    wrap.appendChild(btns[1]);
+    
+    // Insert before the last child (test fan btn area)
+    var testFanBtn = header.querySelector('[class*="testFan"]');
+    if (testFanBtn) {
+      header.insertBefore(wrap, testFanBtn);
+    } else {
+      header.appendChild(wrap);
+    }
+  }
+
+  function injectFixed() {
+    if (document.getElementById('admin-nav-wrap')) return;
+    var wrap = document.createElement('div');
+    wrap.id = 'admin-nav-wrap';
+    var topPos = hasHeader ? '56px' : '12px';
     wrap.setAttribute('style',
       'position:fixed !important;top:' + topPos + ' !important;left:16px !important;z-index:99999 !important;' +
       'display:flex !important;gap:8px !important;'
     );
-
-    var btnStyle = 
-      'background:rgba(19,36,58,0.95) !important;' +
-      'font-family:"DM Sans","Inter",-apple-system,sans-serif !important;' +
-      'font-size:13px !important;font-weight:600 !important;padding:8px 16px !important;' +
-      'border-radius:20px !important;text-decoration:none !important;' +
-      'backdrop-filter:blur(8px) !important;-webkit-backdrop-filter:blur(8px) !important;' +
-      'display:block !important;visibility:visible !important;opacity:1 !important;';
-
-    var bs = document.createElement('a');
-    bs.href = '/backstage/';
-    bs.textContent = '🔒 Backstage';
-    bs.setAttribute('style', btnStyle + 'color:#e91e8c !important;border:1px solid rgba(233,30,140,0.3) !important;');
-    bs.onmouseover = function() { bs.style.borderColor='#e91e8c'; };
-    bs.onmouseout = function() { bs.style.borderColor='rgba(233,30,140,0.3)'; };
-
-    var hm = document.createElement('a');
-    hm.href = '/feed/';
-    hm.textContent = '🏠 Home';
-    hm.setAttribute('style', btnStyle + 'color:#00b4d8 !important;border:1px solid rgba(0,180,216,0.3) !important;');
-    hm.onmouseover = function() { hm.style.borderColor='#00b4d8'; };
-    hm.onmouseout = function() { hm.style.borderColor='rgba(0,180,216,0.3)'; };
-
-    wrap.appendChild(bs);
-    wrap.appendChild(hm);
+    var btns = createBtns();
+    // Make fixed buttons slightly bigger
+    btns[0].setAttribute('style', btns[0].getAttribute('style').replace('font-size:11px','font-size:13px').replace('padding:5px 12px','padding:8px 16px'));
+    btns[1].setAttribute('style', btns[1].getAttribute('style').replace('font-size:11px','font-size:13px').replace('padding:5px 12px','padding:8px 16px'));
+    wrap.appendChild(btns[0]);
+    wrap.appendChild(btns[1]);
     document.body.appendChild(wrap);
+  }
+
+  function showAdminNav() {
+    if (isChat) { injectChat(); }
+    else { injectFixed(); }
   }
 
   function checkAdmin() {
@@ -61,7 +89,7 @@
       }).catch(function() {});
   }
 
-  if (document.readyState === 'complete') { setTimeout(checkAdmin, 300); }
-  else { window.addEventListener('load', function() { setTimeout(checkAdmin, 300); }); }
+  if (document.readyState === 'complete') { setTimeout(checkAdmin, 500); }
+  else { window.addEventListener('load', function() { setTimeout(checkAdmin, 500); }); }
   setInterval(checkAdmin, 3000);
 })();
