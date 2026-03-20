@@ -19,7 +19,7 @@
     btn.href = '/logout/';
     btn.textContent = 'Log out';
     btn.setAttribute('style',
-      'position:fixed !important;top:12px !important;right:16px !important;z-index:99999 !important;' +
+      'position:fixed !important;top:56px !important;right:16px !important;z-index:99999 !important;' +
       'background:rgba(19,36,58,0.95) !important;color:#7a93a8 !important;' +
       'font-family:"DM Sans","Inter",-apple-system,sans-serif !important;' +
       'font-size:13px !important;font-weight:600 !important;padding:8px 16px !important;' +
