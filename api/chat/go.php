@@ -30,7 +30,7 @@ try {
     $processed = 0; $queued = 0; $errors = 0; $debug = [];
 
     // Queue new messages
-    $r = $db->query("SELECT m.id, m.sender_id, m.content, m.created_at FROM messages m WHERE m.receiver_id = $CREATOR_ID AND m.sender_id != $CREATOR_ID AND m.is_ai = 0 AND m.id NOT IN (SELECT fan_message_id FROM chat_queue) ORDER BY m.created_at DESC LIMIT 6");
+    $r = $db->query("SELECT m.id, m.sender_id, m.content, m.created_at FROM messages m WHERE m.receiver_id = $CREATOR_ID AND m.sender_id != $CREATOR_ID AND m.is_ai = 0 AND m.id NOT IN (SELECT fan_message_id FROM chat_queue) ORDER BY m.created_at ASC LIMIT 20");
     while ($row = $r->fetchArray(SQLITE3_ASSOC)) {
         $delay = ($row['sender_id'] == 3 || $row['sender_id'] == 9999) ? 3 : 1800;
         $sched = date('Y-m-d H:i:s', strtotime($row['created_at']) + $delay);
@@ -69,7 +69,11 @@ try {
     foreach ($processItems as $item) {
         // Get history
         $fid = intval($item['fan_id']);
-        $hr = $db->query("SELECT sender_id, content FROM messages WHERE (sender_id=$fid AND receiver_id=$CREATOR_ID) OR (sender_id=$CREATOR_ID AND receiver_id=$fid) ORDER BY created_at ASC LIMIT 20");
+        $hr = $db->query("SELECT sender_id, content FROM (
+            SELECT sender_id, content, created_at FROM messages 
+            WHERE (sender_id=$fid AND receiver_id=$CREATOR_ID) OR (sender_id=$CREATOR_ID AND receiver_id=$fid) 
+            ORDER BY created_at DESC LIMIT 10
+        ) sub ORDER BY created_at ASC");
         $msgs = [];
         $lastRole = null;
         while ($h = $hr->fetchArray(SQLITE3_ASSOC)) {
