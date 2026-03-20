@@ -26,6 +26,23 @@
     .close-btn{position:fixed;top:18px;right:18px;background:rgba(0,0,0,0.5);border-radius:999px;padding:8px;color:#fff;z-index:130}
     @media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr);gap:8px}.container{padding:0}}
   </style>
+
+<style>
+  .lightbox-overlay img, .lightbox img, [id*="lightbox"] img {
+    max-width: 480px !important;
+    max-height: 80vh !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 12px !important;
+  }
+  @media (max-width: 768px) {
+    .lightbox-overlay img, .lightbox img, [id*="lightbox"] img {
+      max-width: 90vw !important;
+      max-height: 70vh !important;
+    }
+  }
+</style>
 </head>
 <body>
   <div class="page">
