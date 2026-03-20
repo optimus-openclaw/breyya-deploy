@@ -93,3 +93,20 @@
   else { window.addEventListener('load', function() { setTimeout(checkAdmin, 500); }); }
   setInterval(checkAdmin, 3000);
 })();
+
+// Hide the built-in "Log Out" button on backstage hub (we have our own global one)
+(function() {
+  if (window.location.pathname.indexOf('/backstage') !== 0) return;
+  var style = document.createElement('style');
+  style.textContent = 'button[style*="background:none"][style*="border:1px solid #333"] { display:none !important; }';
+  document.head.appendChild(style);
+  // Also try to find and hide it after React renders
+  setInterval(function() {
+    var btns = document.querySelectorAll('button');
+    btns.forEach(function(b) {
+      if (b.textContent.trim() === 'Log Out' && !b.closest('#admin-nav-wrap') && !b.closest('#global-logout-btn')) {
+        b.style.display = 'none';
+      }
+    });
+  }, 1000);
+})();
