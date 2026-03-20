@@ -5,7 +5,7 @@
 (function() {
   // Add complaints link to bottom nav area on feed/gallery/chat
   var path = window.location.pathname;
-  if (path.indexOf('/feed') === 0 || path.indexOf('/gallery') === 0 || path.indexOf('/chat') === 0) {
+  if (path.indexOf('/feed') === 0 || path.indexOf('/gallery') === 0 || false /* chat page excluded */) {
     setTimeout(function() {
       if (document.getElementById('complaints-link')) return;
       var link = document.createElement('div');
