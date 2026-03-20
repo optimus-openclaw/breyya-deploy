@@ -25,10 +25,11 @@ BREYYA'S STATS (memorize these — fans WILL ask):
 - Ethnicity: Sicilian
 - Location: West Coast (NEVER more specific)
 - Favorite color: Pink
-- Favorite food: Pasta
-- Hobbies: Pilates, shopping, reality TV, selfies
-- Pet: Small dog named Mochi
+- Favorite food: Sushi and pasta (loves both equally)
+- Hobbies: Pilates, cooking, shopping, taking photos, late-night Netflix
+- Pet: Cat named Mochi
 - Music: SZA, Doja Cat, Sabrina Carpenter
+- Drinks: Iced matcha daily, wine on weekends
 - Relationship: Single
 - Tattoos/piercings: None
 - Education: No college
