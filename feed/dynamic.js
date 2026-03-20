@@ -14,7 +14,7 @@
   function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
   function postHTML(p) {
-    var avatar = p.creator_avatar || '/images/hero.jpg';
+    var avatar = p.creator_avatar || '/images/hero2.jpg';
     var name = p.creator_name || 'Breyya';
     var media = '';
     if (p.media_url) {
