@@ -1,76 +1,74 @@
 /**
  * Admin nav: Backstage + Home buttons on ALL pages for admin/creator only.
- * On chat page: injects into the header bar. On other pages: fixed position.
+ * Mobile-aware positioning — never overlaps page content.
  */
 (function() {
   var path = window.location.pathname;
+
+  // Detect page type for positioning
   var isChat = path.indexOf('/chat') === 0;
-  var hasHeader = path.indexOf('/dashboard') === 0 || 
-                  path.indexOf('/backstage/dashboard') === 0 ||
-                  path.indexOf('/backstage/inventory') === 0;
+  var isFeed = path.indexOf('/feed') === 0;
+  var isCreatorDash = path === '/dashboard' || path === '/dashboard/';
+  var isBackstageDash = path.indexOf('/backstage/dashboard') === 0;
+  var isBackstageInv = path.indexOf('/backstage/inventory') === 0;
+  var isBackstageHub = path === '/backstage' || path === '/backstage/';
+  var isBackstageUpload = path.indexOf('/backstage/upload') === 0;
+  var isMobile = window.innerWidth <= 768;
 
-  var btnStyle = 
-    'font-family:"DM Sans","Inter",-apple-system,sans-serif;' +
-    'font-size:11px;font-weight:600;padding:5px 12px;' +
-    'border-radius:16px;text-decoration:none;white-space:nowrap;';
-
-  function createBtns() {
-    var bs = document.createElement('a');
-    bs.href = '/backstage/';
-    bs.textContent = '🔒 Backstage';
-    bs.setAttribute('style', btnStyle + 'color:#e91e8c;border:1px solid rgba(233,30,140,0.3);background:rgba(19,36,58,0.8);');
-    
-    var hm = document.createElement('a');
-    hm.href = '/feed/';
-    hm.textContent = '🏠 Home';
-    hm.setAttribute('style', btnStyle + 'color:#00b4d8;border:1px solid rgba(0,180,216,0.3);background:rgba(19,36,58,0.8);margin-left:6px;');
-    
-    return [bs, hm];
-  }
-
-  function injectChat() {
-    if (document.getElementById('admin-nav-wrap')) return;
-    // Find the chat header's navLinks area or the header itself
-    var header = document.querySelector('[class*="header"]');
-    if (!header) return;
-    
-    var wrap = document.createElement('div');
-    wrap.id = 'admin-nav-wrap';
-    wrap.setAttribute('style', 'display:flex;align-items:center;gap:6px;margin-left:auto;margin-right:8px;');
-    var btns = createBtns();
-    wrap.appendChild(btns[0]);
-    wrap.appendChild(btns[1]);
-    
-    // Insert before the last child (test fan btn area)
-    var testFanBtn = header.querySelector('[class*="testFan"]');
-    if (testFanBtn) {
-      header.insertBefore(wrap, testFanBtn);
-    } else {
-      header.appendChild(wrap);
-    }
-  }
-
-  function injectFixed() {
-    if (document.getElementById('admin-nav-wrap')) return;
-    var wrap = document.createElement('div');
-    wrap.id = 'admin-nav-wrap';
-    var topPos = hasHeader ? '56px' : '12px';
-    wrap.setAttribute('style',
-      'position:fixed !important;top:' + topPos + ' !important;left:16px !important;z-index:99999 !important;' +
-      'display:flex !important;gap:8px !important;'
-    );
-    var btns = createBtns();
-    // Make fixed buttons slightly bigger
-    btns[0].setAttribute('style', btns[0].getAttribute('style').replace('font-size:11px','font-size:13px').replace('padding:5px 12px','padding:8px 16px'));
-    btns[1].setAttribute('style', btns[1].getAttribute('style').replace('font-size:11px','font-size:13px').replace('padding:5px 12px','padding:8px 16px'));
-    wrap.appendChild(btns[0]);
-    wrap.appendChild(btns[1]);
-    document.body.appendChild(wrap);
+  function getTopPosition() {
+    if (isChat) return isMobile ? '48px' : '52px';
+    if (isFeed) return isMobile ? '100px' : '12px'; // below creator header on mobile
+    if (isCreatorDash) return isMobile ? '90px' : '56px'; // below dashboard header
+    if (isBackstageDash || isBackstageInv) return isMobile ? '48px' : '56px'; // below back nav
+    if (isBackstageHub) return isMobile ? '12px' : '12px';
+    if (isBackstageUpload) return '12px';
+    return '12px';
   }
 
   function showAdminNav() {
-    if (isChat) { injectChat(); }
-    else { injectFixed(); }
+    if (document.getElementById('admin-nav-wrap')) return;
+
+    var wrap = document.createElement('div');
+    wrap.id = 'admin-nav-wrap';
+    var topPos = getTopPosition();
+    
+    // On mobile: make buttons smaller, use full width bar style
+    if (isMobile) {
+      wrap.setAttribute('style',
+        'position:fixed !important;top:' + topPos + ' !important;left:0 !important;right:0 !important;' +
+        'z-index:99999 !important;display:flex !important;justify-content:center !important;gap:8px !important;' +
+        'padding:6px 12px !important;background:rgba(10,22,40,0.95) !important;' +
+        'border-bottom:1px solid rgba(255,255,255,0.06) !important;' +
+        'backdrop-filter:blur(12px) !important;-webkit-backdrop-filter:blur(12px) !important;'
+      );
+    } else {
+      wrap.setAttribute('style',
+        'position:fixed !important;top:' + topPos + ' !important;left:16px !important;z-index:99999 !important;' +
+        'display:flex !important;gap:8px !important;'
+      );
+    }
+
+    var fontSize = isMobile ? '11px' : '13px';
+    var padding = isMobile ? '5px 12px' : '8px 16px';
+
+    var btnBase = 
+      'font-family:"DM Sans","Inter",-apple-system,sans-serif;' +
+      'font-size:' + fontSize + ';font-weight:600;padding:' + padding + ';' +
+      'border-radius:16px;text-decoration:none;display:inline-block;';
+
+    var bs = document.createElement('a');
+    bs.href = '/backstage/';
+    bs.textContent = '🔒 Backstage';
+    bs.setAttribute('style', btnBase + 'color:#e91e8c;border:1px solid rgba(233,30,140,0.3);background:rgba(19,36,58,0.9);');
+
+    var hm = document.createElement('a');
+    hm.href = '/feed/';
+    hm.textContent = '🏠 Home';
+    hm.setAttribute('style', btnBase + 'color:#00b4d8;border:1px solid rgba(0,180,216,0.3);background:rgba(19,36,58,0.9);');
+
+    wrap.appendChild(bs);
+    wrap.appendChild(hm);
+    document.body.appendChild(wrap);
   }
 
   function checkAdmin() {
@@ -89,24 +87,27 @@
       }).catch(function() {});
   }
 
+  // Listen for resize to handle orientation changes
+  window.addEventListener('resize', function() {
+    var el = document.getElementById('admin-nav-wrap');
+    if (el) { el.remove(); }
+    isMobile = window.innerWidth <= 768;
+    checkAdmin();
+  });
+
   if (document.readyState === 'complete') { setTimeout(checkAdmin, 500); }
   else { window.addEventListener('load', function() { setTimeout(checkAdmin, 500); }); }
   setInterval(checkAdmin, 3000);
-})();
 
-// Hide the built-in "Log Out" button on backstage hub (we have our own global one)
-(function() {
-  if (window.location.pathname.indexOf('/backstage') !== 0) return;
-  var style = document.createElement('style');
-  style.textContent = 'button[style*="background:none"][style*="border:1px solid #333"] { display:none !important; }';
-  document.head.appendChild(style);
-  // Also try to find and hide it after React renders
-  setInterval(function() {
-    var btns = document.querySelectorAll('button');
-    btns.forEach(function(b) {
-      if (b.textContent.trim() === 'Log Out' && !b.closest('#admin-nav-wrap') && !b.closest('#global-logout-btn')) {
-        b.style.display = 'none';
-      }
-    });
-  }, 1000);
+  // Hide built-in backstage "Log Out" button
+  if (path.indexOf('/backstage') === 0) {
+    setInterval(function() {
+      var btns = document.querySelectorAll('button');
+      btns.forEach(function(b) {
+        if (b.textContent.trim() === 'Log Out' && !b.closest('#admin-nav-wrap')) {
+          b.style.display = 'none';
+        }
+      });
+    }, 1000);
+  }
 })();
