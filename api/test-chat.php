@@ -15,6 +15,12 @@ try {
     $_sf = __DIR__ . '/../.secrets.php';
     echo json_encode(['step' => 1, 'secrets_file' => $_sf, 'exists' => file_exists($_sf)]);
     
+    // Also test the contents
+    if (file_exists($_sf)) {
+        $contents = file_get_contents($_sf);
+        echo json_encode(['step' => '1b', 'file_size' => strlen($contents), 'has_define' => strpos($contents, 'define') !== false]);
+    }
+    
     if (file_exists($_sf)) require_once $_sf;
     if (defined('AI_API_KEY') && AI_API_KEY !== '') {
         $ANTHROPIC_KEY = AI_API_KEY;
