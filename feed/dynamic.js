@@ -182,7 +182,21 @@
       .catch(function(e) { console.error('[feed]', e); });
   }
 
-  // Load once after page is ready
-  if (document.readyState === 'complete') setTimeout(loadFeed, 800);
-  else window.addEventListener('load', function() { setTimeout(loadFeed, 800); });
+  // Load feed with retries (React may not have rendered the container yet)
+  var retries = 0;
+  function tryLoad() {
+    var feedDiv = document.querySelector('.feed-module__Sej6XW__feed');
+    if (feedDiv) {
+      loadFeed();
+    } else if (retries < 20) {
+      retries++;
+      setTimeout(tryLoad, 500);
+    }
+  }
+  if (document.readyState === 'complete') setTimeout(tryLoad, 500);
+  else window.addEventListener('load', function() { setTimeout(tryLoad, 500); });
+  // Also reload if page becomes visible again (user navigated back)
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') setTimeout(loadFeed, 300);
+  });
 })();
