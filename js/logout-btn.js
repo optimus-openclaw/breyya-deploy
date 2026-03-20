@@ -1,14 +1,15 @@
 /**
  * Global logout button — shows on member pages and when logged in.
- * Resilient to Next.js hydration — retries injection.
+ * Positions vary by page to avoid overlapping native UI elements.
  */
 (function() {
   if (window.location.pathname.indexOf('/logout') === 0) return;
 
+  var path = window.location.pathname;
+  var isDashboard = path.indexOf('/dashboard') === 0;
   var memberPages = ['/feed', '/chat', '/backstage', '/dashboard'];
-  var onMemberPage = memberPages.some(function(p) {
-    return window.location.pathname.indexOf(p) === 0;
-  });
+  var onMemberPage = memberPages.some(function(p) { return path.indexOf(p) === 0; });
+
   var hasLocalToken = false;
   try { hasLocalToken = !!localStorage.getItem('token'); } catch(e) {}
 
@@ -18,8 +19,10 @@
     btn.id = 'global-logout-btn';
     btn.href = '/logout/';
     btn.textContent = 'Log out';
+    // On dashboard, position below the top bar to avoid overlapping New Post / Mass PPV buttons
+    var topPos = isDashboard ? '56px' : '12px';
     btn.setAttribute('style',
-      'position:fixed !important;top:12px !important;right:16px !important;z-index:99999 !important;' +
+      'position:fixed !important;top:' + topPos + ' !important;right:16px !important;z-index:99999 !important;' +
       'background:rgba(19,36,58,0.95) !important;color:#7a93a8 !important;' +
       'font-family:"DM Sans","Inter",-apple-system,sans-serif !important;' +
       'font-size:13px !important;font-weight:600 !important;padding:8px 16px !important;' +
@@ -36,7 +39,6 @@
   function tryShow() {
     if (onMemberPage || hasLocalToken) {
       injectButton();
-      // Re-inject every 2 seconds in case React hydration removes it
       setInterval(function() { injectButton(); }, 2000);
       return;
     }
@@ -47,21 +49,9 @@
           injectButton();
           setInterval(function() { injectButton(); }, 2000);
         }
-      })
-      .catch(function() {});
+      }).catch(function() {});
   }
 
-  // Wait for DOM to be fully ready, then inject after a delay
-  if (document.readyState === 'complete') {
-    setTimeout(tryShow, 500);
-  } else {
-    window.addEventListener('load', function() { setTimeout(tryShow, 500); });
-  }
-})();
-
-// Center the "Test as Fan" button so it doesn't overlap with logout
-(function() {
-  var style = document.createElement('style');
-  style.textContent = '[class*="testFanBtn"] { margin-left: auto !important; margin-right: auto !important; position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; }';
-  document.head.appendChild(style);
+  if (document.readyState === 'complete') { setTimeout(tryShow, 500); }
+  else { window.addEventListener('load', function() { setTimeout(tryShow, 500); }); }
 })();
