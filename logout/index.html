@@ -1,41 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Logout — Breyya</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
-<style>body{font-family:'DM Sans',system-ui;background:#0d1b2a;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;margin:0} .card{max-width:600px;padding:24px;text-align:center}</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logging out — Breyya</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: #0d1b2a;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    background: #13243a;
+    border-radius: 16px;
+    padding: 40px 30px;
+  }
+  .icon { font-size: 48px; margin-bottom: 16px; }
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  p { font-size: 15px; color: #7a93a8; margin-bottom: 24px; }
+  .btn {
+    display: inline-block;
+    background: #00b4d8;
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: #0090b0; }
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid #1e3350;
+    border-top: 3px solid #00b4d8;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #logging-out { display: block; }
+  #logged-out { display: none; }
+</style>
 </head>
 <body>
 <div class="card">
-  <p>Logging out…</p>
-  <p id="link-area" style="margin-top:12px"></p>
+  <!-- Logging out state -->
+  <div id="logging-out">
+    <div class="spinner"></div>
+    <h1>Logging out...</h1>
+    <p>Clearing your session</p>
+  </div>
+  <!-- Logged out state -->
+  <div id="logged-out">
+    <div class="icon">👋</div>
+    <h1>You've been logged out</h1>
+    <p>Your session has been cleared. See you next time!</p>
+    <a href="/" class="btn">Back to Home</a>
+  </div>
 </div>
+
 <script>
-(function(){
-  try{
-    // Clear common localStorage keys
-    try{ localStorage.removeItem('token'); }catch(e){}
-    try{ localStorage.removeItem('user'); }catch(e){}
-    try{ localStorage.clear(); }catch(e){}
-    // If server-side logout exists, show link
-    var linkArea = document.getElementById('link-area');
-    var xhr = new XMLHttpRequest();
-    xhr.open('HEAD','/api/auth/logout.php',true);
-    xhr.onreadystatechange = function(){
-      if(xhr.readyState===4){
-        if(xhr.status===200){
-          linkArea.innerHTML = '<a href="/api/auth/logout.php" style="color:#00b4d8">Also log out from server</a>';
-        } else {
-          linkArea.innerHTML = '';
-        }
-        setTimeout(function(){ window.location.href = '/'; },800);
-      }
-    };
-    xhr.send(null);
-  }catch(e){ window.location.href = '/'; }
+(function() {
+  // 1. Clear ALL localStorage
+  try { localStorage.clear(); } catch(e) {}
+  
+  // 2. Clear ALL sessionStorage
+  try { sessionStorage.clear(); } catch(e) {}
+  
+  // 3. Delete all cookies for this domain
+  try {
+    document.cookie.split(';').forEach(function(c) {
+      var name = c.trim().split('=')[0];
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.breyya.com';
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=breyya.com';
+    });
+  } catch(e) {}
+  
+  // 4. Call server-side logout to clear auth cookie
+  fetch('/api/auth/logout.php', { method: 'POST', credentials: 'include' })
+    .catch(function() {})
+    .finally(function() {
+      // 5. Show logged out state
+      document.getElementById('logging-out').style.display = 'none';
+      document.getElementById('logged-out').style.display = 'block';
+    });
 })();
 </script>
 </body>
