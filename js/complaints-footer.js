@@ -5,14 +5,14 @@
 (function() {
   // Add complaints link to bottom nav area on feed/gallery/chat
   var path = window.location.pathname;
-  if (path.indexOf('/feed') === 0 || path.indexOf('/gallery') === 0 || false /* chat page excluded */) {
+  if (path.indexOf('/feed') === 0 || path.indexOf('/gallery') === 0 || path.indexOf('/chat') === 0) {
     setTimeout(function() {
       if (document.getElementById('complaints-link')) return;
       var link = document.createElement('div');
       link.id = 'complaints-link';
       link.setAttribute('style',
         'text-align:center;padding:8px;font-size:11px;color:#3d5368;' +
-        'position:fixed;bottom:52px;left:0;right:0;z-index:99;' +
+        'position:fixed;bottom:' + (path.indexOf('/chat') === 0 ? '110' : '52') + 'px;left:0;right:0;z-index:99;' +
         'background:linear-gradient(transparent, #0d1b2a 30%);pointer-events:none;');
       link.innerHTML = '<a href="/contact#complaints" style="color:#3d5368;text-decoration:none;pointer-events:auto;">Report / Complaints</a>';
       document.body.appendChild(link);
