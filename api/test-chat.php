@@ -20,10 +20,8 @@ try {
         $contents = file_get_contents($_sf);
         echo json_encode(['step' => '1b', 'file_size' => strlen($contents), 'has_define' => strpos($contents, 'define') !== false]);
         
-        // Test if there's a PHP syntax error by evaluating it
-        $evalResult = null;
-        ob_start();
-        $error = error_get_last();
+        // Test what constants are defined before/after eval
+        $beforeConstants = get_defined_constants(true)['user'] ?? [];
         try {
             eval('?>' . $contents);
             $evalResult = 'ok';
@@ -32,8 +30,9 @@ try {
         } catch (Throwable $e) {
             $evalResult = 'error: ' . $e->getMessage();
         }
-        ob_end_clean();
-        echo json_encode(['step' => '1c', 'eval_result' => $evalResult]);
+        $afterConstants = get_defined_constants(true)['user'] ?? [];
+        $newConstants = array_diff_key($afterConstants, $beforeConstants);
+        echo json_encode(['step' => '1c', 'eval_result' => $evalResult, 'new_constants' => array_keys($newConstants)]);
     }
     
     if (file_exists($_sf)) {
