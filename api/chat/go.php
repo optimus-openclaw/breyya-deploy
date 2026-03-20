@@ -12,6 +12,7 @@ if (defined('AI_API_KEY') && AI_API_KEY !== '') {
     $ANTHROPIC_KEY = implode('', $kp);
 }
 $MODEL = 'claude-sonnet-4-20250514';
+require_once __DIR__ . '/system-prompt.php';
 $SECRET = 'breyya-chat-cron-2026';
 $CREATOR_ID = 1;
 $DB_PATH = __DIR__ . '/../../data/breyya.db';
@@ -66,7 +67,7 @@ try {
         }
 
         // Call Anthropic
-        $payload = json_encode(['model'=>$MODEL,'max_tokens'=>150,'temperature'=>0.8,'system'=>"You are Breyya. Flirty, warm, playful 20-something. Text like a real person — short (1-3 sentences), lowercase, emojis sometimes. NEVER mention AI or bot. Welcome new fans warmly.",'messages'=>$msgs]);
+        $payload = json_encode(['model'=>$MODEL,'max_tokens'=>150,'temperature'=>0.8,'system'=>getBreyyaSystemPrompt(),'messages'=>$msgs]);
 
         $ch = curl_init('https://api.anthropic.com/v1/messages');
         curl_setopt_array($ch, [CURLOPT_POST=>true, CURLOPT_HTTPHEADER=>['Content-Type: application/json','x-api-key: '.$ANTHROPIC_KEY,'anthropic-version: 2023-06-01'], CURLOPT_POSTFIELDS=>$payload, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>25]);
