@@ -1,50 +1,38 @@
 /**
- * Realistic "Seen" behavior for chat.
- * Replaces instant "Seen ✓✓" with:
- * 1. "Delivered ✓" immediately
- * 2. "Seen ✓✓" after a random delay (mimics her opening the app)
- * 3. Then typing indicator kicks in naturally
+ * Realistic Seen behavior — based on server-side is_read flag.
+ * "Delivered ✓" until the AI processor marks the message as read.
+ * "Seen ✓✓" only after Breyya's AI has started processing.
  */
 (function() {
   if (window.location.pathname.indexOf('/chat') !== 0) return;
 
-  // Track when we last sent a message
-  var lastSentTime = 0;
-  var seenShown = false;
-
-  // Watch for send button clicks to track timing
-  document.addEventListener('click', function(e) {
-    var btn = e.target.closest('[class*="sendBtn"]');
-    if (btn) {
-      lastSentTime = Date.now();
-      seenShown = false;
-    }
-  });
-
-  // Override the "Seen ✓✓" display
   setInterval(function() {
-    var seenEls = document.querySelectorAll('div');
-    seenEls.forEach(function(el) {
-      if (el.textContent.trim() === 'Seen ✓✓' && el.style.fontSize === '11px') {
-        var timeSinceSend = Date.now() - lastSentTime;
-        
-        // If we sent a message recently (within 10 minutes)
-        if (lastSentTime > 0 && timeSinceSend < 600000) {
-          // Random "seen" delay: 2-8 minutes after sending
-          var seenDelay = (Math.random() * 360000) + 120000; // 2-8 min in ms
-          
-          if (timeSinceSend < seenDelay) {
-            // Not enough time passed — show "Delivered" instead
-            el.textContent = 'Delivered ✓';
-            el.style.color = '#556677';
-          } else {
-            // Enough time passed — show "Seen"
-            el.style.color = '#00b4ff';
-            seenShown = true;
-          }
-        }
-        // If no recent send or more than 10 min ago, leave "Seen" as normal
+    // Find all "Seen ✓✓" indicators
+    var divs = document.querySelectorAll('div');
+    divs.forEach(function(el) {
+      var text = el.textContent.trim();
+      if (text === 'Seen ✓✓' && el.style.fontSize === '11px') {
+        // Replace with "Delivered ✓" — server will control when "Seen" shows
+        // The React app shows "Seen" when has_pending=true && is_typing=false
+        // We override: show "Delivered" until is_typing becomes true
+        el.textContent = 'Delivered ✓';
+        el.style.color = '#556677';
       }
     });
+  }, 300);
+
+  // Watch for typing indicator — when typing shows, upgrade previous "Delivered" to "Seen"
+  setInterval(function() {
+    var typingDots = document.querySelector('[class*="typingDots"]');
+    if (typingDots) {
+      // Breyya is typing — she's seen the message
+      var divs = document.querySelectorAll('div');
+      divs.forEach(function(el) {
+        if (el.textContent.trim() === 'Delivered ✓' && el.style.fontSize === '11px') {
+          el.textContent = 'Seen ✓✓';
+          el.style.color = '#00b4ff';
+        }
+      });
+    }
   }, 500);
 })();
