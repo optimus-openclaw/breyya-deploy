@@ -99,6 +99,25 @@
   else { window.addEventListener('load', function() { setTimeout(checkAdmin, 500); }); }
   setInterval(checkAdmin, 3000);
 
+  // Inject Earnings link on backstage hub
+  if (path === '/backstage' || path === '/backstage/') {
+    setInterval(function() {
+      if (document.getElementById('earnings-link-injected')) return;
+      var grid = document.querySelector('[style*="grid"]');
+      if (!grid) return;
+      var card = document.createElement('a');
+      card.id = 'earnings-link-injected';
+      card.href = '/backstage/earnings/';
+      card.setAttribute('style', 
+        'background:#16213e;border-radius:14px;padding:28px 20px;text-decoration:none;' +
+        'border:1px solid rgba(0,174,239,0.15);transition:transform 0.2s;display:block;cursor:pointer;text-align:center;');
+      card.innerHTML = '<div style="font-size:36px;margin-bottom:12px">💰</div>' +
+        '<h2 style="color:#fff;font-size:16px;font-weight:600;margin-bottom:8px">Earnings</h2>' +
+        '<p style="color:#8899aa;font-size:13px;line-height:1.4">Revenue breakdown, transaction history, payouts</p>';
+      grid.appendChild(card);
+    }, 1000);
+  }
+
   // Hide built-in backstage "Log Out" button
   if (path.indexOf('/backstage') === 0) {
     setInterval(function() {
