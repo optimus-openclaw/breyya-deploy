@@ -34,3 +34,11 @@
   style.textContent = 'img, video { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; pointer-events: none; } [class*="postMedia"] { -webkit-user-select: none; user-select: none; }';
   document.head.appendChild(style);
 })();
+
+// Block Ctrl+S / Cmd+S (Save Page)
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    return false;
+  }
+});
