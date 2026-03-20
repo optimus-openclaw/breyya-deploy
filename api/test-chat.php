@@ -21,13 +21,24 @@ try {
         echo json_encode(['step' => '1b', 'file_size' => strlen($contents), 'has_define' => strpos($contents, 'define') !== false]);
     }
     
-    if (file_exists($_sf)) require_once $_sf;
-    if (defined('AI_API_KEY') && AI_API_KEY !== '') {
-        $ANTHROPIC_KEY = AI_API_KEY;
-        echo json_encode(['step' => 2, 'key_loaded' => substr($ANTHROPIC_KEY, 0, 10) . '...']);
+    if (file_exists($_sf)) {
+        require_once $_sf;
+        echo json_encode(['step' => '2a', 'require_ok' => true]);
+    }
+    
+    echo json_encode(['step' => '2b', 'defined' => defined('AI_API_KEY')]);
+    
+    if (defined('AI_API_KEY')) {
+        $keyValue = AI_API_KEY;
+        echo json_encode(['step' => '2c', 'key_empty' => ($keyValue === ''), 'key_length' => strlen($keyValue)]);
+        if ($keyValue !== '') {
+            $ANTHROPIC_KEY = $keyValue;
+            echo json_encode(['step' => 2, 'key_loaded' => substr($ANTHROPIC_KEY, 0, 10) . '...']);
+        } else {
+            echo json_encode(['step' => 2, 'key_loaded' => false, 'reason' => 'empty']);
+        }
     } else {
-        $ANTHROPIC_KEY = '';
-        echo json_encode(['step' => 2, 'key_loaded' => false]);
+        echo json_encode(['step' => 2, 'key_loaded' => false, 'reason' => 'not_defined']);
     }
     
     // Test inventory paths
