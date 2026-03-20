@@ -126,10 +126,10 @@
       '</div>' +
       '<div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;">' +
         '<span style="color:#7a93a8;font-size:18px;font-weight:700;">$</span>' +
-        '<input id="custom-tip" type="number" min="5" step="1" placeholder="Custom amount" style="flex:1;padding:12px;background:#1a2940;border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:#fff;font-size:15px;outline:none;-moz-appearance:textfield;"/>' +
+        '<input id="custom-tip" type="number" min="2" step="1" placeholder="Custom amount" style="flex:1;padding:12px;background:#1a2940;border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:#fff;font-size:15px;outline:none;-moz-appearance:textfield;"/>' +
         '<button id="send-custom-tip" style="padding:12px 20px;background:linear-gradient(135deg,#00b4d8,#0090b0);border:none;border-radius:12px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;">Send</button>' +
       '</div>' +
-      '<p style="color:#556677;font-size:11px;margin:0 0 14px;">Minimum tip: $5</p>' +
+      '<p style="color:#556677;font-size:11px;margin:0 0 14px;">Minimum tip: $2</p>' +
       '<button id="tip-cancel" style="color:#667;cursor:pointer;background:none;border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:8px 24px;font-size:13px;">Cancel</button>';
 
     overlay.appendChild(modal);
@@ -154,9 +154,9 @@
     if (sendCustom) {
       sendCustom.addEventListener('click', function() {
         var val = parseInt(customInput.value);
-        if (!val || val < 5) { 
+        if (!val || val < 2) { 
           customInput.style.borderColor = '#ff4757';
-          customInput.placeholder = 'Min $5';
+          customInput.placeholder = 'Min $2';
           return;
         }
         sendCustom.textContent = '✅ Tipped $' + val + '!';
