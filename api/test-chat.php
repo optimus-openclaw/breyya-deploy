@@ -19,6 +19,21 @@ try {
     if (file_exists($_sf)) {
         $contents = file_get_contents($_sf);
         echo json_encode(['step' => '1b', 'file_size' => strlen($contents), 'has_define' => strpos($contents, 'define') !== false]);
+        
+        // Test if there's a PHP syntax error by evaluating it
+        $evalResult = null;
+        ob_start();
+        $error = error_get_last();
+        try {
+            eval('?>' . $contents);
+            $evalResult = 'ok';
+        } catch (ParseError $e) {
+            $evalResult = 'parse_error: ' . $e->getMessage();
+        } catch (Throwable $e) {
+            $evalResult = 'error: ' . $e->getMessage();
+        }
+        ob_end_clean();
+        echo json_encode(['step' => '1c', 'eval_result' => $evalResult]);
     }
     
     if (file_exists($_sf)) {
