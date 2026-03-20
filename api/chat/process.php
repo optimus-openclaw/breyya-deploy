@@ -6,6 +6,9 @@ $_sf = __DIR__ . '/../.secrets.php';
 if (file_exists($_sf)) require_once $_sf;
 if (defined('AI_API_KEY') && AI_API_KEY !== '') {
     $ANTHROPIC_KEY = AI_API_KEY;
+} elseif (defined('OPENAI_API_KEY') && OPENAI_API_KEY !== '') {
+    // Fallback to OPENAI_API_KEY if AI_API_KEY not found
+    $ANTHROPIC_KEY = OPENAI_API_KEY;
 } else {
     // Key must be set in .secrets.php — never hardcode here
     $ANTHROPIC_KEY = '';
