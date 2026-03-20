@@ -124,6 +124,12 @@
         '<button class="tip-amount" data-amount="25" style="padding:12px;background:linear-gradient(135deg,#00b4d8,#0090b0);border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;">$25</button>' +
         '<button class="tip-amount" data-amount="50" style="padding:12px;background:linear-gradient(135deg,#00b4d8,#0090b0);border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;">$50</button>' +
       '</div>' +
+      '<div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;">' +
+        '<span style="color:#7a93a8;font-size:18px;font-weight:700;">$</span>' +
+        '<input id="custom-tip" type="number" min="5" step="1" placeholder="Custom amount" style="flex:1;padding:12px;background:#1a2940;border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:#fff;font-size:15px;outline:none;-moz-appearance:textfield;"/>' +
+        '<button id="send-custom-tip" style="padding:12px 20px;background:linear-gradient(135deg,#00b4d8,#0090b0);border:none;border-radius:12px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;">Send</button>' +
+      '</div>' +
+      '<p style="color:#556677;font-size:11px;margin:0 0 14px;">Minimum tip: $5</p>' +
       '<button id="tip-cancel" style="color:#667;cursor:pointer;background:none;border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:8px 24px;font-size:13px;">Cancel</button>';
 
     overlay.appendChild(modal);
@@ -141,6 +147,27 @@
         }, 1000);
       });
     });
+
+    // Custom tip
+    var customInput = modal.querySelector('#custom-tip');
+    var sendCustom = modal.querySelector('#send-custom-tip');
+    if (sendCustom) {
+      sendCustom.addEventListener('click', function() {
+        var val = parseInt(customInput.value);
+        if (!val || val < 5) { 
+          customInput.style.borderColor = '#ff4757';
+          customInput.placeholder = 'Min $5';
+          return;
+        }
+        sendCustom.textContent = '✅ Tipped $' + val + '!';
+        sendCustom.style.background = '#00c853';
+        setTimeout(function() { overlay.remove(); }, 1000);
+      });
+      // Enter key
+      customInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') sendCustom.click();
+      });
+    }
 
     // Cancel
     modal.querySelector('#tip-cancel').addEventListener('click', function() {
