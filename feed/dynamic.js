@@ -128,10 +128,21 @@
   });
   observer.observe(document.body, { childList: true, subtree: true });
 
-  // Initial load
+  // Aggressive initialization for mobile Safari
   function init() { loadFeed(); }
-  if (document.readyState === 'complete') setTimeout(init, 300);
-  else window.addEventListener('load', function() { setTimeout(init, 300); });
+  
+  // Try immediately
+  init();
+  
+  // Try again after short delays
+  setTimeout(init, 500);
+  setTimeout(init, 1000);
+  setTimeout(init, 2000);
+  setTimeout(init, 3000);
+  
+  // Also try on DOMContentLoaded and load
+  document.addEventListener('DOMContentLoaded', init);
+  window.addEventListener('load', function() { setTimeout(init, 500); });
 
   // Reload when page becomes visible
   document.addEventListener('visibilitychange', function() {
