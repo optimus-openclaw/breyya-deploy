@@ -43,19 +43,19 @@
             e.stopPropagation();
             
             // Toggle heart
-            var liked = btn.dataset.liked === '1';
+            var liked = btn.dataset.liked === '1' || post.dataset.liked === '1';
             var countEl = btn.querySelector('span');
             var count = countEl ? parseInt(countEl.textContent) || 0 : 0;
             
             if (liked) {
               // Unlike
-              btn.dataset.liked = '0';
+              btn.dataset.liked = '0'; post.dataset.liked = '0';
               svg.setAttribute('fill', 'none');
               svg.style.color = '';
               if (countEl) countEl.textContent = Math.max(0, count - 1);
             } else {
               // Like — animate
-              btn.dataset.liked = '1';
+              btn.dataset.liked = '1'; post.dataset.liked = '1';
               svg.setAttribute('fill', '#ff4757');
               svg.style.color = '#ff4757';
               if (countEl) countEl.textContent = count + 1;

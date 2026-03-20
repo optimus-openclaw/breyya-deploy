@@ -1,10 +1,10 @@
 <?php
 /**
- * POST /api/posts/like
- * Toggle like on a post
+ * POST /api/posts/like.php
+ * Toggle like on a post. Returns new like state + count.
  */
-
 require_once __DIR__ . '/../lib/auth.php';
+require_once __DIR__ . '/../lib/database.php';
 setCorsHeaders();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -25,8 +25,7 @@ $db = getDB();
 $stmt = $db->prepare('SELECT id FROM post_likes WHERE post_id = :pid AND user_id = :uid');
 $stmt->bindValue(':pid', $postId, SQLITE3_INTEGER);
 $stmt->bindValue(':uid', $user['id'], SQLITE3_INTEGER);
-$result = $stmt->execute();
-$existing = $result->fetchArray();
+$existing = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
 
 if ($existing) {
     // Unlike
@@ -39,7 +38,7 @@ if ($existing) {
     $liked = false;
 } else {
     // Like
-    $stmt = $db->prepare('INSERT INTO post_likes (post_id, user_id) VALUES (:pid, :uid)');
+    $stmt = $db->prepare('INSERT OR IGNORE INTO post_likes (post_id, user_id) VALUES (:pid, :uid)');
     $stmt->bindValue(':pid', $postId, SQLITE3_INTEGER);
     $stmt->bindValue(':uid', $user['id'], SQLITE3_INTEGER);
     $stmt->execute();
@@ -48,11 +47,8 @@ if ($existing) {
     $liked = true;
 }
 
+// Get new count
 $newCount = $db->querySingle("SELECT like_count FROM posts WHERE id = $postId");
 $db->close();
 
-jsonResponse([
-    'ok' => true,
-    'liked' => $liked,
-    'like_count' => $newCount,
-]);
+jsonResponse(['ok' => true, 'liked' => $liked, 'like_count' => $newCount]);
