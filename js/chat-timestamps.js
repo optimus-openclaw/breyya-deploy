@@ -121,3 +121,16 @@
     return d;
   }
 })();
+
+// Fix status: change "Online" to "Offline" to match feed
+(function() {
+  if (window.location.pathname.indexOf('/chat') !== 0) return;
+  setInterval(function() {
+    var statusEls = document.querySelectorAll('[class*="headerStatus"]');
+    statusEls.forEach(function(el) {
+      if (el.textContent.includes('Online')) {
+        el.innerHTML = '<span style="color:#7a93a8">● Offline</span>';
+      }
+    });
+  }, 500);
+})();
