@@ -1,19 +1,18 @@
 /**
- * Admin nav: Backstage + Home buttons on all pages for admin/creator only.
+ * Admin nav: Backstage + Home buttons on ALL pages for admin/creator only.
  */
 (function() {
   var path = window.location.pathname;
-  if (path.indexOf('/backstage') === 0 || path.indexOf('/admin') === 0) return;
-
   var isChat = path.indexOf('/chat') === 0;
-  var isDashboard = path.indexOf('/dashboard') === 0;
+  var isDashboard = path.indexOf('/dashboard') === 0 || path.indexOf('/backstage/dashboard') === 0;
+  var isBackstageInventory = path.indexOf('/backstage/inventory') === 0;
 
   function showAdminNav() {
     if (document.getElementById('admin-nav-wrap')) return;
 
     var wrap = document.createElement('div');
     wrap.id = 'admin-nav-wrap';
-    var topPos = isChat ? '52px' : isDashboard ? '56px' : '12px';
+    var topPos = (isChat || isDashboard || isBackstageInventory) ? '56px' : '12px';
     wrap.setAttribute('style',
       'position:fixed !important;top:' + topPos + ' !important;left:16px !important;z-index:99999 !important;' +
       'display:flex !important;gap:8px !important;'
@@ -27,7 +26,6 @@
       'backdrop-filter:blur(8px) !important;-webkit-backdrop-filter:blur(8px) !important;' +
       'display:block !important;visibility:visible !important;opacity:1 !important;';
 
-    // Backstage button
     var bs = document.createElement('a');
     bs.href = '/backstage/';
     bs.textContent = '🔒 Backstage';
@@ -35,7 +33,6 @@
     bs.onmouseover = function() { bs.style.borderColor='#e91e8c'; };
     bs.onmouseout = function() { bs.style.borderColor='rgba(233,30,140,0.3)'; };
 
-    // Home button
     var hm = document.createElement('a');
     hm.href = '/feed/';
     hm.textContent = '🏠 Home';
