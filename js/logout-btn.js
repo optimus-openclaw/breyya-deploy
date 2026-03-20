@@ -19,7 +19,7 @@
     btn.href = '/logout/';
     btn.textContent = 'Log out';
     btn.setAttribute('style',
-      'position:fixed !important;top:56px !important;right:16px !important;z-index:99999 !important;' +
+      'position:fixed !important;top:12px !important;right:16px !important;z-index:99999 !important;' +
       'background:rgba(19,36,58,0.95) !important;color:#7a93a8 !important;' +
       'font-family:"DM Sans","Inter",-apple-system,sans-serif !important;' +
       'font-size:13px !important;font-weight:600 !important;padding:8px 16px !important;' +
@@ -57,4 +57,11 @@
   } else {
     window.addEventListener('load', function() { setTimeout(tryShow, 500); });
   }
+})();
+
+// Center the "Test as Fan" button so it doesn't overlap with logout
+(function() {
+  var style = document.createElement('style');
+  style.textContent = '[class*="testFanBtn"] { margin-left: auto !important; margin-right: auto !important; position: absolute !important; left: 50% !important; transform: translateX(-50%) !important; }';
+  document.head.appendChild(style);
 })();
