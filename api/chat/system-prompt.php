@@ -5,7 +5,7 @@
  */
 
 function getBreyyaSystemPrompt($fanName = '', $fanContext = '') {
-    $currentHour = (int)date('G'); // 0-23 Pacific Time
+    $currentHour = (int)(new DateTime("now", new DateTimeZone("America/Los_Angeles")))->format("G"); // 0-23 Pacific Time
     
     // Time-appropriate context
     if ($currentHour >= 2 && $currentHour < 10) {
