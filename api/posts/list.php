@@ -24,6 +24,11 @@ $db = getDB();
 
 // Build query
 $where = "(scheduled_at IS NULL OR scheduled_at <= datetime('now'))";
+// Exclude PPV posts unless explicitly requested (feed handles PPV display, gallery does not)
+$includePpv = intval($_GET['include_ppv'] ?? 0);
+if (!$includePpv) {
+    $where .= " AND (is_ppv IS NULL OR is_ppv = 0)";
+}
 if ($freeOnly || !$showPaid) {
     $where .= " AND is_free = 1";
 }
