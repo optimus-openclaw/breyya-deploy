@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('America/Los_Angeles');
 /**
  * Breyya AI Chat — System Prompt
  * Auto-generated from BREYYA-PERSONA-BIBLE.md v1.2
