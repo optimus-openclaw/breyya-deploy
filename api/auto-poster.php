@@ -24,7 +24,7 @@ $db = getDB();
 // Check if we already posted today
 $today = date('Y-m-d');
 $alreadyPosted = $db->querySingle(
-    "SELECT COUNT(*) FROM posts WHERE date(created_at) = '$today' AND creator_id = $CREATOR_ID AND caption LIKE '%[auto]%'"
+    "SELECT COUNT(*) FROM posts WHERE date(created_at) = '$today' AND creator_id = $CREATOR_ID AND is_auto = 1"
 );
 
 if ($alreadyPosted > 0) {
@@ -132,7 +132,7 @@ $captions = [
     "late night vibes 🌙",
     "can't sleep so here's a pic 😩💕",
 ];
-$caption = $captions[array_rand($captions)] . ' [auto]';
+$caption = $captions[array_rand($captions)];
 
 // Insert the post with the scheduled time
 $stmt = $db->prepare(
