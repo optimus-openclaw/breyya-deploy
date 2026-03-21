@@ -5,9 +5,13 @@ if (($_GET['secret'] ?? '') !== 'breyya-chat-cron-2026') { http_response_code(40
 
 $db = getDB();
 
-$caption = $_GET['caption'] ?? 'something special for you 😏🔒';
+// Ensure PPV columns exist
+$db->exec("ALTER TABLE posts ADD COLUMN is_ppv INTEGER DEFAULT 0");
+$db->exec("ALTER TABLE posts ADD COLUMN ppv_price_cents INTEGER DEFAULT 0");
+
+$caption = $_GET['caption'] ?? 'something special for you 🔥🔒';
 $mediaUrl = $_GET['media_url'] ?? '';
-$price = intval($_GET['price'] ?? 1500); // cents
+$price = intval($_GET['price'] ?? 1500);
 $type = $_GET['type'] ?? 'video';
 
 $stmt = $db->prepare(
