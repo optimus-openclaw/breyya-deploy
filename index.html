@@ -179,20 +179,6 @@
   <!-- Bio -->
   <p class="bio">your girlfriend experience ❤️</p>
 
-  <!-- Stats -->
-  <p style="font-size:13px;color:#7a93a8;margin:8px 0 4px;display:flex;align-items:center;justify-content:center;gap:8px;">
-    <span>❤️ 259</span>
-    <span id="hero-seen-text">· Active today</span>
-  </p>
-  <script>
-  fetch("/api/chat/last-active.php").then(function(r){return r.json()}).then(function(d){
-    if(!d.ok||!d.last_active)return;
-    var l=new Date(d.last_active.replace(" ","T")+"Z"),m=Math.floor((new Date()-l)/60000);
-    var t=m<1?"just now":m<60?m+"m ago":m<1440?Math.floor(m/60)+"h ago":Math.floor(m/1440)+"d ago";
-    document.getElementById("hero-seen-text").textContent="\u00b7 Seen "+t;
-  }).catch(function(){});
-  </script>
-
   
 
   <!-- CTA -->
