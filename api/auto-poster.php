@@ -61,8 +61,48 @@ if (is_dir($uploadDir)) {
     }
 }
 
-// Strategy 2: Check R2 content if no local uploads available
-// (Future: query R2 inventory for unused gallery content)
+// Strategy 2: Check R2 Feed content if no local uploads available
+if (empty($availableFiles)) {
+    $r2BaseUrl = 'https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev';
+    
+    // Query R2 for Feed images via rclone (runs on the OpenClaw host, not the web server)
+    // Instead, use a pre-synced list or check known R2 feed paths
+    // For now, maintain a list in the DB of R2 feed content
+    $r2Result = $db->query("SELECT r2_url FROM content_inventory WHERE status = 'feed' AND r2_url NOT IN (SELECT media_url FROM posts WHERE media_url IS NOT NULL)");
+    if ($r2Result) {
+        while ($row = $r2Result->fetchArray(SQLITE3_ASSOC)) {
+            $url = $row['r2_url'];
+            // Only images, not videos
+            $ext = strtolower(pathinfo($url, PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'heic'])) {
+                $availableFiles[] = $url;
+            }
+        }
+    }
+    
+    // Strategy 3: If still no content from DB, check R2 directly via known public URLs
+    if (empty($availableFiles)) {
+        // Hardcoded R2 Feed URLs as fallback (from content sorter output)
+        $knownR2Feed = [
+            $r2BaseUrl . '/2020-09-14%20sorted/Feed/!-01-jpeg/images/IMG_0352.jpeg',
+            $r2BaseUrl . '/2020-09-14%20sorted/Feed/!-03-jpeg/images/IMG_0374.jpeg',
+            $r2BaseUrl . '/2020-09-14%20sorted/Feed/!-05-jpeg/images/IMG_0057.jpeg',
+            $r2BaseUrl . '/2020-09-14%20sorted/Feed/!-08-jpeg/images/IMG_0075.jpeg',
+            $r2BaseUrl . '/2020-09-14%20sorted/Feed/!-10-jpeg/images/IMG_0223.jpeg',
+            $r2BaseUrl . '/2020-09-28%20sorted/Feed/!-03-jpeg/images/IMG_0296.jpeg',
+            $r2BaseUrl . '/2020-09-28%20sorted/Feed/!-05-jpeg/images/IMG_0073.jpeg',
+            $r2BaseUrl . '/2020-09-28%20sorted/Feed/!-06-jpeg/images/IMG_0622.jpeg',
+            $r2BaseUrl . '/2020-09-28%20sorted/Feed/!-09-jpeg/images/IMG_0299.jpeg',
+            $r2BaseUrl . '/2021-01-23%20sorted/Feed/white-tank-light-denim-shorts/images/IMG_9474.jpg',
+        ];
+        
+        foreach ($knownR2Feed as $url) {
+            if (!in_array($url, $usedMedia)) {
+                $availableFiles[] = $url;
+            }
+        }
+    }
+}
 
 if (empty($availableFiles)) {
     $db->close();
