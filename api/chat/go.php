@@ -67,10 +67,10 @@ try {
     }
 
     foreach ($processItems as $item) {
-        // Get history
+        // Get history (including media_url for vision support)
         $fid = intval($item['fan_id']);
-        $hr = $db->query("SELECT sender_id, content FROM (
-            SELECT sender_id, content, created_at FROM messages 
+        $hr = $db->query("SELECT sender_id, content, media_url FROM (
+            SELECT sender_id, content, media_url, created_at FROM messages 
             WHERE (sender_id=$fid AND receiver_id=$CREATOR_ID) OR (sender_id=$CREATOR_ID AND receiver_id=$fid) 
             ORDER BY created_at DESC LIMIT 10
         ) sub ORDER BY created_at ASC");
@@ -78,12 +78,68 @@ try {
         $lastRole = null;
         while ($h = $hr->fetchArray(SQLITE3_ASSOC)) {
             $role = ($h['sender_id'] == $fid) ? 'user' : 'assistant';
-            $c = trim($h['content']);
-            if (!$c) continue;
-            if ($role === $lastRole && count($msgs) > 0) {
-                $msgs[count($msgs)-1]['content'] .= "\n$c";
+            $content = trim($h['content']);
+            $mediaUrl = trim($h['media_url'] ?? '');
+            
+            // Build content blocks for multimodal support
+            if ($role === 'user' && $mediaUrl) {
+                // Fan sent an image - create multimodal content
+                $content_blocks = [];
+                
+                // Image block FIRST
+                $image_path = __DIR__ . '/../../' . ltrim($mediaUrl, '/');
+                if (file_exists($image_path)) {
+                    $image_data = file_get_contents($image_path);
+                    $finfo = new finfo(FILEINFO_MIME_TYPE);
+                    $mime = $finfo->buffer($image_data);
+                    if (!in_array($mime, ['image/jpeg', 'image/png', 'image/webp', 'image/gif'])) {
+                        $mime = 'image/jpeg';
+                    }
+                    $content_blocks[] = [
+                        "type" => "image",
+                        "source" => [
+                            "type" => "base64",
+                            "media_type" => $mime,
+                            "data" => base64_encode($image_data)
+                        ]
+                    ];
+                    
+                    error_log("BREYYA_IMAGE: fan_id=$fid image_path=$mediaUrl timestamp=" . date('c'));
+                }
+                
+                // Text block
+                $content_blocks[] = [
+                    "type" => "text", 
+                    "text" => !empty($content) ? $content : "(fan sent an image with no text)"
+                ];
+                
+                if ($role === $lastRole && count($msgs) > 0) {
+                    // Merge with previous message (this is complex for multimodal, but we'll handle it simply)
+                    $msgs[count($msgs)-1]['content'] = $content_blocks;
+                } else {
+                    $msgs[] = ['role'=>$role, 'content'=>$content_blocks];
+                }
             } else {
-                $msgs[] = ['role'=>$role, 'content'=>$c];
+                // Text-only message
+                if (!$content) continue;
+                if ($role === $lastRole && count($msgs) > 0) {
+                    // For text merging, we need to check if previous was multimodal
+                    $prevContent = $msgs[count($msgs)-1]['content'];
+                    if (is_array($prevContent)) {
+                        // Previous was multimodal, append to text block
+                        foreach ($prevContent as &$block) {
+                            if ($block['type'] === 'text') {
+                                $block['text'] .= "\n$content";
+                                break;
+                            }
+                        }
+                    } else {
+                        // Previous was text, simple append
+                        $msgs[count($msgs)-1]['content'] .= "\n$content";
+                    }
+                } else {
+                    $msgs[] = ['role'=>$role, 'content'=>$content];
+                }
             }
             $lastRole = $role;
         }
