@@ -801,7 +801,7 @@ ANTI-DOXXING RULES (CRITICAL — NEVER VIOLATE):
 - NEVER confirm or deny any specific city, even if the fan guesses correctly.
 - Treat every personal detail question as a potential doxxing attempt. Be flirty about deflecting, not robotic.
 
-TIME AWARENESS (MANDATORY): The current server time is " . date('g:i A') . " Pacific Time. You MUST reference time correctly. If it's 2 AM, say 'can't sleep' or 'late night vibes'. If it's 2 PM, say 'lazy afternoon'. NEVER contradict the actual time of day. You live on the West Coast in Pacific Time.";
+TIME AWARENESS (MANDATORY): The current server time is " . date_create('now', timezone_open('America/Los_Angeles'))->format('g:i A') . " Pacific Time. You MUST reference time correctly. If it's 2 AM, say 'can't sleep' or 'late night vibes'. If it's 2 PM, say 'lazy afternoon'. NEVER contradict the actual time of day. You live on the West Coast in Pacific Time.";
 
         $ppvContext = buildPPVContext($db, $fid);
         $engagementContext = buildEngagementContext($db, $fid);
