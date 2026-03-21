@@ -34,14 +34,14 @@
     
     // Mock data structure for demonstration (in production, this would come from API)
     const mockAnalytics = {
-        totalActiveFans: 150,
+        totalActiveFans: 0,
         dailyFeedRate: 1, // posts per day
         sets: [
-            { id: 1, timesSold: 45, price: 25 },
-            { id: 2, timesSold: 32, price: 30 },
-            { id: 3, timesSold: 67, price: 20 },
-            { id: 4, timesSold: 12, price: 35 },
-            { id: 5, timesSold: 28, price: 25 }
+            { id: 1, timesSold: 0, price: 25 },
+            { id: 2, timesSold: 0, price: 30 },
+            { id: 3, timesSold: 0, price: 20 },
+            { id: 4, timesSold: 0, price: 35 },
+            { id: 5, timesSold: 0, price: 25 }
         ]
     };
     
