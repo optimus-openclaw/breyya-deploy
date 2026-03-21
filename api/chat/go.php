@@ -26,6 +26,7 @@ try {
     $db->busyTimeout(5000);
     @$db->exec("ALTER TABLE messages ADD COLUMN is_ai INTEGER DEFAULT 0");
     $db->exec("CREATE TABLE IF NOT EXISTS chat_queue (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_message_id INTEGER NOT NULL, fan_user_id INTEGER NOT NULL, status TEXT DEFAULT 'pending', scheduled_at TEXT, ai_response TEXT DEFAULT '', delivered_at TEXT, created_at TEXT DEFAULT (datetime('now')), UNIQUE(fan_message_id))");
+    $db->exec("CREATE TABLE IF NOT EXISTS tip_events (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_user_id INTEGER NOT NULL, amount_cents INTEGER NOT NULL, purpose TEXT DEFAULT '', processed INTEGER DEFAULT 0, created_at TEXT DEFAULT (datetime('now')))");
 
     $processed = 0; $queued = 0; $errors = 0; $debug = [];
 

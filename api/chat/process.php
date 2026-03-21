@@ -14,6 +14,7 @@ if (defined('AI_API_KEY') && AI_API_KEY !== '') {
     $ANTHROPIC_KEY = '';
 }
 $MODEL = 'claude-sonnet-4-20250514';
+require_once __DIR__ . '/system-prompt.php';
 $SECRET = 'breyya-chat-cron-2026';
 $CREATOR_ID = 1;
 $TEST_FAN_ID = 3;
@@ -361,6 +362,66 @@ function getAvailablePPV($db, $fanId) {
     return ['tier1' => $tier1, 'tier2' => $tier2];
 }
 
+// ── Helper: get unprocessed tips for a fan ──────────────────────────────
+function getUnprocessedTips($db, $fanId) {
+    $tips = [];
+    $r = $db->query("SELECT id, amount_cents, purpose FROM tip_events WHERE fan_user_id = " . intval($fanId) . " AND processed = 0 ORDER BY created_at ASC");
+    while ($row = $r->fetchArray(SQLITE3_ASSOC)) {
+        $tips[] = $row;
+    }
+    return $tips;
+}
+
+// ── Helper: mark tips as processed ──────────────────────────────────────
+function markTipsProcessed($db, $tipIds) {
+    if (empty($tipIds)) return;
+    $ids = implode(',', array_map('intval', $tipIds));
+    $db->exec("UPDATE tip_events SET processed = 1 WHERE id IN ($ids)");
+}
+
+// ── Helper: build tip context for system prompt ────────────────────────
+function buildTipContext($db, $fanId) {
+    $tips = getUnprocessedTips($db, $fanId);
+    if (empty($tips)) return '';
+    
+    $tipContext = '';
+    foreach ($tips as $tip) {
+        $amount = $tip['amount_cents'] / 100;
+        $purpose = !empty($tip['purpose']) ? " for {$tip['purpose']}" : '';
+        $tipContext .= "\n[SYSTEM: Fan just tipped $" . number_format($amount, 2) . "$purpose]";
+    }
+    
+    return $tipContext;
+}
+
+// ── Helper: get rating price for a fan (whale tier pricing) ─────────────
+function getRatingPrice($fanId, $db) {
+    global $TEST_FAN_ID;
+    if ($fanId == $TEST_FAN_ID) return 2000; // Test fan gets standard pricing
+    
+    // Get whale score from fan profile
+    $whaleScore = intval($db->querySingle("SELECT whale_score FROM fan_profiles WHERE fan_user_id = " . intval($fanId)) ?? 0);
+    
+    if ($whaleScore >= 70) {
+        // Whale tier: $25-30
+        return rand(2500, 3000);
+    } else {
+        // Standard tier: $20
+        return 2000;
+    }
+}
+
+// ── Helper: check if fan has paid enough for rating in last hour ────────
+function fanPaidForRating($db, $fanId, $requiredCents) {
+    $hourAgo = date('Y-m-d H:i:s', strtotime('-1 hour'));
+    $totalTipped = $db->querySingle(
+        "SELECT SUM(amount_cents) FROM tip_events WHERE fan_user_id = " . intval($fanId) . 
+        " AND created_at >= '$hourAgo'"
+    ) ?? 0;
+    
+    return intval($totalTipped) >= $requiredCents;
+}
+
 // ── Helper: build PPV system prompt section ────────────────────────────
 function buildPPVContext($db, $fanId) {
     $inv = loadInventory();
@@ -604,6 +665,51 @@ function calculateWhaleScore($ppvTotal, $totalMessages, $lastActive) {
     elseif ($totalMessages >= 15) $score += 5;
     
     return min(100, $score);
+}
+
+// ── Helper: detect if response is a rating delivery ─────────────────────
+function isRatingDelivery($reply) {
+    // Look for rating patterns: numbers like "8/10", "solid 9", specific rating language
+    $ratingPatterns = [
+        '/\b\d+\/10\b/',           // "8/10"
+        '/\bsolid \d+\b/',         // "solid 9"
+        '/you\'?re like a \d+/',   // "you're like a 7"
+        '/rating.*\d+/',           // "rating is 8"
+        '/\d+ out of 10/',         // "8 out of 10"
+        '/honestly.*\d+/'          // "honestly a 9"
+    ];
+    
+    foreach ($ratingPatterns as $pattern) {
+        if (preg_match($pattern, strtolower($reply))) {
+            return true;
+        }
+    }
+    
+    // Also check for rating-specific language
+    $ratingKeywords = ['rating', 'rate', 'score', 'honestly', 'not bad', 'wow', 'expecting'];
+    $keywordCount = 0;
+    $lowerReply = strtolower($reply);
+    
+    foreach ($ratingKeywords as $keyword) {
+        if (strpos($lowerReply, $keyword) !== false) {
+            $keywordCount++;
+        }
+    }
+    
+    // If multiple rating keywords + mentions size/specific details, likely a rating
+    return $keywordCount >= 2 && (strpos($lowerReply, 'size') !== false || strpos($lowerReply, 'big') !== false || strpos($lowerReply, 'thick') !== false);
+}
+
+// ── Helper: get payment request message for ratings ─────────────────────
+function getRatingPaymentMessage($fanId, $db) {
+    $price = getRatingPrice($fanId, $db) / 100; // Convert cents to dollars
+    $messages = [
+        "hey babe you gotta pay first 😂 $" . intval($price) . " and I'll give you the full rating 😘",
+        "lol not for free babe 😏 $" . intval($price) . " and I'll tell you exactly what I think 👀",
+        "nuh uh, payment first 😂 $" . intval($price) . " and then I'll give you my honest opinion 😘"
+    ];
+    
+    return $messages[array_rand($messages)];
 }
 
 // ── Helper: detect and process PPV tags in AI response ─────────────────
@@ -859,12 +965,16 @@ ANTI-DOXXING RULES (CRITICAL — NEVER VIOLATE):
 
 TIME AWARENESS (MANDATORY): The current server time is " . date_create('now', timezone_open('America/Los_Angeles'))->format('g:i A') . " Pacific Time. You MUST reference time correctly. If it's 2 AM, say 'can't sleep' or 'late night vibes'. If it's 2 PM, say 'lazy afternoon'. NEVER contradict the actual time of day. You live on the West Coast in Pacific Time.";
 
+        // Check for unprocessed tips and build tip context
+        $tipContext = buildTipContext($db, $fid);
+        $unprocessedTips = getUnprocessedTips($db, $fid);
+        
         $ppvContext = buildPPVContext($db, $fid);
         $engagementContext = buildEngagementContext($db, $fid);
         $fanProfileContext = getFanProfile($db, $fid);
         $whaleScore = intval($db->querySingle("SELECT whale_score FROM fan_profiles WHERE fan_user_id = " . intval($fid)) ?? 0);
         $upsellContext = buildUpsellTimingContext($db, $fid, $item['fan_msg'], $engagement['message_count'], $whaleScore);
-        $system = $systemBase . $ppvContext . $engagementContext . $fanProfileContext . $upsellContext;
+        $system = $systemBase . $tipContext . $ppvContext . $engagementContext . $fanProfileContext . $upsellContext;
 
         // If this fan is near limit, add sign-off instruction
         if ($engagement['message_count'] >= 19 && $fid != $TEST_FAN_ID) {
@@ -923,6 +1033,15 @@ TIME AWARENESS (MANDATORY): The current server time is " . date_create('now', ti
             }
         }
 
+        // Rating greenlight logic - check if response is a rating delivery
+        if (PAYMENTS_ENABLED && isRatingDelivery($reply)) {
+            $requiredPrice = getRatingPrice($fid, $db);
+            if (!fanPaidForRating($db, $fid, $requiredPrice)) {
+                // Fan hasn't paid enough - override with payment request
+                $reply = getRatingPaymentMessage($fid, $db);
+            }
+        }
+        
         // Check for PPV tag in response
         $result = processPPVTag($reply, $db, $fid);
         $cleanReply = $result['reply'];
@@ -950,6 +1069,13 @@ TIME AWARENESS (MANDATORY): The current server time is " . date_create('now', ti
         $db->exec("UPDATE chat_queue SET status='delivered', ai_response='" . $db->escapeString($reply) . "', delivered_at=datetime('now') WHERE id=" . intval($item['qid']));
         // Update fan profile with this interaction
         updateFanProfile($db, $fid, $item['fan_msg'], $cleanReply);
+        
+        // Mark tips as processed now that AI has seen them
+        if (!empty($unprocessedTips)) {
+            $tipIds = array_column($unprocessedTips, 'id');
+            markTipsProcessed($db, $tipIds);
+        }
+        
         $processed++;
     }
 
