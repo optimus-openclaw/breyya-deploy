@@ -1,80 +1,57 @@
 /**
  * Feed Stats: Like count (259 floor) + Seen timestamp
- * Only runs on /feed/ page
  */
 (function() {
   if (window.location.pathname.indexOf('/feed') !== 0) return;
 
   var LIKE_FLOOR = 259;
-  var injected = false;
 
-  function inject() {
-    if (injected) return;
+  function tryInject() {
+    if (document.getElementById('feed-stats-row')) return true;
     
-    // Find the creator info section (has avatar + name)
-    var creatorInfo = document.querySelector('[class*="creatorInfo"]');
-    if (!creatorInfo) return;
+    // Find ANY element with creatorInfo or creatorName in class
+    var allEls = document.querySelectorAll('*');
+    var target = null;
+    for (var i = 0; i < allEls.length; i++) {
+      var cls = allEls[i].className || '';
+      if (typeof cls === 'string' && cls.indexOf('creatorName') > -1) {
+        target = allEls[i].parentElement;
+        break;
+      }
+    }
     
-    // Find the name element
-    var nameEl = document.querySelector('[class*="creatorName"]');
-    if (!nameEl) return;
+    if (!target) return false;
 
-    injected = true;
-
-    // Count real likes from visible posts
+    // Count likes from post action buttons
     var realLikes = 0;
-    document.querySelectorAll('[class*="actionBtn"] span').forEach(function(s) {
+    var spans = document.querySelectorAll('button span, [class*="actionBtn"] span');
+    spans.forEach(function(s) {
       var n = parseInt(s.textContent);
-      if (!isNaN(n)) realLikes += n;
+      if (!isNaN(n) && n > 0 && n < 1000) realLikes += n;
     });
 
-    // Create stats row
-    var statsDiv = document.createElement('div');
-    statsDiv.id = 'feed-stats-row';
-    statsDiv.setAttribute('style',
-      'display:flex;align-items:center;gap:12px;margin-top:4px;font-size:12px;color:#556677;');
+    var div = document.createElement('div');
+    div.id = 'feed-stats-row';
+    div.style.cssText = 'display:flex;align-items:center;gap:8px;font-size:11px;color:#556677;margin-top:2px;';
+    div.innerHTML = '<span>❤️ ' + (LIKE_FLOOR + realLikes).toLocaleString() + '</span><span id="feed-seen-text"></span>';
+    target.appendChild(div);
 
-    // Like count
-    var likeSpan = document.createElement('span');
-    likeSpan.textContent = '❤️ ' + (LIKE_FLOOR + realLikes).toLocaleString();
-    statsDiv.appendChild(likeSpan);
-
-    // Seen timestamp - fetch from API
-    var seenSpan = document.createElement('span');
-    seenSpan.textContent = '';
-    statsDiv.appendChild(seenSpan);
-
+    // Fetch seen time
     fetch('/api/chat/last-active.php')
       .then(function(r) { return r.json(); })
       .then(function(d) {
-        if (d.ok && d.last_active) {
-          var last = new Date(d.last_active.replace(' ', 'T') + 'Z');
-          var now = new Date();
-          var mins = Math.floor((now - last) / 60000);
-          var text;
-          if (mins < 1) text = 'Seen just now';
-          else if (mins < 60) text = 'Seen ' + mins + 'm ago';
-          else if (mins < 1440) text = 'Seen ' + Math.floor(mins/60) + 'h ago';
-          else text = 'Seen ' + Math.floor(mins/1440) + 'd ago';
-          seenSpan.textContent = '· ' + text;
-        }
-      })
-      .catch(function() {});
+        if (!d.ok || !d.last_active) return;
+        var last = new Date(d.last_active.replace(' ', 'T') + 'Z');
+        var mins = Math.floor((new Date() - last) / 60000);
+        var text = mins < 1 ? 'just now' : mins < 60 ? mins + 'm ago' : mins < 1440 ? Math.floor(mins/60) + 'h ago' : Math.floor(mins/1440) + 'd ago';
+        var el = document.getElementById('feed-seen-text');
+        if (el) el.textContent = '· Seen ' + text;
+      }).catch(function(){});
 
-    // Insert after the name/status area inside creatorInfo
-    var innerDiv = creatorInfo.querySelector('div');
-    if (innerDiv) {
-      innerDiv.appendChild(statsDiv);
-    } else {
-      creatorInfo.appendChild(statsDiv);
-    }
+    return true;
   }
 
-  // Try repeatedly until React renders
-  var attempts = 0;
-  var timer = setInterval(function() {
-    inject();
-    attempts++;
-    if (injected || attempts > 20) clearInterval(timer);
-  }, 500);
+  // Try every 500ms for 15 seconds
+  var t = setInterval(function() { if (tryInject()) clearInterval(t); }, 500);
+  setTimeout(function() { clearInterval(t); }, 15000);
 })();
