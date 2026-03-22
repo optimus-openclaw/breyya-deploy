@@ -26,11 +26,15 @@ try {
     }
 
     $today = date('Y-m-d');
-    $backupFile = $BACKUP_DIR . "/breyya-{$today}.db";
+    $backupFile = $BACKUP_DIR . "/breyya-" . strtolower(date('l')) . ".db";
     $jsonExportFile = $BACKUP_DIR . "/breyya-{$today}.json";
 
     // Copy database file
-    if (!copy($DB_PATH, $backupFile)) {
+    // Use SQLite VACUUM INTO for safe backup during concurrent writes
+    $srcDb = new SQLite3($DB_PATH, SQLITE3_OPEN_READONLY);
+    $srcDb->exec("VACUUM INTO '$backupFile'");
+    $srcDb->close();
+    if (!file_exists($backupFile)) {
         throw new Exception('Failed to copy database file');
     }
 
