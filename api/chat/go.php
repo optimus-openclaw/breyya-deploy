@@ -272,7 +272,11 @@ try {
             array_unshift($msgs, ['role'=>'user','content'=>'hi']);
         }
 
-        // Call Anthropic with fan context
+        // Call Anthropic with fallback logic
+        $reply = null;
+        $apiError = null;
+        
+        // Primary model attempt
         $payload = json_encode(['model'=>$MODEL,'max_tokens'=>300,'temperature'=>0.9,'system'=>getBreyyaSystemPrompt('', $fanContext),'messages'=>$msgs]);
 
         $ch = curl_init('https://api.anthropic.com/v1/messages');
@@ -283,16 +287,50 @@ try {
         curl_close($ch);
 
         $debug[] = "api=$code";
-        if ($code !== 200) {
-            $debug[] = 'err=' . substr($resp,0,100);
-            $db->exec("UPDATE chat_queue SET status='failed' WHERE id=" . intval($item['qid']));
-            $errors++;
-            continue;
+        if ($code === 200) {
+            $data = json_decode($resp, true);
+            $reply = $data['content'][0]['text'] ?? null;
         }
 
-        $data = json_decode($resp, true);
-        $reply = $data['content'][0]['text'] ?? null;
-        if (!$reply) { $errors++; $db->exec("UPDATE chat_queue SET status='failed' WHERE id=" . intval($item['qid'])); continue; }
+        // Fallback to claude-haiku if primary failed
+        if (!$reply && $MODEL !== 'claude-haiku-3-20240307') {
+            $fallbackModel = 'claude-haiku-3-20240307';
+            $payload = json_encode(['model'=>$fallbackModel,'max_tokens'=>300,'temperature'=>0.9,'system'=>getBreyyaSystemPrompt('', $fanContext),'messages'=>$msgs]);
+            
+            $ch = curl_init('https://api.anthropic.com/v1/messages');
+            curl_setopt_array($ch, [CURLOPT_POST=>true, CURLOPT_HTTPHEADER=>['Content-Type: application/json','x-api-key: '.$ANTHROPIC_KEY,'anthropic-version: 2023-06-01'], CURLOPT_POSTFIELDS=>$payload, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>25]);
+            $resp = curl_exec($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            
+            if ($code === 200) {
+                $data = json_decode($resp, true);
+                $reply = $data['content'][0]['text'] ?? null;
+                $debug[] = "fallback_success:haiku";
+            } else {
+                $apiError = "Primary and fallback APIs failed. Code: $code, Error: $cerr";
+            }
+        } elseif (!$reply) {
+            $apiError = "Primary API failed. Code: $code, Error: $cerr";
+        }
+
+        // If both API calls failed, use canned fallback response
+        if (!$reply) {
+            $fallbackMessages = [
+                "sorry babe my phone died 😩 what'd I miss?",
+                "omg sorry I disappeared 😂 my wifi was being weird",
+                "hey sorry about that 😩 I'm back now",
+                "ugh sorry babe, my phone was acting up 😂"
+            ];
+            $reply = $fallbackMessages[array_rand($fallbackMessages)];
+            
+            // Log the error
+            error_log("BREYYA_API_FALLBACK: fan_id=$fid, error=$apiError, timestamp=" . date('c'));
+            
+            // Mark queue item with fallback status
+            $db->exec("UPDATE chat_queue SET status='fallback_sent' WHERE id=" . intval($item['qid']));
+            $debug[] = "fallback_used";
+        }
 
         // Double-texting logic: ~15% chance of splitting into 2 messages
         $doubleTexted = false;
