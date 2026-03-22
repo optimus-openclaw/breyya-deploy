@@ -294,35 +294,9 @@ try {
         $reply = $data['content'][0]['text'] ?? null;
         if (!$reply) { $errors++; $db->exec("UPDATE chat_queue SET status='failed' WHERE id=" . intval($item['qid'])); continue; }
 
-        // Double-texting logic: ~15% chance of splitting into 2 messages
-        $doubleTexted = false;
-        if (mt_rand(1, 100) <= 15 && strlen($reply) > 20) {
-            // Split the reply into 2 messages
-            // Strategy: Split at sentence boundary, or split at emoji
-            $parts = preg_split('/(?<=[.!?😂🔥😏💕😘🥰👀😩])\s+/', $reply, 2);
-            if (count($parts) == 2 && strlen($parts[0]) > 5 && strlen($parts[1]) > 5) {
-                // Insert first message
-                $safe1 = $db->escapeString($parts[0]);
-                $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) 
-                          VALUES ($CREATOR_ID, $fid, '$safe1', 1, 1, datetime('now'))");
-                
-                // Insert second message 2-5 seconds later
-                $delay = mt_rand(2, 5);
-                $safe2 = $db->escapeString($parts[1]);
-                $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) 
-                          VALUES ($CREATOR_ID, $fid, '$safe2', 1, 1, datetime('now', '+$delay seconds'))");
-                
-                // Skip normal insert
-                $doubleTexted = true;
-                $debug[] = "double_text:fan=$fid,delay={$delay}s";
-            }
-        }
-
-        // Insert reply (only if not double-texted)
-        if (!$doubleTexted) {
-            $safe = $db->escapeString($reply);
-            $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $fid, '$safe', 1, 1, datetime('now'))");
-        }
+        // Insert reply
+        $safe = $db->escapeString($reply);
+        $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $fid, '$safe', 1, 1, datetime('now'))");
         $db->exec("UPDATE chat_queue SET status='delivered', ai_response='$safe', delivered_at=datetime('now') WHERE id=" . intval($item['qid']));
         
         // Update fan profile with this interaction
