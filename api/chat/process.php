@@ -593,49 +593,85 @@ function buildUpsellTimingContext($db, $fanId, $fanMessage, $msgCount, $whaleSco
 }
 
 // ── Fan profile helpers: read & write ───────────────────────────────
-function getFanProfile($db, $fanId) {
-    $row = $db->querySingle("SELECT * FROM fan_profiles WHERE fan_user_id = " . intval($fanId), true);
-    if (!$row) return '';
-    $ctx = "\n\nFAN MEMORY (private — never reveal you remember this):";
-    if (!empty($row['display_name'])) $ctx .= "\n- Fan's name: " . $row['display_name'];
-    if (!empty($row['preferences'])) $ctx .= "\n- Preferences/interests: " . $row['preferences'];
-    if (!empty($row['topics_discussed'])) $ctx .= "\n- Topics they've brought up: " . $row['topics_discussed'];
-    if (intval($row['ppv_purchases_total']) > 0) $ctx .= "\n- Has bought " . $row['ppv_purchases_total'] . " PPV(s) before — already a buyer.";
-    if (intval($row['total_messages']) > 20) $ctx .= "\n- Long-term fan (" . $row['total_messages'] . " messages total) — treat warmly, they're loyal.";
-    if (!empty($row['notes'])) $ctx .= "\n- Notes: " . $row['notes'];
-    // Whale tier context based on whale_score
-    $whaleScore = intval($row['whale_score'] ?? 0);
-    if ($whaleScore >= 70) {
-        $ctx .= "\n- 🐳 VIP FAN (whale score: {$whaleScore}/100) — This fan is highly valuable. Be extra warm, personal, and attentive. They've shown strong engagement and spending. Natural upsell opportunities are worth taking.";
-    } elseif ($whaleScore >= 40) {
-        $ctx .= "\n- 🐬 Active fan (score: {$whaleScore}/100) — Good engagement. Be warm and attentive.";
+// Load or create fan profile
+function loadFanProfile($db, $fanId) {
+    $stmt = $db->prepare("SELECT * FROM fan_profiles WHERE fan_id = :fid");
+    $stmt->bindValue(':fid', $fanId, SQLITE3_INTEGER);
+    $result = $stmt->execute();
+    $profile = $result->fetchArray(SQLITE3_ASSOC);
+    
+    if (!$profile) {
+        // New fan — create profile
+        $offset = round(mt_rand(0, 300) / 100, 1); // 0-3 hour random offset
+        $db->exec("INSERT INTO fan_profiles (fan_id, first_message_date, attention_offset_hours) VALUES ($fanId, datetime('now'), $offset)");
+        $profile = ['fan_id' => $fanId, 'display_name' => '', 'conversation_stage' => 'new', 'onboarding_step' => 1];
+    }
+    
+    return $profile;
+}
+
+// Build fan context string for system prompt injection
+function buildFanContext($profile) {
+    $ctx = "[FAN MEMORY — PRIVATE, NEVER REFERENCE THIS SECTION DIRECTLY]\n\n";
+    if ($profile['display_name']) $ctx .= "Name: {$profile['display_name']}\n";
+    if ($profile['birthday']) $ctx .= "Birthday: {$profile['birthday']}\n";
+    if ($profile['occupation']) $ctx .= "Occupation: {$profile['occupation']}\n";
+    if ($profile['location']) $ctx .= "Location: {$profile['location']}\n";
+    if ($profile['interests'] && $profile['interests'] !== '[]') $ctx .= "Interests: {$profile['interests']}\n";
+    if ($profile['emotional_patterns']) $ctx .= "Emotional patterns: {$profile['emotional_patterns']}\n";
+    if ($profile['what_works']) $ctx .= "What works: {$profile['what_works']}\n";
+    if ($profile['content_preferences'] && $profile['content_preferences'] !== '[]') $ctx .= "Content preferences: {$profile['content_preferences']}\n";
+    if ($profile['callback_inventory'] && $profile['callback_inventory'] !== '[]') $ctx .= "Remember: {$profile['callback_inventory']}\n";
+    $ctx .= "Conversation stage: {$profile['conversation_stage']}\n";
+    $ctx .= "Total messages: {$profile['total_messages']}\n";
+    $ctx .= "Whale tier: {$profile['whale_tier']} (score: {$profile['whale_score']})\n";
+    $ctx .= "Ladder position: {$profile['ladder_position']}\n";
+    if ($profile['welcome_sequence_complete']) {
+        $ctx .= "Welcome sequence: complete\n";
+    } else {
+        $ctx .= "Welcome sequence: step {$profile['onboarding_step']} of 5 — follow the welcome flow\n";
     }
     return $ctx;
 }
 
 function updateFanProfile($db, $fanId, $fanMessage, $aiResponse) {
-    $db->exec("INSERT OR IGNORE INTO fan_profiles (fan_user_id) VALUES (" . intval($fanId) . ")");
-    // Extract name if fan introduces themselves
-    if (preg_match('/\b(?:i\'\?m|my name is|call me|i am)\s+([A-Z][a-z]{1,15})\b/i', $fanMessage, $m)) {
-        $name = $db->escapeString($m[1]);
-        $db->exec("UPDATE fan_profiles SET display_name = '$name' WHERE fan_user_id = " . intval($fanId));
+    // Increment message count
+    $db->exec("UPDATE fan_profiles SET total_messages = total_messages + 1, last_message_date = datetime('now'), messages_today = messages_today + 1, updated_at = datetime('now') WHERE fan_id = $fanId");
+    
+    // Simple extraction rules (no extra API call needed):
+    $msg = strtolower($fanMessage);
+    
+    // Name extraction: "I'm Jake" / "my name is Jake" / "call me Jake"
+    if (preg_match("/(?:i'm|i am|my name is|call me|name's|they call me)\s+([A-Z][a-z]+)/i", $fanMessage, $m)) {
+        $name = SQLite3::escapeString($m[1]);
+        $db->exec("UPDATE fan_profiles SET display_name = '$name' WHERE fan_id = $fanId AND display_name = ''");
     }
-    // Update message count and last active
-    $db->exec("UPDATE fan_profiles SET total_messages = total_messages + 1, last_active = datetime('now'), updated_at = datetime('now') WHERE fan_user_id = " . intval($fanId));
-    // Update PPV purchase count
-    $ppvCount = $db->querySingle("SELECT COUNT(*) FROM ppv_sales WHERE fan_user_id = " . intval($fanId));
-    $db->exec("UPDATE fan_profiles SET ppv_purchases_total = " . intval($ppvCount) . " WHERE fan_user_id = " . intval($fanId));
-
-    // Recalculate whale score
-    $profile = $db->querySingle("SELECT ppv_purchases_total, total_messages, last_active FROM fan_profiles WHERE fan_user_id = " . intval($fanId), true);
-    if ($profile) {
-        $whaleScore = calculateWhaleScore(
-            intval($profile['ppv_purchases_total']),
-            intval($profile['total_messages']),
-            $profile['last_active']
-        );
-        $db->exec("UPDATE fan_profiles SET whale_score = " . intval($whaleScore) . " WHERE fan_user_id = " . intval($fanId));
+    
+    // Location extraction: "I'm from Texas" / "I live in California" / "here in NYC"
+    if (preg_match("/(?:from|live in|i'm in|here in|based in)\s+([A-Za-z\s]+)/i", $fanMessage, $m)) {
+        $loc = SQLite3::escapeString(trim($m[1]));
+        if (strlen($loc) > 2 && strlen($loc) < 30) {
+            $db->exec("UPDATE fan_profiles SET location = '$loc' WHERE fan_id = $fanId AND location = ''");
+        }
     }
+    
+    // Birthday: "my birthday is March 15" / "birthday's next Friday"
+    if (preg_match("/birthday.{0,20}(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\s+\d{1,2}/i", $fanMessage, $m)) {
+        $bday = SQLite3::escapeString($m[0]);
+        $db->exec("UPDATE fan_profiles SET birthday = '$bday' WHERE fan_id = $fanId");
+    }
+    
+    // Update conversation stage based on message count
+    $count = $db->querySingle("SELECT total_messages FROM fan_profiles WHERE fan_id = $fanId");
+    if ($count <= 5) {
+        $stage = 'new';
+        $db->exec("UPDATE fan_profiles SET onboarding_step = $count, welcome_sequence_complete = CASE WHEN $count >= 5 THEN 1 ELSE 0 END WHERE fan_id = $fanId");
+    } elseif ($count <= 20) {
+        $stage = 'warming_up';
+    } else {
+        $stage = 'hooked';
+    }
+    $db->exec("UPDATE fan_profiles SET conversation_stage = '$stage' WHERE fan_id = $fanId");
 }
 
 function calculateWhaleScore($ppvTotal, $totalMessages, $lastActive) {
@@ -793,7 +829,42 @@ try {
     $db->exec("CREATE TABLE IF NOT EXISTS chat_queue (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_message_id INTEGER NOT NULL, fan_user_id INTEGER NOT NULL, status TEXT DEFAULT 'pending', scheduled_at TEXT, ai_response TEXT DEFAULT '', delivered_at TEXT, created_at TEXT DEFAULT (datetime('now')), UNIQUE(fan_message_id))");
     $db->exec("CREATE TABLE IF NOT EXISTS ppv_sales (id INTEGER PRIMARY KEY, fan_user_id INTEGER, content_key TEXT, price_cents INTEGER, sold_at TEXT DEFAULT (datetime('now')))");
     $db->exec("CREATE TABLE IF NOT EXISTS daily_engagement (id INTEGER PRIMARY KEY, fan_user_id INTEGER, date TEXT, message_count INTEGER DEFAULT 0, bonus_messages INTEGER DEFAULT 0, UNIQUE(fan_user_id, date))");
-    $db->exec("CREATE TABLE IF NOT EXISTS fan_profiles (fan_user_id INTEGER PRIMARY KEY, display_name TEXT DEFAULT '', preferences TEXT DEFAULT '', topics_discussed TEXT DEFAULT '', ppv_purchases_total INTEGER DEFAULT 0, total_messages INTEGER DEFAULT 0, last_active TEXT DEFAULT '', notes TEXT DEFAULT '', whale_score INTEGER DEFAULT 0, updated_at TEXT DEFAULT (datetime('now')))" );
+    $db->exec("CREATE TABLE IF NOT EXISTS fan_profiles (
+        fan_id INTEGER PRIMARY KEY,
+        display_name TEXT DEFAULT '',
+        age INTEGER,
+        occupation TEXT DEFAULT '',
+        location TEXT DEFAULT '',
+        timezone TEXT DEFAULT '',
+        relationship_status TEXT DEFAULT 'unknown',
+        interests TEXT DEFAULT '[]',
+        personality_notes TEXT DEFAULT '',
+        emotional_patterns TEXT DEFAULT '',
+        what_works TEXT DEFAULT '',
+        content_preferences TEXT DEFAULT '[]',
+        callback_inventory TEXT DEFAULT '[]',
+        conversation_stage TEXT DEFAULT 'new',
+        total_messages INTEGER DEFAULT 0,
+        whale_score INTEGER DEFAULT 0,
+        whale_tier TEXT DEFAULT 'casual',
+        total_lifetime_spend REAL DEFAULT 0,
+        tip_total REAL DEFAULT 0,
+        ppv_total_purchased INTEGER DEFAULT 0,
+        ladder_position INTEGER DEFAULT 1,
+        highest_ppv_price_paid REAL DEFAULT 0,
+        welcome_sequence_complete INTEGER DEFAULT 0,
+        onboarding_step INTEGER DEFAULT 1,
+        birthday TEXT DEFAULT '',
+        life_events TEXT DEFAULT '[]',
+        first_message_date TEXT,
+        last_message_date TEXT,
+        messages_today INTEGER DEFAULT 0,
+        attention_offset_hours REAL DEFAULT 0,
+        prompt_injection_attempts INTEGER DEFAULT 0,
+        flagged_for_review INTEGER DEFAULT 0,
+        banned INTEGER DEFAULT 0,
+        updated_at TEXT DEFAULT (datetime('now'))
+    )" );
 
     // Safe migration: add whale_score if it doesn't exist (harmless to rerun)
     @ $db->exec("ALTER TABLE fan_profiles ADD COLUMN whale_score INTEGER DEFAULT 0");
@@ -841,6 +912,10 @@ try {
             $debug[] = "skipped:fan=$fid,at_limit";
             continue;
         }
+
+        // Load fan profile and build context
+        $fanProfile = loadFanProfile($db, $fid);
+        $fanContext = buildFanContext($fanProfile);
 
         // Get chat history (including media_url for vision support)
         $hr = $db->query("SELECT sender_id, content, is_ppv, media_url FROM messages WHERE (sender_id=$fid AND receiver_id=$CREATOR_ID) OR (sender_id=$CREATOR_ID AND receiver_id=$fid) ORDER BY created_at ASC LIMIT 20");
@@ -971,10 +1046,9 @@ TIME AWARENESS (MANDATORY): The current server time is " . date_create('now', ti
         
         $ppvContext = buildPPVContext($db, $fid);
         $engagementContext = buildEngagementContext($db, $fid);
-        $fanProfileContext = getFanProfile($db, $fid);
-        $whaleScore = intval($db->querySingle("SELECT whale_score FROM fan_profiles WHERE fan_user_id = " . intval($fid)) ?? 0);
+        $whaleScore = intval($fanProfile['whale_score'] ?? 0);
         $upsellContext = buildUpsellTimingContext($db, $fid, $item['fan_msg'], $engagement['message_count'], $whaleScore);
-        $system = $systemBase . $tipContext . $ppvContext . $engagementContext . $fanProfileContext . $upsellContext;
+        $system = getBreyyaSystemPrompt('', $fanContext) . $tipContext . $ppvContext . $engagementContext . $upsellContext;
 
         // If this fan is near limit, add sign-off instruction
         if ($engagement['message_count'] >= 19 && $fid != $TEST_FAN_ID) {
@@ -1090,6 +1164,20 @@ TIME AWARENESS (MANDATORY): The current server time is " . date_create('now', ti
                 recordPPVSale($db, $unlockFanId, $ppvMsg['ppv_content_key'], $ppvMsg['ppv_price_cents']);
                 $debug[] = "unlocked_msg=$msgId";
             }
+        }
+    }
+
+    // Handle daily reset (messages_today) at midnight PT
+    if (($_GET['action'] ?? '') === 'daily_reset') {
+        $pt = new DateTimeZone('America/Los_Angeles');
+        $now = new DateTime('now', $pt);
+        $hour = (int)$now->format('G');
+        
+        // Only run reset during midnight hour (0:00-0:59 AM PT)
+        if ($hour === 0) {
+            $db->exec("UPDATE fan_profiles SET messages_today = 0");
+            $resetCount = $db->changes();
+            $debug[] = "daily_reset:fans_reset=$resetCount";
         }
     }
 

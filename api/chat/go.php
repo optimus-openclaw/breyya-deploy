@@ -27,6 +27,125 @@ try {
     @$db->exec("ALTER TABLE messages ADD COLUMN is_ai INTEGER DEFAULT 0");
     $db->exec("CREATE TABLE IF NOT EXISTS chat_queue (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_message_id INTEGER NOT NULL, fan_user_id INTEGER NOT NULL, status TEXT DEFAULT 'pending', scheduled_at TEXT, ai_response TEXT DEFAULT '', delivered_at TEXT, created_at TEXT DEFAULT (datetime('now')), UNIQUE(fan_message_id))");
     $db->exec("CREATE TABLE IF NOT EXISTS tip_events (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_user_id INTEGER NOT NULL, amount_cents INTEGER NOT NULL, purpose TEXT DEFAULT '', processed INTEGER DEFAULT 0, created_at TEXT DEFAULT (datetime('now')))");
+    
+    // Create fan_profiles table
+    $db->exec("CREATE TABLE IF NOT EXISTS fan_profiles (
+        fan_id INTEGER PRIMARY KEY,
+        display_name TEXT DEFAULT '',
+        age INTEGER,
+        occupation TEXT DEFAULT '',
+        location TEXT DEFAULT '',
+        timezone TEXT DEFAULT '',
+        relationship_status TEXT DEFAULT 'unknown',
+        interests TEXT DEFAULT '[]',
+        personality_notes TEXT DEFAULT '',
+        emotional_patterns TEXT DEFAULT '',
+        what_works TEXT DEFAULT '',
+        content_preferences TEXT DEFAULT '[]',
+        callback_inventory TEXT DEFAULT '[]',
+        conversation_stage TEXT DEFAULT 'new',
+        total_messages INTEGER DEFAULT 0,
+        whale_score INTEGER DEFAULT 0,
+        whale_tier TEXT DEFAULT 'casual',
+        total_lifetime_spend REAL DEFAULT 0,
+        tip_total REAL DEFAULT 0,
+        ppv_total_purchased INTEGER DEFAULT 0,
+        ladder_position INTEGER DEFAULT 1,
+        highest_ppv_price_paid REAL DEFAULT 0,
+        welcome_sequence_complete INTEGER DEFAULT 0,
+        onboarding_step INTEGER DEFAULT 1,
+        birthday TEXT DEFAULT '',
+        life_events TEXT DEFAULT '[]',
+        first_message_date TEXT,
+        last_message_date TEXT,
+        messages_today INTEGER DEFAULT 0,
+        attention_offset_hours REAL DEFAULT 0,
+        prompt_injection_attempts INTEGER DEFAULT 0,
+        flagged_for_review INTEGER DEFAULT 0,
+        banned INTEGER DEFAULT 0,
+        updated_at TEXT DEFAULT (datetime('now'))
+    )");
+
+    // Load or create fan profile
+    function loadFanProfile($db, $fanId) {
+        $stmt = $db->prepare("SELECT * FROM fan_profiles WHERE fan_id = :fid");
+        $stmt->bindValue(':fid', $fanId, SQLITE3_INTEGER);
+        $result = $stmt->execute();
+        $profile = $result->fetchArray(SQLITE3_ASSOC);
+        
+        if (!$profile) {
+            // New fan — create profile
+            $offset = round(mt_rand(0, 300) / 100, 1); // 0-3 hour random offset
+            $db->exec("INSERT INTO fan_profiles (fan_id, first_message_date, attention_offset_hours) VALUES ($fanId, datetime('now'), $offset)");
+            $profile = ['fan_id' => $fanId, 'display_name' => '', 'conversation_stage' => 'new', 'onboarding_step' => 1];
+        }
+        
+        return $profile;
+    }
+
+    // Build fan context string for system prompt injection
+    function buildFanContext($profile) {
+        $ctx = "[FAN MEMORY — PRIVATE, NEVER REFERENCE THIS SECTION DIRECTLY]\n\n";
+        if ($profile['display_name']) $ctx .= "Name: {$profile['display_name']}\n";
+        if ($profile['birthday']) $ctx .= "Birthday: {$profile['birthday']}\n";
+        if ($profile['occupation']) $ctx .= "Occupation: {$profile['occupation']}\n";
+        if ($profile['location']) $ctx .= "Location: {$profile['location']}\n";
+        if ($profile['interests'] && $profile['interests'] !== '[]') $ctx .= "Interests: {$profile['interests']}\n";
+        if ($profile['emotional_patterns']) $ctx .= "Emotional patterns: {$profile['emotional_patterns']}\n";
+        if ($profile['what_works']) $ctx .= "What works: {$profile['what_works']}\n";
+        if ($profile['content_preferences'] && $profile['content_preferences'] !== '[]') $ctx .= "Content preferences: {$profile['content_preferences']}\n";
+        if ($profile['callback_inventory'] && $profile['callback_inventory'] !== '[]') $ctx .= "Remember: {$profile['callback_inventory']}\n";
+        $ctx .= "Conversation stage: {$profile['conversation_stage']}\n";
+        $ctx .= "Total messages: {$profile['total_messages']}\n";
+        $ctx .= "Whale tier: {$profile['whale_tier']} (score: {$profile['whale_score']})\n";
+        $ctx .= "Ladder position: {$profile['ladder_position']}\n";
+        if ($profile['welcome_sequence_complete']) {
+            $ctx .= "Welcome sequence: complete\n";
+        } else {
+            $ctx .= "Welcome sequence: step {$profile['onboarding_step']} of 5 — follow the welcome flow\n";
+        }
+        return $ctx;
+    }
+
+    function updateFanProfile($db, $fanId, $fanMessage, $aiResponse) {
+        // Increment message count
+        $db->exec("UPDATE fan_profiles SET total_messages = total_messages + 1, last_message_date = datetime('now'), messages_today = messages_today + 1, updated_at = datetime('now') WHERE fan_id = $fanId");
+        
+        // Simple extraction rules (no extra API call needed):
+        $msg = strtolower($fanMessage);
+        
+        // Name extraction: "I'm Jake" / "my name is Jake" / "call me Jake"
+        if (preg_match("/(?:i'm|i am|my name is|call me|name's|they call me)\s+([A-Z][a-z]+)/i", $fanMessage, $m)) {
+            $name = SQLite3::escapeString($m[1]);
+            $db->exec("UPDATE fan_profiles SET display_name = '$name' WHERE fan_id = $fanId AND display_name = ''");
+        }
+        
+        // Location extraction: "I'm from Texas" / "I live in California" / "here in NYC"
+        if (preg_match("/(?:from|live in|i'm in|here in|based in)\s+([A-Za-z\s]+)/i", $fanMessage, $m)) {
+            $loc = SQLite3::escapeString(trim($m[1]));
+            if (strlen($loc) > 2 && strlen($loc) < 30) {
+                $db->exec("UPDATE fan_profiles SET location = '$loc' WHERE fan_id = $fanId AND location = ''");
+            }
+        }
+        
+        // Birthday: "my birthday is March 15" / "birthday's next Friday"
+        if (preg_match("/birthday.{0,20}(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\s+\d{1,2}/i", $fanMessage, $m)) {
+            $bday = SQLite3::escapeString($m[0]);
+            $db->exec("UPDATE fan_profiles SET birthday = '$bday' WHERE fan_id = $fanId");
+        }
+        
+        // Update conversation stage based on message count
+        $count = $db->querySingle("SELECT total_messages FROM fan_profiles WHERE fan_id = $fanId");
+        if ($count <= 5) {
+            $stage = 'new';
+            $db->exec("UPDATE fan_profiles SET onboarding_step = $count, welcome_sequence_complete = CASE WHEN $count >= 5 THEN 1 ELSE 0 END WHERE fan_id = $fanId");
+        } elseif ($count <= 20) {
+            $stage = 'warming_up';
+        } else {
+            $stage = 'hooked';
+        }
+        $db->exec("UPDATE fan_profiles SET conversation_stage = '$stage' WHERE fan_id = $fanId");
+    }
 
     $processed = 0; $queued = 0; $errors = 0; $debug = [];
 
@@ -70,6 +189,11 @@ try {
     foreach ($processItems as $item) {
         // Get history (including media_url for vision support)
         $fid = intval($item['fan_id']);
+        
+        // Load fan profile and build context
+        $fanProfile = loadFanProfile($db, $fid);
+        $fanContext = buildFanContext($fanProfile);
+        
         $hr = $db->query("SELECT sender_id, content, media_url FROM (
             SELECT sender_id, content, media_url, created_at FROM messages 
             WHERE (sender_id=$fid AND receiver_id=$CREATOR_ID) OR (sender_id=$CREATOR_ID AND receiver_id=$fid) 
@@ -148,8 +272,8 @@ try {
             array_unshift($msgs, ['role'=>'user','content'=>'hi']);
         }
 
-        // Call Anthropic
-        $payload = json_encode(['model'=>$MODEL,'max_tokens'=>300,'temperature'=>0.9,'system'=>getBreyyaSystemPrompt(),'messages'=>$msgs]);
+        // Call Anthropic with fan context
+        $payload = json_encode(['model'=>$MODEL,'max_tokens'=>300,'temperature'=>0.9,'system'=>getBreyyaSystemPrompt('', $fanContext),'messages'=>$msgs]);
 
         $ch = curl_init('https://api.anthropic.com/v1/messages');
         curl_setopt_array($ch, [CURLOPT_POST=>true, CURLOPT_HTTPHEADER=>['Content-Type: application/json','x-api-key: '.$ANTHROPIC_KEY,'anthropic-version: 2023-06-01'], CURLOPT_POSTFIELDS=>$payload, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>25]);
@@ -174,6 +298,10 @@ try {
         $safe = $db->escapeString($reply);
         $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $fid, '$safe', 1, 1, datetime('now'))");
         $db->exec("UPDATE chat_queue SET status='delivered', ai_response='$safe', delivered_at=datetime('now') WHERE id=" . intval($item['qid']));
+        
+        // Update fan profile with this interaction
+        updateFanProfile($db, $fid, $item['fan_msg'], $reply);
+        
         $processed++;
     }
 
