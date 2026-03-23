@@ -6,7 +6,7 @@
  */
 
 // PAYMENTS_ENABLED flag - if false, injects payment system warning
-define('PAYMENTS_ENABLED', false);
+define('PAYMENTS_ENABLED', true);
 
 function getBreyyaSystemPrompt($fanName = '', $fanContext = '') {
     $currentHour = (int)(new DateTime("now", new DateTimeZone("America/Los_Angeles")))->format("G"); // 0-23 Pacific Time
