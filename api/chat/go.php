@@ -69,6 +69,7 @@ try {
     // Load or create fan profile
     function loadFanProfile($db, $fanId) {
         $stmt = $db->prepare("SELECT * FROM fan_profiles WHERE fan_id = :fid");
+        if (!$stmt) { error_log("BREYYA_ERROR: fan_profiles prepare failed: " . $db->lastErrorMsg()); return ["fan_id" => $fanId, "display_name" => "", "conversation_stage" => "new", "onboarding_step" => 1]; }
         $stmt->bindValue(':fid', $fanId, SQLITE3_INTEGER);
         $result = $stmt->execute();
         $profile = $result->fetchArray(SQLITE3_ASSOC);
