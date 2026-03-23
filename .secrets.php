@@ -6,7 +6,7 @@ define('CHAT_CRON_SECRET', 'breyya-chat-cron-2026');
 define('CCBILL_ACCOUNT', '955253');
 define('CCBILL_SUB_MEMBERSHIP', '0000');
 define('CCBILL_SUB_ONETIME', '0001');
-define('CCBILL_SALT', ''); // Will be filled from admin portal
+define('CCBILL_SALT', 'XXDzs2W4u9JXgNnXNQ4FyUgk'); // Will be filled from admin portal
 define('CCBILL_FLEX_ID', 'd6c111d7-3565-4d8a-a3d7-211539a585f3');
 
 // FAK Test Config (for testing)
