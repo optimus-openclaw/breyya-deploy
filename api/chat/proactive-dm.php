@@ -32,19 +32,6 @@ $context = $_GET['context'] ?? '';
 $validContexts = ['birthday', 'followup', 'whale_checkin', 'reengagement'];
 
 
-// Birthday scan mode - check ALL fans for todays birthday
-if ($context === "birthday" && empty($fanId)) {
-    $db = getDB();
-    $today = date("F j"); // e.g. "March 24"
-    $todayShort = strtolower(date("M j")); // e.g. "mar 24"
-    $todayNum = date("m-d"); // e.g. "03-24"
-    $results = $db->query("SELECT fan_id, display_name, birthday FROM fan_profiles WHERE birthday != '' AND birthday IS NOT NULL");
-    $birthdayFans = [];
-    while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
-        $bday = strtolower($row["birthday"]);
-        if (strpos($bday, strtolower($today)) !== false || strpos($bday, $todayShort) !== false || strpos($bday, strtolower(date("F"))) !== false && strpos($bday, (string)date("j")) !== false) {
-            $birthdayFans[] = $row;
-        }
     }
     $db->close();
     if (empty($birthdayFans)) { echo json_encode(["ok"=>true,"message"=>"No birthdays today","date"=>$today]); exit; }
@@ -55,6 +42,46 @@ if ($context === "birthday" && empty($fanId)) {
         $sent[] = ["fan_id"=>$fan["fan_id"], "name"=>$fan["display_name"]];
     }
     echo json_encode(["ok"=>true,"birthdays_today"=>count($birthdayFans),"sent"=>$sent]); exit;
+}
+
+
+// Birthday scan mode - check ALL fans for todays birthday
+if ($context === 'birthday' && empty($fanId)) {
+    $db = getDB();
+    $todayFull = strtolower(date('F j')); // "march 24"
+    $todayShort = strtolower(date('M j')); // "mar 24"
+    $month = strtolower(date('F')); // "march"
+    $day = date('j'); // "24"
+    
+    $results = $db->query("SELECT fan_id, display_name, birthday FROM fan_profiles WHERE birthday != '' AND birthday IS NOT NULL");
+    $birthdayFans = [];
+    if ($results) {
+        while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
+            $bday = strtolower($row['birthday']);
+            if (strpos($bday, $todayFull) !== false || strpos($bday, $todayShort) !== false || (strpos($bday, $month) !== false && strpos($bday, $day) !== false)) {
+                $birthdayFans[] = $row;
+            }
+        }
+    }
+    $db->close();
+    
+    if (empty($birthdayFans)) {
+        echo json_encode(['ok' => true, 'message' => 'No birthdays today', 'date' => date('F j')]);
+        exit;
+    }
+    
+    $sent = [];
+    foreach ($birthdayFans as $fan) {
+        $dmUrl = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . '?secret=' . $SECRET . '&fan_id=' . $fan['fan_id'] . '&context=birthday';
+        $ch = curl_init($dmUrl);
+        curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 30]);
+        curl_exec($ch);
+        curl_close($ch);
+        $sent[] = ['fan_id' => $fan['fan_id'], 'name' => $fan['display_name']];
+    }
+    
+    echo json_encode(['ok' => true, 'birthdays_today' => count($birthdayFans), 'sent' => $sent]);
+    exit;
 }
 
 if (!$fanId || !in_array($context, $validContexts)) {
