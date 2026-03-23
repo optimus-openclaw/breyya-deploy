@@ -31,20 +31,6 @@ $fanId = intval($_GET['fan_id'] ?? 0);
 $context = $_GET['context'] ?? '';
 $validContexts = ['birthday', 'followup', 'whale_checkin', 'reengagement'];
 
-
-    }
-    $db->close();
-    if (empty($birthdayFans)) { echo json_encode(["ok"=>true,"message"=>"No birthdays today","date"=>$today]); exit; }
-    $sent = [];
-    foreach ($birthdayFans as $fan) {
-        $url = "https://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"] . "?secret=$SECRET&fan_id=" . $fan["fan_id"] . "&context=birthday";
-        $ch = curl_init($url); curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>30]); $result = curl_exec($ch); curl_close($ch);
-        $sent[] = ["fan_id"=>$fan["fan_id"], "name"=>$fan["display_name"]];
-    }
-    echo json_encode(["ok"=>true,"birthdays_today"=>count($birthdayFans),"sent"=>$sent]); exit;
-}
-
-
 // Birthday scan mode - check ALL fans for todays birthday
 if ($context === 'birthday' && empty($fanId)) {
     $db = getDB();
