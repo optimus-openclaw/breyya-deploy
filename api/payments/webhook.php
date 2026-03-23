@@ -77,6 +77,17 @@ $db->exec('CREATE TABLE IF NOT EXISTS payments_log (
     created_at TEXT DEFAULT (datetime("now"))
 )');
 
+// Create fan_payment_methods table for CBPT functionality
+$db->exec('CREATE TABLE IF NOT EXISTS fan_payment_methods (
+    fan_user_id INTEGER PRIMARY KEY,
+    ccbill_subscription_id TEXT NOT NULL,
+    card_last_four TEXT DEFAULT "",
+    card_type TEXT DEFAULT "",
+    created_at TEXT DEFAULT (datetime("now")),
+    updated_at TEXT DEFAULT (datetime("now")),
+    FOREIGN KEY (fan_user_id) REFERENCES users(id)
+)');
+
 // Ensure tip_events table exists for tip handling
 $db->exec('CREATE TABLE IF NOT EXISTS tip_events (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -160,6 +171,19 @@ switch ($eventType) {
             $stmt->bindValue(':ref', $subscriptionId, SQLITE3_TEXT);
             $stmt->execute();
 
+            // Store payment method for future CBPT charges
+            if ($subscriptionId && $fanUserId) {
+                $cardLastFour = $data['cardLastFour'] ?? $data['last4'] ?? '';
+                $cardType = $data['cardType'] ?? '';
+                
+                $stmt = $db->prepare("INSERT OR REPLACE INTO fan_payment_methods (fan_user_id, ccbill_subscription_id, card_last_four, card_type, updated_at) VALUES (:uid, :subid, :last4, :type, datetime('now'))");
+                $stmt->bindValue(':uid', $fanUserId, SQLITE3_INTEGER);
+                $stmt->bindValue(':subid', $subscriptionId, SQLITE3_TEXT);
+                $stmt->bindValue(':last4', $cardLastFour, SQLITE3_TEXT);
+                $stmt->bindValue(':type', $cardType, SQLITE3_TEXT);
+                $stmt->execute();
+            }
+
         } else if ($clientSubacc === '0001' || $clientSubacc === '0630') {
             // One-time purchase (tip or PPV)
             if ($fanUserId) {
@@ -181,6 +205,27 @@ switch ($eventType) {
                 $stmt->bindValue(':desc', $tipMessage, SQLITE3_TEXT);
                 $stmt->bindValue(':ref', $subscriptionId, SQLITE3_TEXT);
                 $stmt->execute();
+
+                // Store payment method for future CBPT charges (first-time one-time purchase)
+                if ($subscriptionId && $fanUserId) {
+                    $cardLastFour = $data['cardLastFour'] ?? $data['last4'] ?? '';
+                    $cardType = $data['cardType'] ?? '';
+                    
+                    // Check if we already have a payment method for this user
+                    $stmt = $db->prepare("SELECT fan_user_id FROM fan_payment_methods WHERE fan_user_id = :uid");
+                    $stmt->bindValue(':uid', $fanUserId, SQLITE3_INTEGER);
+                    $result = $stmt->execute();
+                    $existing = $result->fetchArray();
+                    
+                    if (!$existing) {
+                        $stmt = $db->prepare("INSERT INTO fan_payment_methods (fan_user_id, ccbill_subscription_id, card_last_four, card_type, updated_at) VALUES (:uid, :subid, :last4, :type, datetime('now'))");
+                        $stmt->bindValue(':uid', $fanUserId, SQLITE3_INTEGER);
+                        $stmt->bindValue(':subid', $subscriptionId, SQLITE3_TEXT);
+                        $stmt->bindValue(':last4', $cardLastFour, SQLITE3_TEXT);
+                        $stmt->bindValue(':type', $cardType, SQLITE3_TEXT);
+                        $stmt->execute();
+                    }
+                }
             }
         }
         break;

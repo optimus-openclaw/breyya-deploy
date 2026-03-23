@@ -9,6 +9,22 @@
     catch(e) { return ''; }
   }
 
+  function getCurrentUserIdFromAuth() {
+    try {
+      var token = getToken();
+      if (!token) return null;
+      
+      // Decode JWT payload (basic decode, no verification)
+      var parts = token.split('.');
+      if (parts.length !== 3) return null;
+      
+      var payload = JSON.parse(atob(parts[1]));
+      return payload.sub || null;
+    } catch(e) {
+      return null;
+    }
+  }
+
   function handleInteractions() {
     var posts = document.querySelectorAll('article[class*="post"], [data-post-id]');
     
@@ -148,12 +164,21 @@
     modal.querySelectorAll('.tip-amount').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var amount = btn.dataset.amount;
-        // For now, show confirmation (real payment comes with CCBill)
-        btn.textContent = '✅ Tipped!';
-        btn.style.background = '#00c853';
-        setTimeout(function() {
-          overlay.remove();
-        }, 1000);
+        overlay.remove(); // Close this modal first
+        
+        // Use the new CBPT tip system
+        if (window.TipConfirm) {
+          var fanUserId = getCurrentUserIdFromAuth();
+          if (fanUserId) {
+            window.TipConfirm.showTipConfirm(fanUserId, amount, 'Tip');
+          } else {
+            // Fallback to FlexForm if not authenticated
+            window.location.href = '/login';
+          }
+        } else {
+          // Fallback - redirect to create tip link
+          window.location.href = '/api/payments/create-tip-link.php?amount=' + amount;
+        }
       });
     });
 
@@ -168,9 +193,21 @@
           customInput.placeholder = 'Min $2';
           return;
         }
-        sendCustom.textContent = '✅ Tipped $' + val + '!';
-        sendCustom.style.background = '#00c853';
-        setTimeout(function() { overlay.remove(); }, 1000);
+        overlay.remove(); // Close this modal first
+        
+        // Use the new CBPT tip system
+        if (window.TipConfirm) {
+          var fanUserId = getCurrentUserIdFromAuth();
+          if (fanUserId) {
+            window.TipConfirm.showTipConfirm(fanUserId, val, 'Tip');
+          } else {
+            // Fallback to FlexForm if not authenticated
+            window.location.href = '/login';
+          }
+        } else {
+          // Fallback - redirect to create tip link
+          window.location.href = '/api/payments/create-tip-link.php?amount=' + val;
+        }
       });
       // Enter key
       customInput.addEventListener('keydown', function(e) {

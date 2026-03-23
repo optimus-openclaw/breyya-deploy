@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBPT Test Page</title>
+    <style>
+        body { 
+            font-family: -apple-system, sans-serif; 
+            background: #111; 
+            color: #fff; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+        .tip-btn {
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .tip-btn:hover {
+            background: linear-gradient(45deg, #e6127a, #ff1493);
+        }
+        .test-section {
+            background: #222;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .auth-status {
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .auth-status.logged-in {
+            background: #1a4a1a;
+            color: #90ee90;
+        }
+        .auth-status.logged-out {
+            background: #4a1a1a;
+            color: #ffaaaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 CBPT (Charge By Previous Transaction) Test Page</h1>
+        
+        <div id="auth-status" class="auth-status">
+            Checking authentication...
+        </div>
+
+        <div class="test-section">
+            <h2>Test CBPT Tip Buttons</h2>
+            <p>These buttons will use stored payment methods if available, or redirect to FlexForm for first-time users.</p>
+            
+            <!-- These buttons will be automatically wired by tip-confirm.js -->
+            <button class="tip-btn" data-tip-amount="5" data-tip-description="Test Tip $5">💕 Tip $5</button>
+            <button class="tip-btn" data-tip-amount="10" data-tip-description="Test Tip $10">💕 Tip $10</button>
+            <button class="tip-btn" data-tip-amount="25" data-tip-description="Test Tip $25">💕 Tip $25</button>
+            <button class="tip-btn" data-tip-amount="50" data-tip-description="Test Tip $50">💕 Tip $50</button>
+        </div>
+
+        <div class="test-section">
+            <h2>Manual Test</h2>
+            <p>Use the TipConfirm API directly:</p>
+            <input type="number" id="manual-amount" placeholder="Amount" min="1" max="500" style="padding: 8px; margin-right: 10px;">
+            <button id="manual-tip" class="tip-btn">Send Manual Tip</button>
+        </div>
+
+        <div class="test-section">
+            <h2>Payment Method Status</h2>
+            <button id="check-payment-method" class="tip-btn">Check Stored Payment Method</button>
+            <div id="payment-method-result" style="margin-top: 10px; padding: 10px; background: #333; border-radius: 6px;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Debug Info</h2>
+            <button id="show-debug" class="tip-btn">Show Debug Info</button>
+            <pre id="debug-output" style="background: #000; padding: 10px; border-radius: 6px; font-size: 12px; margin-top: 10px; display: none;"></pre>
+        </div>
+    </div>
+
+    <script src="/js/tip-confirm.js?v=1"></script>
+    <script>
+        // Auth status check
+        function checkAuthStatus() {
+            const statusDiv = document.getElementById('auth-status');
+            
+            try {
+                const token = getCookieValue('breyya_token') || localStorage.getItem('breyya_token') || localStorage.getItem('token');
+                
+                if (token) {
+                    const parts = token.split('.');
+                    if (parts.length === 3) {
+                        const payload = JSON.parse(atob(parts[1]));
+                        statusDiv.className = 'auth-status logged-in';
+                        statusDiv.innerHTML = `✅ Logged in as User ID: ${payload.sub} (${payload.role || 'fan'})`;
+                        return payload.sub;
+                    }
+                }
+                
+                statusDiv.className = 'auth-status logged-out';
+                statusDiv.innerHTML = '❌ Not logged in - CBPT will redirect to FlexForm';
+                return null;
+            } catch (e) {
+                statusDiv.className = 'auth-status logged-out';
+                statusDiv.innerHTML = '❌ Auth error: ' + e.message;
+                return null;
+            }
+        }
+
+        function getCookieValue(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUserId = checkAuthStatus();
+
+            // Manual tip button
+            document.getElementById('manual-tip').addEventListener('click', function() {
+                const amount = document.getElementById('manual-amount').value;
+                if (!amount || amount < 1) {
+                    alert('Please enter a valid amount');
+                    return;
+                }
+                
+                if (window.TipConfirm && currentUserId) {
+                    window.TipConfirm.showTipConfirm(currentUserId, amount, `Manual tip $${amount}`);
+                } else if (window.TipConfirm) {
+                    // Will redirect to FlexForm
+                    window.TipConfirm.showTipConfirm(0, amount, `Manual tip $${amount}`);
+                } else {
+                    alert('TipConfirm not loaded');
+                }
+            });
+
+            // Check payment method button
+            document.getElementById('check-payment-method').addEventListener('click', async function() {
+                const resultDiv = document.getElementById('payment-method-result');
+                
+                if (!currentUserId) {
+                    resultDiv.innerHTML = '❌ Must be logged in to check payment method';
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/payments/check-payment-method.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({ fan_user_id: currentUserId })
+                    });
+
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        resultDiv.innerHTML = `✅ Payment method found: ${data.payment_method.card_type || 'Card'} ending in ****${data.payment_method.card_last_four}`;
+                    } else {
+                        resultDiv.innerHTML = '❌ No stored payment method found';
+                    }
+                } catch (error) {
+                    resultDiv.innerHTML = '❌ Error: ' + error.message;
+                }
+            });
+
+            // Debug button
+            document.getElementById('show-debug').addEventListener('click', function() {
+                const debugDiv = document.getElementById('debug-output');
+                const debugInfo = {
+                    currentUserId: currentUserId,
+                    cookies: document.cookie,
+                    localStorage: {
+                        breyya_token: localStorage.getItem('breyya_token'),
+                        token: localStorage.getItem('token')
+                    },
+                    userAgent: navigator.userAgent,
+                    location: window.location.href,
+                    tipConfirmLoaded: !!window.TipConfirm
+                };
+                
+                debugDiv.textContent = JSON.stringify(debugInfo, null, 2);
+                debugDiv.style.display = debugDiv.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
