@@ -1,0 +1,11 @@
+*.secrets.php
+*secrets.php
+api/.secrets.php
+api/lib/cbpt.php
+data/breyya.db
+data/db.sqlite
+data/webhooks/
+data/.go-lock
+voice-notes/*.mp3
+data/ppv-previews/
+data/backups/

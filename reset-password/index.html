@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reset Password - Breyya</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: #0d1b2a;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .container { width: 100%; max-width: 400px; text-align: center; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: #7a93a8; margin-bottom: 32px; }
+  .form-group { margin-bottom: 16px; text-align: left; }
+  label { display: block; font-size: 13px; color: #7a93a8; margin-bottom: 6px; }
+  input {
+    width: 100%; padding: 14px 16px;
+    background: #13243a; border: 1px solid #1e3350;
+    border-radius: 12px; color: #fff; font-family: inherit; font-size: 15px;
+    outline: none; transition: border-color 0.2s;
+  }
+  input:focus { border-color: #00b4d8; }
+  input::placeholder { color: #3d5368; }
+  .btn {
+    display: block; width: 100%;
+    background: #00b4d8; color: #fff;
+    font-family: inherit; font-size: 16px; font-weight: 700;
+    padding: 16px; border-radius: 50px; border: none;
+    cursor: pointer; letter-spacing: 0.5px;
+    margin-top: 24px; transition: background 0.2s, transform 0.1s;
+  }
+  .btn:hover { background: #0090b0; transform: scale(1.02); }
+  .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .error { color: #ff6b6b; font-size: 13px; margin-top: 12px; display: none; }
+  .success { color: #22c55e; font-size: 13px; margin-top: 12px; display: none; }
+  .back { display: block; margin-top: 24px; font-size: 13px; color: #7a93a8; text-decoration: none; }
+  .back:hover { color: #00b4d8; }
+  .password-requirements {
+    font-size: 12px; color: #7a93a8; margin-top: 8px;
+    text-align: left;
+  }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Email form (no token) -->
+  <div id="emailForm" class="hidden">
+    <h1>Reset your password</h1>
+    <p class="subtitle">Enter your email to receive a reset link</p>
+
+    <form id="forgotForm">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="emailInput" placeholder="you@example.com" required>
+      </div>
+      <button type="submit" class="btn" id="emailBtn">SEND RESET LINK</button>
+      <p class="error" id="emailError"></p>
+      <p class="success" id="emailSuccess"></p>
+    </form>
+
+    <a href="/login" class="back">← Back to login</a>
+  </div>
+
+  <!-- Password form (with token) -->
+  <div id="passwordForm" class="hidden">
+    <h1>Create new password</h1>
+    <p class="subtitle">Choose a strong password for your account</p>
+
+    <form id="resetForm">
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" id="passwordInput" placeholder="••••••••" required>
+        <div class="password-requirements">
+          Minimum 8 characters
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmInput" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn" id="resetBtn">RESET PASSWORD</button>
+      <p class="error" id="resetError"></p>
+    </form>
+
+    <a href="/login" class="back">← Back to login</a>
+  </div>
+</div>
+
+<script>
+// Get token from URL
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+
+// Show appropriate form
+if (token) {
+  document.getElementById('passwordForm').classList.remove('hidden');
+} else {
+  document.getElementById('emailForm').classList.remove('hidden');
+}
+
+// Forgot password form
+document.getElementById('forgotForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('emailBtn');
+  const errorEl = document.getElementById('emailError');
+  const successEl = document.getElementById('emailSuccess');
+  const email = document.getElementById('emailInput').value.trim();
+
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
+  errorEl.style.display = 'none';
+  successEl.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/auth/forgot-password.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+
+    if (data.ok) {
+      successEl.textContent = data.message;
+      successEl.style.display = 'block';
+      document.getElementById('emailInput').value = '';
+    } else {
+      errorEl.textContent = data.error || 'Something went wrong';
+      errorEl.style.display = 'block';
+    }
+  } catch (err) {
+    errorEl.textContent = 'Something went wrong. Try again.';
+    errorEl.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'SEND RESET LINK';
+});
+
+// Reset password form
+document.getElementById('resetForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('resetBtn');
+  const errorEl = document.getElementById('resetError');
+  const password = document.getElementById('passwordInput').value;
+  const confirm = document.getElementById('confirmInput').value;
+
+  // Validate passwords match
+  if (password !== confirm) {
+    errorEl.textContent = 'Passwords do not match';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  if (password.length < 8) {
+    errorEl.textContent = 'Password must be at least 8 characters';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'RESETTING...';
+  errorEl.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/auth/reset-password.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        token: token, 
+        new_password: password 
+      })
+    });
+    const data = await res.json();
+
+    if (data.ok && data.token) {
+      // Store token and redirect
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      window.location.href = '/chat';
+    } else {
+      errorEl.textContent = data.error || 'Reset failed. Try requesting a new link.';
+      errorEl.style.display = 'block';
+    }
+  } catch (err) {
+    errorEl.textContent = 'Something went wrong. Try again.';
+    errorEl.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'RESET PASSWORD';
+});
+</script>
+</body>
+</html>

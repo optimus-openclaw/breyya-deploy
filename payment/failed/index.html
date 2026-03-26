@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed - Breyya</title>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0a1628;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+            padding: 40px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 16px;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .error-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            background: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .error-icon svg {
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 12px;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .help-text {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s;
+            min-width: 180px;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(148, 163, 184, 0.1);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(148, 163, 184, 0.2);
+            color: #e2e8f0;
+        }
+
+        .support-info {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        @media (min-width: 480px) {
+            .actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+        </div>
+        
+        <h1>Payment Failed</h1>
+        <p class="message">We were unable to process your payment at this time.</p>
+        
+        <p class="help-text">
+            This could be due to insufficient funds, an expired card, or a temporary issue with your bank.
+            Please check your payment details and try again.
+        </p>
+        
+        <div class="actions">
+            <a href="/join" class="btn btn-primary">Try Again</a>
+            <a href="/contact" class="btn btn-secondary">Contact Support</a>
+        </div>
+
+        <div class="support-info">
+            Need help? Our support team is here to assist you.<br>
+            Most payment issues can be resolved quickly.
+        </div>
+    </div>
+</body>
+</html>

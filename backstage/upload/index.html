@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Upload Post — Backstage</title>
+  <link href="/css/main.css" rel="stylesheet">
+  <style>
+    body{background:#0a1628;color:#cfe8ff;font-family:Inter, system-ui, sans-serif}
+    .card{background:#111d32;padding:20px;border-radius:8px;max-width:760px;margin:40px auto}
+    .btn{background:#00b4ff;color:#042033;padding:8px 14px;border-radius:6px;border:none;cursor:pointer}
+    .field{margin-bottom:12px}
+    input[type=file]{display:block}
+    img.preview, video.preview{max-width:100%;border-radius:6px;margin-top:8px}
+    .success{background:#063b1f;color:#b7ffd6;padding:10px;border-radius:6px;margin-top:10px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Post to Feed</h2>
+    <form id="uploadForm">
+      <div class="field">
+        <label>Media (image or video)</label><br>
+        <input type="file" id="media" name="media" accept="image/*,video/*" required>
+        <div id="preview"></div>
+      </div>
+      <div class="field">
+        <label>Caption</label><br>
+        <textarea id="caption" name="caption" rows="4" style="width:100%" required></textarea>
+      </div>
+      <div class="field">
+        <label>Hearts / Likes</label><br>
+        <input type="number" id="like_count" name="like_count" value="0" min="0">
+      </div>
+      <div class="field">
+        <label>Publish date</label><br>
+        <input type="datetime-local" id="created_at" name="created_at">
+      </div>
+      <div class="field">
+        <label>Is Free</label>
+        <select id="is_free" name="is_free"><option value="1">Yes (Feed)</option><option value="0">No (PPV)</option></select>
+      </div>
+      <button class="btn" type="submit">Post to Feed</button>
+    </form>
+    <div id="message" role="status" aria-live="polite"></div>
+  </div>
+
+<script>
+// Prefill date
+(function(){
+  const now = new Date();
+  const tzOffset = now.getTimezoneOffset();
+  const local = new Date(now.getTime() - tzOffset*60000);
+  document.getElementById('created_at').value = local.toISOString().slice(0,16);
+})();
+
+const mediaInput = document.getElementById('media');
+const preview = document.getElementById('preview');
+mediaInput.addEventListener('change', (e)=>{
+  preview.innerHTML='';
+  const f = e.target.files[0];
+  if (!f) return;
+  const url = URL.createObjectURL(f);
+  if (f.type.startsWith('image/')){
+    const img = document.createElement('img'); img.src = url; img.className='preview'; preview.appendChild(img);
+  } else if (f.type.startsWith('video/')){
+    const v = document.createElement('video'); v.src = url; v.controls = true; v.className='preview'; preview.appendChild(v);
+  }
+});
+
+document.getElementById('uploadForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const token = localStorage.getItem('breyya_token');
+  if (!token) { document.getElementById('message').innerHTML = '<div class="success">You must be logged in as creator/admin.</div>'; return; }
+
+  const form = new FormData();
+  const file = mediaInput.files[0];
+  form.append('media', file);
+  form.append('caption', document.getElementById('caption').value);
+  form.append('like_count', document.getElementById('like_count').value || '0');
+  const createdAt = document.getElementById('created_at').value;
+  if (createdAt) {
+    // convert to YYYY-MM-DD HH:MM:SS
+    const dt = new Date(createdAt);
+    const pad = (n)=>String(n).padStart(2,'0');
+    const s = dt.getFullYear() + '-' + pad(dt.getMonth()+1) + '-' + pad(dt.getDate()) + ' ' + pad(dt.getHours()) + ':' + pad(dt.getMinutes()) + ':00';
+    form.append('created_at', s);
+  }
+  form.append('is_free', document.getElementById('is_free').value);
+
+  const resp = await fetch('/api/posts/create.php', {
+    method: 'POST',
+    body: form,
+    headers: { 'Authorization': 'Bearer ' + token },
+    credentials: 'include'
+  });
+  const data = await resp.json();
+  if (data.ok || data.post) {
+    document.getElementById('message').innerHTML = '<div class="success">Post uploaded successfully.</div>';
+    document.getElementById('uploadForm').reset(); preview.innerHTML='';
+  } else {
+    document.getElementById('message').innerHTML = '<div class="success" style="background:#3b0b0b;color:#ffd6d6">Error: '+(data.error||'Unknown')+'</div>';
+  }
+});
+</script>
+<script src="/js/admin-nav.js?v=8" defer></script></body>
+</html>

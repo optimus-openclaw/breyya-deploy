@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,62819,t=>{"use strict";var e=t.i(47472);function c(){return(0,e.useEffect)(()=>{try{fetch("/api/analytics/track.php",{method:"GET",keepalive:!0}).catch(()=>{})}catch(t){}},[]),null}t.s(["default",()=>c])}]);

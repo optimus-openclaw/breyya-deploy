@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "subscription": 20.00,
+  "ppv_ladder": [
+    {"level": 1, "min": 3, "max": 5, "label": "first purchase ever"},
+    {"level": 2, "min": 8, "max": 10, "label": "after first purchase"},
+    {"level": 3, "min": 12, "max": 15, "label": "after 2+ purchases"},
+    {"level": 4, "min": 18, "max": 25, "label": "established buyer"},
+    {"level": 5, "min": 25, "max": 50, "label": "whale, repeat buyer"}
+  ],
+  "dick_rating": {
+    "casual": 20, "active": 20, "whale_min": 25, "whale_max": 30
+  },
+  "sexting": {
+    "base": 15, "active": 20, "whale_min": 25, "whale_max": 30, "repeat_bonus": 5
+  },
+  "custom_voice": {
+    "base": 5, "active_min": 7, "active_max": 10, "whale_min": 10, "whale_max": 15, "repeat_bonus": 3
+  },
+  "voice_play": {
+    "base": 15, "active": 20, "whale_min": 25, "whale_max": 35, "repeat_bonus": 5
+  },
+  "combo": {
+    "active_min": 25, "active_max": 30, "whale_min": 35, "whale_max": 50,
+    "requires": "at least one sexting or voice play purchase"
+  },
+  "tiers": {
+    "casual": {"min": 0, "max": 39},
+    "active": {"min": 40, "max": 69},
+    "whale": {"min": 70, "max": 100}
+  },
+  "rules": {
+    "first_purchase_always_base": true,
+    "never_skip_ppv_levels": true,
+    "max_single_charge": 500,
+    "price_ranges_pick_specific": true,
+    "cant_afford_drop_to_base": true
+  }
+}

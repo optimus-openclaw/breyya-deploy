@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Backstage — Earnings</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5f5f5;
+      --card:#ffffff;
+      --accent:#00aeef;
+      --green:#07b279;
+      --orange:#ff9a33;
+      --muted:#9aa3af;
+      --radius:10px;
+      --max-w:1100px;
+      --shadow: 0 6px 18px rgba(22,28,37,0.06);
+      font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px 16px;
+      display:flex;
+      justify-content:center;
+      box-sizing:border-box;
+    }
+    .wrap{width:100%;max-width:var(--max-w);}
+    a.back{color:var(--muted);text-decoration:none;font-size:14px;display:inline-flex;align-items:center;margin-bottom:14px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    h1{font-size:22px;margin:0;font-weight:700}
+    .range-toggle{display:flex;gap:8px}
+    .btn-toggle{background:transparent;border:1px solid transparent;padding:8px 12px;border-radius:999px;font-weight:600;color:var(--muted);cursor:pointer}
+    .btn-toggle.active{background:var(--card);border-color:rgba(0,0,0,0.06);box-shadow:var(--shadow);color:var(--accent)}
+
+    /* summary cards */
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);}
+    .card .label{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .card .amount{font-size:20px;font-weight:800}
+    .card .subtitle{font-size:12px;color:var(--muted);margin-top:8px}
+    .card.total .amount{color:var(--green);font-size:26px}
+    .card.blue .amount{color:var(--accent)}
+    .card.orange .amount{color:var(--orange)}
+
+    /* breakdown */
+    .breakdown{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+    .break-item{flex:1 1 220px;background:var(--card);padding:12px;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px}
+    .break-icon{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,rgba(0,0,0,0.03),rgba(0,0,0,0.01));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)}
+    .break-label{font-size:13px;color:var(--muted)}
+    .break-value{font-weight:700}
+    .bar-wrap{flex:1;height:8px;background:#eef3f6;border-radius:999px;overflow:hidden;margin-top:8px}
+    .bar{height:100%;background:var(--accent);width:0%}
+
+    /* chart */
+    .chart-card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:20px}
+    .chart-inner{display:flex;gap:12px;align-items:end;height:160px;padding:8px}
+    .bar-day{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+    .bar-day .bar-rect{width:28px;background:var(--accent);border-radius:6px 6px 0 0;height:0}
+    .bar-day .label{font-size:12px;color:var(--muted);margin-top:8px}
+    .no-data{height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
+
+    /* transactions */
+    .two-col{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+    .tx-card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:10px 8px;text-align:left;border-bottom:1px solid #f0f3f5}
+    th{font-size:12px;color:var(--muted);font-weight:600}
+    .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;color:#fff}
+    .badge.sub{background:var(--green)}
+    .badge.tip{background:var(--accent)}
+    .badge.ppv{background:rebeccapurple}
+    .badge.refund{background:#ef4444}
+    .tx-body{max-height:260px;overflow:auto}
+
+    /* payout */
+    .payout{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .muted{color:var(--muted)}
+
+    @media (max-width:900px){
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .two-col{grid-template-columns:1fr;}
+      .chart-inner{height:120px}
+    }
+    @media (max-width:520px){
+      .cards{grid-template-columns:1fr}
+      .range-toggle{flex-wrap:wrap}
+      .btn-toggle{padding:7px 10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/backstage/">← Back to Backstage</a>
+    <header>
+      <div>
+        <h1>Earnings</h1>
+        <div class="muted" style="margin-top:6px;font-size:13px">Overview of subscriptions, tips, PPV messages and payouts</div>
+      </div>
+      <div class="range-toggle" role="tablist" aria-label="Date range">
+        <button class="btn-toggle" data-range="today">Today</button>
+        <button class="btn-toggle active" data-range="week">This Week</button>
+        <button class="btn-toggle" data-range="month">This Month</button>
+        <button class="btn-toggle" data-range="all">All Time</button>
+      </div>
+    </header>
+
+    <section class="cards" aria-label="Summary cards">
+      <div class="card total">
+        <div class="label">Total Earnings</div>
+        <div class="amount" id="total-earnings">$0.00</div>
+        <div class="subtitle">All-time gross earnings</div>
+      </div>
+      <div class="card blue">
+        <div class="label">This Month</div>
+        <div class="amount" id="this-month">$0.00</div>
+        <div class="subtitle">Earnings for the current calendar month</div>
+      </div>
+      <div class="card blue">
+        <div class="label">Today</div>
+        <div class="amount" id="today-earnings">$0.00</div>
+        <div class="subtitle">Earnings for selected date range</div>
+      </div>
+      <div class="card orange">
+        <div class="label">Pending Balance</div>
+        <div class="amount" id="pending-balance">$0.00</div>
+        <div class="subtitle">5% holdback (released after 26 weeks)</div>
+      </div>
+    </section>
+
+    <section class="breakdown" aria-label="Earnings breakdown">
+      <div class="break-item">
+        <div class="break-icon">S</div>
+        <div style="flex:1">
+          <div class="break-label">Subscriptions</div>
+          <div class="break-value" id="break-sub">$0.00</div>
+          <div class="bar-wrap"><div class="bar" id="bar-sub" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="break-item">
+        <div class="break-icon">T</div>
+        <div style="flex:1">
+          <div class="break-label">Tips</div>
+          <div class="break-value" id="break-tip">$0.00</div>
+          <div class="bar-wrap"><div class="bar" id="bar-tip" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="break-item">
+        <div class="break-icon">P</div>
+        <div style="flex:1">
+          <div class="break-label">PPV Messages</div>
+          <div class="break-value" id="break-ppv">$0.00</div>
+          <div class="bar-wrap"><div class="bar" id="bar-ppv" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="break-item">
+        <div class="break-icon">R</div>
+        <div style="flex:1">
+          <div class="break-label">Refunds</div>
+          <div class="break-value" id="break-refund">-$0.00</div>
+          <div class="bar-wrap"><div class="bar" id="bar-refund" style="width:0%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chart-card" aria-label="Earnings chart">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-weight:700">Earnings (last 7 days)</div>
+        <div class="muted" id="chart-total">Total: $0.00</div>
+      </div>
+
+      <div id="chart-area">
+        <div class="chart-inner" id="chart-rows">
+          <!-- bars injected here -->
+        </div>
+        <div class="no-data" id="chart-no-data">No data yet — earnings will appear when payments start</div>
+      </div>
+    </section>
+
+    <div class="two-col">
+      <div class="tx-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="font-weight:700">Transaction History</div>
+          <div class="muted">Newest first</div>
+        </div>
+        <div class="tx-body">
+          <table aria-label="Transactions table">
+            <thead>
+              <tr><th>Date</th><th>Fan</th><th>Type</th><th>Gross</th><th>Fee</th><th>Net</th></tr>
+            </thead>
+            <tbody id="tx-tbody">
+              <tr><td colspan="6" class="muted">No transactions yet — earnings will appear here when payments start</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="payout" style="margin-bottom:14px">
+          <div style="font-weight:700;margin-bottom:6px">Next payout</div>
+          <div class="muted" id="next-payout">TBD</div>
+          <hr style="border:none;border-top:1px solid #f0f3f5;margin:12px 0" />
+          <div style="font-weight:700">Payout method</div>
+          <div class="muted">ACH (Chase Bank)</div>
+        </div>
+
+        <div class="payout">
+          <div style="font-weight:700;margin-bottom:6px">Fees & holdback</div>
+          <div class="muted">CCBill fees: 9.9% + $0.35/transaction</div>
+          <div class="muted" style="margin-top:6px">5% holdback for 26 weeks</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- hidden debug / messages -->
+    <div id="error" style="display:none;color:#ef4444;margin-top:12px"></div>
+
+  </div>
+
+  <script src="/js/admin-nav.js?v=8"></script>
+  <script src="/js/logout-btn.js?v=6"></script>
+  <script>
+    // Auth gate
+    (function(){
+      try{
+        const token = localStorage.getItem('breyya_token');
+        if(!token){ window.location = '/'; return; }
+        const userStr = localStorage.getItem('breyya_user');
+        if(userStr){
+          try{
+            const user = JSON.parse(userStr);
+            if(!user || !user.role || (user.role !== 'creator' && user.role !== 'admin')){
+              window.location = '/';
+              return;
+            }
+          }catch(e){ /* continue */ }
+        }
+
+        const headers = { 'Authorization': 'Bearer ' + token, 'Accept':'application/json' };
+        const qs = '?range=7';
+        fetch('/api/stats/earnings.php'+qs, { headers }).then(r=>r.json()).then(render).catch(err=>{
+          document.getElementById('error').style.display='block';
+          document.getElementById('error').textContent = 'Failed to load earnings.';
+          console.error(err);
+        });
+
+        // range toggle
+        document.querySelectorAll('.btn-toggle').forEach(btn=>{
+          btn.addEventListener('click',()=>{
+            document.querySelectorAll('.btn-toggle').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            const range = btn.dataset.range;
+            let q = '?range=7';
+            if(range==='today') q='?range=1';
+            if(range==='week') q='?range=7';
+            if(range==='month') q='?range=30';
+            if(range==='all') q='?range=all';
+            fetch('/api/stats/earnings.php'+q,{headers}).then(r=>r.json()).then(render).catch(()=>{});
+          });
+        });
+
+        function fmt(n){
+          const v = Number(n)||0; return v<0?('-$'+Math.abs(v).toFixed(2)):('$'+v.toFixed(2));
+        }
+
+        function render(data){
+          // expected: { subscriptions, tips, ppv, refunds, total, recent:[], days: [{date,amount}], next_payout }
+          if(!data) return;
+          document.getElementById('total-earnings').textContent = fmt(data.total || 0);
+          document.getElementById('this-month').textContent = fmt(data.month || 0);
+          document.getElementById('today-earnings').textContent = fmt(data.today || 0);
+          const pending = ((data.total || 0) * 0.05);
+          document.getElementById('pending-balance').textContent = fmt(pending);
+
+          document.getElementById('break-sub').textContent = fmt(data.subscriptions || 0);
+          document.getElementById('break-tip').textContent = fmt(data.tips || 0);
+          document.getElementById('break-ppv').textContent = fmt(data.ppv || 0);
+          document.getElementById('break-refund').textContent = fmt((data.refunds||0));
+
+          // bars proportion
+          const totalPos = Math.max( (data.subscriptions||0) + (data.tips||0) + (data.ppv||0), 1);
+          document.getElementById('bar-sub').style.width = Math.round((data.subscriptions||0)/totalPos*100)+'%';
+          document.getElementById('bar-tip').style.width = Math.round((data.tips||0)/totalPos*100)+'%';
+          document.getElementById('bar-ppv').style.width = Math.round((data.ppv||0)/totalPos*100)+'%';
+          document.getElementById('bar-refund').style.width = Math.round(Math.abs((data.refunds||0))/totalPos*100)+'%';
+
+          // chart days
+          const chartRows = document.getElementById('chart-rows');
+          const noData = document.getElementById('chart-no-data');
+          chartRows.innerHTML='';
+          const days = data.days || [];
+          if(!days.length || days.every(d=>!d.amount)){
+            noData.style.display='flex';
+            document.getElementById('chart-total').textContent = 'Total: '+fmt(0);
+          } else {
+            noData.style.display='none';
+            const max = Math.max(...days.map(d=>Math.abs(d.amount||0)),1);
+            let sum = 0;
+            days.forEach(d=>{ sum += (d.amount||0); const pct = Math.round(Math.abs((d.amount||0))/max*100);
+              const dayName = (new Date(d.date)).toLocaleDateString(undefined,{weekday:'short'});
+              const col = document.createElement('div'); col.className='bar-day';
+              const rect = document.createElement('div'); rect.className='bar-rect'; rect.style.height = pct+'%'; rect.title = fmt(d.amount||0);
+              const lbl = document.createElement('div'); lbl.className='label'; lbl.textContent = dayName;
+              col.appendChild(rect); col.appendChild(lbl); chartRows.appendChild(col);
+            });
+            document.getElementById('chart-total').textContent = 'Total: '+fmt(sum||0);
+          }
+
+          // transactions
+          const tb = document.getElementById('tx-tbody'); tb.innerHTML='';
+          const recent = data.recent || [];
+          if(!recent.length){
+            const r = document.createElement('tr'); const c = document.createElement('td'); c.colSpan=6; c.className='muted'; c.textContent='No transactions yet — earnings will appear here when payments start'; r.appendChild(c); tb.appendChild(r);
+          } else {
+            recent.forEach(tx=>{
+              const tr = document.createElement('tr');
+              const d = document.createElement('td'); d.textContent = new Date(tx.date).toLocaleString(); tr.appendChild(d);
+              const f = document.createElement('td'); f.textContent = tx.fan || tx.payer || '—'; tr.appendChild(f);
+              const t = document.createElement('td');
+              const span = document.createElement('span'); span.className='badge '+(tx.type==='subscription'?'sub':tx.type==='tip'?'tip':tx.type==='ppv'?'ppv':'refund'); span.textContent = (tx.type==='subscription'?'Sub':tx.type==='tip'?'Tip':tx.type==='ppv'?'PPV':'Refund'); t.appendChild(span); tr.appendChild(t);
+              const g = document.createElement('td'); g.textContent = fmt(tx.gross||0); tr.appendChild(g);
+              const fee = document.createElement('td'); fee.textContent = fmt(tx.fee||0); tr.appendChild(fee);
+              const net = document.createElement('td'); net.textContent = fmt(tx.net||0); tr.appendChild(net);
+              tb.appendChild(tr);
+            });
+          }
+
+          // next payout
+          if(data.next_payout) document.getElementById('next-payout').textContent = new Date(data.next_payout).toLocaleDateString();
+        }
+
+      }catch(e){ console.error(e); window.location='/'; }
+    })();
+  </script>
+<script src="/js/backstage-earnings-enhance.js?v=1" defer></script></body>
+</html>

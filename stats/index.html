@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Breyya Stats">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Breyya Stats</title>
+<style>
+:root{--bg:#111;--card:#171717;--border:#222;--muted:#bbb;--green:#45d17f;--white:#fff;--red:#ff4757;--yellow:#feca57}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--white);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+.container{max-width:600px;margin:0 auto;padding:16px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.h-title{font-weight:600;font-size:18px}
+.h-updated{font-size:12px;color:var(--muted)}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--border);padding:12px;border-radius:12px;margin-bottom:12px}
+.row{display:flex;gap:8px}
+.col{flex:1}
+.big{font-size:20px;font-weight:700;color:var(--green)}
+.label{font-size:12px;color:var(--muted)}
+.small{font-size:14px}
+.top-fans li{margin:6px 0}
+.medal{margin-right:8px}
+.alert{margin:6px 0;padding:6px 8px;border-radius:6px;font-size:14px}
+.alert.red{color:var(--red);border:1px solid var(--red)}
+.alert.yellow{color:var(--yellow);border:1px solid var(--yellow)}
+@media(min-width:700px){.container{padding:24px}.row.side-by-side{flex-direction:row}.card.small{flex:1}}
+@media(max-width:699px){.row.side-by-side{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="h-title">🌸 BREYYA STATS</div>
+    <div class="h-updated" id="updated">Updated: --</div>
+  </div>
+
+  <div class="card" id="revenues">
+    <div class="label">Today's Revenue</div>
+    <div class="row">
+      <div class="col small">Subscriptions<br><span class="big" id="rev_subs">$0.00</span></div>
+      <div class="col small">Tips<br><span class="big" id="rev_tips">$0.00</span></div>
+      <div class="col small">PPV<br><span class="big" id="rev_ppv">$0.00</span></div>
+      <div class="col small">Total<br><span class="big" id="rev_total">$0.00</span></div>
+    </div>
+    <div class="label" style="margin-top:8px">New subscribers today: <span id="new_subs">0</span></div>
+  </div>
+
+  <div class="row side-by-side">
+    <div class="card small">
+      <div class="label">This Week</div>
+      <div class="big" id="week_total">$0.00</div>
+      <div class="label">Tips: <span id="week_tips">$0.00</span> | PPV: <span id="week_ppv">$0.00</span></div>
+      <div class="label">New subs: <span id="week_new">0</span></div>
+    </div>
+    <div class="card small">
+      <div class="label">This Month</div>
+      <div class="big" id="month_total">$0.00</div>
+      <div class="label">Tips: <span id="month_tips">$0.00</span> | PPV: <span id="month_ppv">$0.00</span></div>
+      <div class="label">New subs: <span id="month_new">0</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label">Subscribers</div>
+    <div class="row">
+      <div class="col">Active<br><div class="big" id="subs_active">0</div></div>
+      <div class="col">New today<br><div class="big" id="subs_new_today">0</div></div>
+      <div class="col">New this week<br><div class="big" id="subs_new_week">0</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label">Chat Activity (24h)</div>
+    <div class="row">
+      <div class="col">Active chatters<br><div class="big" id="chat_active">0</div></div>
+      <div class="col">Messages<br><div class="big" id="chat_msgs">0</div></div>
+      <div class="col">Replies<br><div class="big" id="chat_replies">0</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label">Top Fans Today</div>
+    <ul class="top-fans" id="top_fans">
+      <li>No purchases yet today</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="label">🐳 Whale Watch</div>
+    <div class="row">
+      <div class="col">70+ Score<br><div class="big" id="whales_70plus">0</div></div>
+      <div class="col">Active Today<br><div class="big" id="whales_active">0</div></div>
+      <div class="col">Rising Stars<br><div class="big" id="whales_rising">0</div></div>
+    </div>
+    <div class="label" style="margin-top:8px">Highest: <span id="whale_top_name">—</span> (<span id="whale_top_score">0</span>)</div>
+  </div>
+
+  <div class="card">
+    <div class="label">📦 Content Health</div>
+    <div class="row">
+      <div class="col">PPV Sets<br><div class="big" id="content_ppv_sets">0</div></div>
+      <div class="col">Feed Posts<br><div class="big" id="content_feed_posts">0</div></div>
+      <div class="col">Days Runway<br><div class="big" id="content_runway" style="color:var(--green)">0</div></div>
+    </div>
+    <div class="label" style="margin-top:8px">Popular: <span id="content_popular">—</span> | All bought: <span id="content_bought_all">0</span></div>
+  </div>
+
+  <div class="card" id="alerts_card" style="display:none">
+    <div class="label">⚠️ Alerts</div>
+    <div id="alerts_list">
+      <!-- Alerts will be populated here -->
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="label">🤖 AI Costs</div>
+    <div class="row">
+      <div class="col small">Sonnet<br><span class="big" style="font-size:16px" id="ai_sonnet_runs">0</span> runs<br><span class="small" id="ai_sonnet_cost">$0.00</span></div>
+      <div class="col small">Mini<br><span class="big" style="font-size:16px" id="ai_mini_runs">0</span> runs<br><span class="small" id="ai_mini_cost">$0.00</span></div>
+      <div class="col small">Opus<br><span class="big" style="font-size:16px" id="ai_opus_runs">0</span> runs<br><span class="small" id="ai_opus_cost">$0.00</span></div>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <div class="col">Today Total<br><div class="big" id="ai_today_total">$0.00</div></div>
+      <div class="col">Month Total<br><div class="big" id="ai_month_total">$0.00</div></div>
+    </div>
+  </div>
+
+</div>
+<script>
+const KEY = 'b3f9a7c2d8e14f6b9a0c3d5e7f8a1b2c';
+const API = '/api/stats/glance.php?key=' + KEY;
+
+function fmt(n){return '$' + Number(n).toFixed(2)}
+
+async function fetchStats(){
+  try{
+    const res = await fetch(API, {cache:'no-store'});
+    if(!res.ok) throw new Error('API error');
+    const j = await res.json();
+    document.getElementById('updated').textContent = 'Updated: ' + new Date(j.updated).toLocaleString();
+    document.getElementById('rev_subs').textContent = fmt(j.today.revenue_subscriptions);
+    document.getElementById('rev_tips').textContent = fmt(j.today.revenue_tips);
+    document.getElementById('rev_ppv').textContent = fmt(j.today.revenue_ppv);
+    document.getElementById('rev_total').textContent = fmt(j.today.revenue_total);
+    document.getElementById('new_subs').textContent = j.today.new_subscribers;
+
+    document.getElementById('week_total').textContent = fmt(j.week.revenue_total);
+    document.getElementById('week_tips').textContent = fmt(j.week.tips_total);
+    document.getElementById('week_ppv').textContent = fmt(j.week.ppv_total);
+    document.getElementById('week_new').textContent = j.week.new_subscribers;
+
+    document.getElementById('month_total').textContent = fmt(j.month.revenue_total);
+    document.getElementById('month_tips').textContent = fmt(j.month.tips_total);
+    document.getElementById('month_ppv').textContent = fmt(j.month.ppv_total);
+    document.getElementById('month_new').textContent = j.month.new_subscribers;
+
+    document.getElementById('subs_active').textContent = j.subscribers.active;
+    document.getElementById('subs_new_today').textContent = j.subscribers.new_today;
+    document.getElementById('subs_new_week').textContent = j.subscribers.new_this_week;
+
+    document.getElementById('chat_active').textContent = j.chat.active_chatters;
+    document.getElementById('chat_msgs').textContent = j.chat.messages_received;
+    document.getElementById('chat_replies').textContent = j.chat.replies_sent;
+
+    const tf = document.getElementById('top_fans');
+    tf.innerHTML = '';
+    if(j.top_fans_today && j.top_fans_today.length){
+      const medals = ['🥇','🥈','🥉'];
+      j.top_fans_today.forEach((f,i)=>{
+        const li = document.createElement('li');
+        li.innerHTML = '<span class="medal">'+(medals[i]||'🏅')+'</span>' + escapeHtml(f.username) + ' — ' + fmt(f.spent_today);
+        tf.appendChild(li);
+      });
+    } else {
+      tf.innerHTML = '<li>No purchases yet today</li>';
+    }
+
+    // Whale Watch
+    document.getElementById('whales_70plus').textContent = j.whales.total_70plus;
+    document.getElementById('whales_active').textContent = j.whales.active_today;
+    document.getElementById('whales_rising').textContent = j.whales.rising_stars;
+    document.getElementById('whale_top_name').textContent = j.whales.highest.username || '—';
+    document.getElementById('whale_top_score').textContent = j.whales.highest.score || 0;
+
+    // Content Health
+    document.getElementById('content_ppv_sets').textContent = j.content.ppv_sets_available;
+    document.getElementById('content_feed_posts').textContent = j.content.feed_posts_remaining;
+    document.getElementById('content_runway').textContent = j.content.feed_days_runway;
+    document.getElementById('content_popular').textContent = j.content.most_popular_set?.name || '—';
+    document.getElementById('content_bought_all').textContent = j.content.fans_bought_all;
+    
+    // Color runway based on value
+    const runway = document.getElementById('content_runway');
+    if (j.content.feed_days_runway < 14) {
+      runway.style.color = 'var(--red)';
+    } else {
+      runway.style.color = 'var(--green)';
+    }
+
+    // Alerts - only show card if there are alerts
+    const alertsCard = document.getElementById('alerts_card');
+    const alertsList = document.getElementById('alerts_list');
+    if (j.alerts && j.alerts.length > 0) {
+      alertsCard.style.display = 'block';
+      alertsList.innerHTML = '';
+      j.alerts.forEach(alert => {
+        const div = document.createElement('div');
+        div.className = `alert ${alert.level}`;
+        div.textContent = alert.message;
+        alertsList.appendChild(div);
+      });
+    } else {
+      alertsCard.style.display = 'none';
+    }
+
+    // AI Costs
+    document.getElementById('ai_sonnet_runs').textContent = j.ai_costs.today.sonnet.runs;
+    document.getElementById('ai_sonnet_cost').textContent = fmt(j.ai_costs.today.sonnet.cost);
+    document.getElementById('ai_mini_runs').textContent = j.ai_costs.today.mini.runs;
+    document.getElementById('ai_mini_cost').textContent = fmt(j.ai_costs.today.mini.cost);
+    document.getElementById('ai_opus_runs').textContent = j.ai_costs.today.opus.runs;
+    document.getElementById('ai_opus_cost').textContent = fmt(j.ai_costs.today.opus.cost);
+    document.getElementById('ai_today_total').textContent = fmt(j.ai_costs.today.total);
+    document.getElementById('ai_month_total').textContent = fmt(j.ai_costs.month_total);
+
+  }catch(e){
+    console.error(e);
+  }
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}
+
+fetchStats();
+setInterval(fetchStats, 60000);
+</script>
+</body>
+</html>
