@@ -6,7 +6,7 @@
 
 require_once __DIR__ . '/database.php';
 
-if (!defined('JWT_SECRET')) { define('JWT_SECRET', ''); }
+define('JWT_SECRET', getenv('BREYYA_JWT_SECRET') ?: 'breyya_dev_secret_change_in_production_2026');
 define('JWT_EXPIRY', 86400 * 30); // 30 days
 define('COOKIE_NAME', 'breyya_token');
 

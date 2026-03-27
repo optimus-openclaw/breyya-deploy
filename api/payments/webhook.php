@@ -24,55 +24,8 @@ file_put_contents("$logDir/" . date('Y-m-d_His') . '.json', $rawBody);
 $data = $_POST ?: json_decode($rawBody, true) ?: [];
 $eventType = $data['eventType'] ?? $data['event_type'] ?? '';
 
-// CCBill CBPT upsales don't send eventType — detect from data fields
-// UpSalesSuccess has: subscriptionId + email + billedInitialPrice + action=chargeByPreviousTransactionId
-if (!$eventType && !empty($data['subscriptionId']) && !empty($data['email'])) {
-    if (!empty($data['billedInitialPrice']) && empty($data['billedAmount'])) {
-        // Likely an UpSalesSuccess webhook (CBPT charge)
-        $eventType = 'UpSalesSuccess';
-        error_log("Webhook: Detected UpSalesSuccess from data fields (no eventType sent)");
-    } elseif (!empty($data['billedAmount']) || !empty($data['billedInitialPrice'])) {
-        // Could be a NewSaleSuccess without eventType (legacy detection)
-        $eventType = 'NewSaleSuccess';
-        error_log("Webhook: Detected NewSaleSuccess from data fields (no eventType sent)");
-    }
-}
-
-// Verify CCBill signature if responseDigest is present
-if (isset($_POST['responseDigest'])) {
-    $responseDigest = $_POST['responseDigest'];
-    
-    // Get the salt from secrets
-    if (!defined('CCBILL_SALT')) {
-        error_log("CRITICAL: CCBILL_SALT not defined for webhook signature verification");
-        http_response_code(403);
-        exit("Signature verification failed - salt not configured");
-    }
-    
-    // Build expected digest based on event type
-    $expectedDigest = null;
-    switch ($eventType) {
-        case 'NewSaleSuccess':
-            if (isset($data['subscriptionId'])) {
-                $expectedDigest = md5($data['subscriptionId'] . "1" . CCBILL_SALT);
-            }
-            break;
-        // Add other event types as needed
-        default:
-            error_log("WARNING: Unknown event type for signature verification: " . $eventType);
-            break;
-    }
-    
-    if ($expectedDigest && $expectedDigest !== $responseDigest) {
-        error_log("SECURITY: CCBill webhook signature verification failed. Expected: " . substr($expectedDigest, 0, 8) . "... Got: " . substr($responseDigest, 0, 8) . "...");
-        http_response_code(403);
-        exit("Signature verification failed");
-    } elseif ($expectedDigest) {
-        error_log("CCBill webhook signature verified successfully");
-    }
-} else {
-    error_log("WARNING: CCBill webhook received without responseDigest field - allowing through for now");
-}
+// Verify CCBill signature (TODO: implement with real CCBill salt)
+// $expectedDigest = md5($data['subscriptionId'] . '...' . CCBILL_SALT);
 
 $db = getDB();
 
@@ -178,61 +131,6 @@ switch ($eventType) {
             $stmt->execute();
             
             error_log("Stored payment method for one-time purchase - user $userId: $cardType ending in $cardLast4");
-        }
-        break;
-
-    case 'UpSalesSuccess':
-        // CBPT one-click charge completed (tips, PPV, ratings)
-        $email = strtolower($data['email'] ?? '');
-        $subscriptionId = $data['subscriptionId'] ?? '';
-        $amount = intval(floatval($data['billedInitialPrice'] ?? $data['initialPrice'] ?? $data['billedAmount'] ?? 0) * 100);
-        
-        if (!$email) {
-            error_log("UpSalesSuccess webhook: no email provided");
-            break;
-        }
-        
-        // Find user
-        $stmt = $db->prepare('SELECT id FROM users WHERE LOWER(email) = :email');
-        $stmt->bindValue(':email', $email, SQLITE3_TEXT);
-        $result = $stmt->execute();
-        $user = $result->fetchArray(SQLITE3_ASSOC);
-        
-        if ($user) {
-            $userId = $user['id'];
-            
-            // Record the transaction
-            $db->exec("CREATE TABLE IF NOT EXISTS transactions (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER NOT NULL,
-                type TEXT NOT NULL,
-                amount_cents INTEGER NOT NULL,
-                description TEXT,
-                reference_id TEXT,
-                status TEXT DEFAULT 'completed',
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            )");
-            
-            $stmt = $db->prepare("INSERT INTO transactions (user_id, type, amount_cents, description, reference_id, status) VALUES (:uid, 'tip', :amount, 'One-click charge (CBPT)', :ref, 'completed')");
-            $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
-            $stmt->bindValue(':amount', $amount, SQLITE3_INTEGER);
-            $stmt->bindValue(':ref', $subscriptionId, SQLITE3_TEXT);
-            $stmt->execute();
-            
-            // Update payment method (in case card changed)
-            $cardType = $data['cardType'] ?? $data['card_type'] ?? 'Card';
-            $cardLast4 = $data['last4'] ?? $data['cardLast4'] ?? $data['card_last_four'] ?? '****';
-            
-            $stmt = $db->prepare("INSERT OR REPLACE INTO fan_payment_methods (fan_user_id, ccbill_subscription_id, card_last_four, card_type, updated_at) VALUES (:uid, :subid, :last4, :type, datetime('now'))");
-            $stmt->bindValue(':uid', $userId, SQLITE3_INTEGER);
-            $stmt->bindValue(':subid', $subscriptionId, SQLITE3_TEXT);
-            $stmt->bindValue(':last4', $cardLast4, SQLITE3_TEXT);
-            $stmt->bindValue(':type', $cardType, SQLITE3_TEXT);
-            $stmt->execute();
-            
-            error_log("UpSalesSuccess: User $userId charged $" . number_format($amount/100, 2) . " via CBPT - sub: $subscriptionId");
-        } else {
-            error_log("UpSalesSuccess webhook: no user found for email $email");
         }
         break;
 

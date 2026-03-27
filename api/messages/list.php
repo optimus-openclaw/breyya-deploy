@@ -75,7 +75,7 @@ $messages = [];
 while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
     // If PPV and not unlocked and not the sender, hide media
     if ($row['is_ppv'] && !$row['is_unlocked'] && $row['sender_id'] != $user['id']) {
-        $row["media_url"] = $row["ppv_preview_url"] ?: "";
+        $row['media_url'] = '';
         $row['locked'] = true;
     } else {
         $row['locked'] = false;
