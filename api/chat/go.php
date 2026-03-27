@@ -634,6 +634,16 @@ try {
         
         if (preg_match('/\[VOICE[:\s]([^\]]+)\]/', $reply, $voiceMatch) || preg_match('/\[VOICE\]\s*(.+?)$/s', $reply, $voiceMatch)) {
             $isVoiceMessage = true;
+            
+            // Voice cooldown: max 1 voice note per 10 messages to same fan
+            $recentVoiceCount = $db->querySingle("SELECT COUNT(*) FROM messages WHERE sender_id = $CREATOR_ID AND receiver_id = $fid AND message_type = 'audio' AND id > (SELECT COALESCE(MAX(id),0) - 10 FROM messages WHERE (sender_id = $fid OR receiver_id = $fid))");
+            if ($recentVoiceCount > 0) {
+                $isVoiceMessage = false;
+                $reply = trim(preg_replace('/\[VOICE[:\s][^\]]*\]|\[VOICE\][^\n]*/', '', $reply));
+                if (empty($reply)) $reply = trim($voiceMatch[1]);
+                $debug[] = "voice_cooldown:fan=$fid";
+            }
+            
             $rawVoiceText = trim($voiceMatch[1]);
             
             // Voice = one short ASMR thought (3-7 words). If model sent more, take first phrase only.
@@ -816,7 +826,7 @@ try {
                     '_type' => 'voice',
                     'voice_text' => $voiceText,
                     'voice_url' => $audioUrl,
-                    'text_reply' => ($reply !== $voiceText && !empty($reply) && strlen($reply) > 2) ? $reply : ''
+                    'text_reply' => ''
                 ]);
                 $safePayload = $db->escapeString($voicePayload);
                 $db->exec("UPDATE chat_queue SET status='typing', ai_response='$safePayload', typing_until=datetime('now', '+" . $typingDuration . " seconds') WHERE id=" . intval($item['qid']));
