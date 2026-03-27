@@ -243,6 +243,43 @@ try {
         } else {
             $stage = 'hooked';
         }
+
+    function callOllama($systemPrompt, $messages, $fanContext = "") {
+        // Convert Anthropic message format to Ollama format
+        $ollamaMessages = [];
+        $ollamaMessages[] = ["role" => "system", "content" => $systemPrompt];
+        foreach ($messages as $msg) {
+            $ollamaMessages[] = ["role" => $msg["role"], "content" => is_string($msg["content"]) ? $msg["content"] : json_encode($msg["content"])];
+        }
+        
+        $payload = json_encode([
+            "model" => OLLAMA_MODEL,
+            "messages" => $ollamaMessages,
+            "stream" => false,
+            "options" => ["temperature" => 0.9, "num_predict" => 300]
+        ]);
+        
+        $ch = curl_init(OLLAMA_URL . "/api/chat");
+        curl_setopt_array($ch, [
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
+            CURLOPT_POSTFIELDS => $payload,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 45  // Ollama can be slow on cold start
+        ]);
+        $resp = curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $err = curl_error($ch);
+        curl_close($ch);
+        
+        if ($code === 200) {
+            $data = json_decode($resp, true);
+            return $data["message"]["content"] ?? null;
+        }
+        error_log("Ollama call failed: code=$code err=$err");
+        return null;
+    }
+
         $db->exec("UPDATE fan_profiles SET conversation_stage = '$stage', updated_at = datetime('now') WHERE fan_id = $fanId");
     }
 
@@ -372,6 +409,42 @@ try {
             array_unshift($msgs, ['role'=>'user','content'=>'hi']);
         }
 
+        // === OLLAMA ROUTING: Check if this fan should use uncensored model ===
+        $useOllama = false;
+        global $OLLAMA_ENABLED_FANS;
+
+        // Check if fan is enabled for Ollama AND has an active sexting session
+        if (in_array($fanUserId, $OLLAMA_ENABLED_FANS)) {
+            // Load sexting session status from fan_profiles
+            $sStmt = $db->prepare("SELECT sexting_session_active FROM fan_profiles WHERE fan_id = :fid");
+            $sStmt->bindValue(":fid", $fanUserId, SQLITE3_INTEGER);
+            $sResult = @$sStmt->execute();
+            $sRow = $sResult ? $sResult->fetchArray(SQLITE3_ASSOC) : null;
+            if ($sRow && $sRow["sexting_session_active"] == 1) {
+                $useOllama = true;
+                $debug[] = "route=ollama";
+            }
+        }
+
+        if ($useOllama) {
+            // Use Ollama with uncensored prompt
+            require_once __DIR__ . "/ollama-prompt.php";
+            $ollamaPrompt = getOllamaSystemPrompt($fanContext);
+            $reply = callOllama($ollamaPrompt, $msgs, $fanContext);
+            
+            if (!$reply) {
+                // Ollama failed — DONT fall back to Sonnet for explicit content
+                $debug[] = "ollama_failed";
+                $fallbackMessages = [
+                    "sorry babe my phone died 😩 whatd I miss?",
+                    "omg sorry I disappeared 😂 my wifi was being weird",
+                    "hey sorry about that 😩 Im back now"
+                ];
+                $reply = $fallbackMessages[array_rand($fallbackMessages)];
+                error_log("OLLAMA FAILED for fan $fanUserId — used canned fallback, NOT Sonnet");
+            }
+        } else {
+
         // Call Anthropic with fallback logic
         $reply = null;
         $apiError = null;
@@ -431,6 +504,7 @@ try {
             $db->exec("UPDATE chat_queue SET status='fallback_sent' WHERE id=" . intval($item['qid']));
             $debug[] = "fallback_used";
         }
+        }  // End of Ollama routing else block
 
         // ========== POST-PROCESSING: Enforce rules server-side ==========
         
