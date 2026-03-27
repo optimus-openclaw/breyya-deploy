@@ -294,7 +294,42 @@ try {
         $queued++;
     }
 
-    // Process ready items
+
+    // ========== PHASE 1: DELIVER typing items whose typing_until has passed ==========
+    $r1 = $db->query("SELECT cq.id as qid, cq.fan_user_id, cq.ai_response, cq.fan_message_id FROM chat_queue cq WHERE cq.status = 'typing' AND cq.typing_until <= datetime('now') ORDER BY cq.created_at ASC");
+    $deliverItems = [];
+    while ($drow = $r1->fetchArray(SQLITE3_ASSOC)) { $deliverItems[] = $drow; }
+    
+    foreach ($deliverItems as $ditem) {
+        $dfid = intval($ditem['fan_user_id']);
+        $dqid = intval($ditem['qid']);
+        $dreply = $ditem['ai_response'];
+        
+        if (!empty($dreply) && $dreply !== '(pending)') {
+            $voiceData = @json_decode($dreply, true);
+            if ($voiceData && isset($voiceData['_type']) && $voiceData['_type'] === 'voice') {
+                // Voice message — stored as JSON during Phase 2
+                $sv = $db->escapeString($voiceData['voice_text'] ?? '');
+                $su = $db->escapeString($voiceData['voice_url'] ?? '');
+                $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, message_type, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $dfid, '$sv', '$su', 'audio', 1, 1, datetime('now'))");
+                if (!empty($voiceData['text_reply'])) {
+                    $st = $db->escapeString($voiceData['text_reply']);
+                    $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $dfid, '$st', 1, 1, datetime('now', '+2 seconds'))");
+                }
+            } else {
+                // Regular text
+                $safe = $db->escapeString($dreply);
+                $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $dfid, '$safe', 1, 1, datetime('now'))");
+            }
+            $db->exec("UPDATE chat_queue SET status='delivered', delivered_at=datetime('now') WHERE id=$dqid");
+            $origMsg = $db->querySingle("SELECT content FROM messages WHERE id = " . intval($ditem['fan_message_id']), false);
+            updateFanProfile($db, $dfid, $origMsg ?? '', $dreply);
+            $processed++;
+            $debug[] = "phase1_deliver:fan=$dfid";
+        }
+    }
+
+    // ========== PHASE 2: GENERATE replies for scheduled items ==========
     $r2 = $db->query("SELECT cq.id as qid, cq.fan_message_id, m.content as fan_msg, m.sender_id as fan_id FROM chat_queue cq JOIN messages m ON cq.fan_message_id = m.id WHERE cq.status = 'scheduled' AND cq.scheduled_at <= datetime('now') ORDER BY cq.scheduled_at ASC LIMIT 5");
     $items = [];
     while ($row = $r2->fetchArray(SQLITE3_ASSOC)) { $items[] = $row; }
@@ -767,35 +802,32 @@ try {
 
         // Insert reply (only if not double-texted and no PPV)
         // DEDUP: prevent duplicate messages within 10 seconds
+        // ===== PHASE 2 SAVE: Store reply in queue, set typing state =====
         $dedupSafe = $db->escapeString($reply);
         $dedupCheck = $db->querySingle("SELECT COUNT(*) FROM messages WHERE sender_id = $CREATOR_ID AND receiver_id = $fid AND content = '$dedupSafe' AND created_at >= datetime('now', '-10 seconds')");
         if ($dedupCheck > 0) { $debug[] = "dedup_skipped:fan=$fid"; $doubleTexted = true; }
         if (!$doubleTexted && !$ppvDetected) {
+            // Calculate typing duration based on reply length (3-20 seconds)
+            $typingDuration = max(3, min(20, intval(mb_strlen($reply) / 15)));
+            
             if ($isVoiceMessage && $audioUrl) {
-                // Insert VOICE as its own message (short thought only)
-                $safeVoice = $db->escapeString($voiceText);
-                $safeAudio = $db->escapeString($audioUrl);
-                $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, message_type, is_ai, is_unlocked, created_at) 
-                          VALUES ($CREATOR_ID, $fid, '$safeVoice', '$safeAudio', 'audio', 1, 1, datetime('now'))");
-                
-                // If there's remaining text DIFFERENT from voiceText, send as separate text message
-                if ($reply !== $voiceText && !empty($reply) && strlen($reply) > 2) {
-                    $safeReply = $db->escapeString($reply);
-                    $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) 
-                              VALUES ($CREATOR_ID, $fid, '$safeReply', 1, 1, datetime('now', '+2 seconds'))");
-                    $debug[] = "voice_plus_text:fan=$fid";
-                }
-                $safe = $safeVoice;
+                // Store voice data as JSON for Phase 1 to deliver
+                $voicePayload = json_encode([
+                    '_type' => 'voice',
+                    'voice_text' => $voiceText,
+                    'voice_url' => $audioUrl,
+                    'text_reply' => ($reply !== $voiceText && !empty($reply) && strlen($reply) > 2) ? $reply : ''
+                ]);
+                $safePayload = $db->escapeString($voicePayload);
+                $db->exec("UPDATE chat_queue SET status='typing', ai_response='$safePayload', typing_until=datetime('now', '+" . $typingDuration . " seconds') WHERE id=" . intval($item['qid']));
+                $debug[] = "phase2_voice_typing:fan=$fid,secs=$typingDuration";
             } else {
-                // Insert as regular text message
+                // Store text reply for Phase 1 to deliver
                 $safe = $db->escapeString($reply);
-                $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $fid, '$safe', 1, 1, datetime('now'))");
+                $db->exec("UPDATE chat_queue SET status='typing', ai_response='$safe', typing_until=datetime('now', '+" . $typingDuration . " seconds') WHERE id=" . intval($item['qid']));
+                $debug[] = "phase2_text_typing:fan=$fid,secs=$typingDuration";
             }
         }
-        $db->exec("UPDATE chat_queue SET status='delivered', ai_response='$safe', delivered_at=datetime('now') WHERE id=" . intval($item['qid']));
-        
-        // Update fan profile with this interaction
-        updateFanProfile($db, $fid, $item['fan_msg'], $reply);
         
         $processed++;
     }
