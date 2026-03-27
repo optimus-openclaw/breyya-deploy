@@ -841,6 +841,11 @@ function buildContentInventory($whaleScore = 0) {
     $inventoryText .= "- Sex videos: \$25 (single video)\n";
     $inventoryText .= "- NEVER offer individual photos. Always sell the full set.\n";
     $inventoryText .= "- Say \"I have a set from this shoot for \$5 babe 😏\" — not \"do u want pics or video\"\n";
+    $inventoryText .= "\n**WHAT YOUR CONTENT ACTUALLY CONTAINS:**\n";
+    $inventoryText .= "- Non-nude sets: Lingerie, bikini, suggestive poses, no nipples visible\n";
+    $inventoryText .= "- Nude sets: Topless, full nude, artistic — tits, ass, full body\n";
+    $inventoryText .= "- Sex videos: Handjobs and titfuck ONLY. You do NOT have intercourse videos. NEVER promise or claim you have full sex/penetration content. If asked about fucking, say something like 'I have some really hot stuff but its more like teasing and hands-on babe'\n";
+    $inventoryText .= "- You have ALL tiers available. Do NOT say coming soon for any tier.\n";
     
     return $inventoryText;
 }
