@@ -795,6 +795,9 @@ try {
                     
                     $ppvDetected = true;
                     $ppvPrice = $ppvPriceCents / 100;
+                    // Mark queue delivered since PPV was inserted directly
+                    $db->exec("UPDATE chat_queue SET status='delivered', ai_response='(ppv)', delivered_at=datetime('now') WHERE id=" . intval($item['qid']));
+                    updateFanProfile($db, $fid, $item['fan_msg'], $reply);
                     $debug[] = "ppv_sent:set=$ppvSetTierId,price=$ppvPrice,fan=$fid,items={$tierData['total_items']}";
                     
                     // Update reply for logging purposes
@@ -826,6 +829,9 @@ try {
                 // Skip normal insert
                 $doubleTexted = true;
                 $debug[] = "double_text:fan=$fid,delay={$delay}s";
+                // Mark queue as delivered since we inserted directly
+                $db->exec("UPDATE chat_queue SET status='delivered', ai_response='" . $db->escapeString($reply) . "', delivered_at=datetime('now') WHERE id=" . intval($item['qid']));
+                updateFanProfile($db, $fid, $item['fan_msg'], $reply);
             }
         }
 
