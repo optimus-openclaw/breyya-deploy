@@ -12,12 +12,6 @@ if (defined('AI_API_KEY') && AI_API_KEY !== '') {
     $ANTHROPIC_KEY = defined("AI_API_KEY") ? AI_API_KEY : "";
 }
 $MODEL = 'claude-sonnet-4-20250514';
-// Ollama routing config
-define("OLLAMA_URL", "https://optimus-macmini.taila072b7.ts.net");
-define("OLLAMA_MODEL", "dolphin-llama3");
-// Fan IDs enabled for Ollama explicit routing (test accounts first)
-$OLLAMA_ENABLED_FANS = [3, 4]; // BigTipper69, CuteGuy42
-
 require_once __DIR__ . '/system-prompt.php';
 $SECRET = 'breyya-chat-cron-2026';
 $CREATOR_ID = 1;
@@ -40,7 +34,6 @@ try {
     $db->busyTimeout(5000);
     @$db->exec("ALTER TABLE messages ADD COLUMN is_ai INTEGER DEFAULT 0");
     @$db->exec("ALTER TABLE messages ADD COLUMN message_type TEXT DEFAULT 'text'"); // For audio/text distinction
-    @$db->exec("ALTER TABLE fan_profiles ADD COLUMN sexting_session_active INTEGER DEFAULT 0");
     $db->exec("CREATE TABLE IF NOT EXISTS chat_queue (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_message_id INTEGER NOT NULL, fan_user_id INTEGER NOT NULL, status TEXT DEFAULT 'pending', scheduled_at TEXT, ai_response TEXT DEFAULT '', delivered_at TEXT, created_at TEXT DEFAULT (datetime('now')), UNIQUE(fan_message_id))");
     $db->exec("CREATE TABLE IF NOT EXISTS tip_events (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_user_id INTEGER NOT NULL, amount_cents INTEGER NOT NULL, purpose TEXT DEFAULT '', processed INTEGER DEFAULT 0, created_at TEXT DEFAULT (datetime('now')))");
     
@@ -443,32 +436,26 @@ try {
         $bannedEmoji = ['😊', '😄', '🙂', '😉', '🤗', '💪', '🎶', '✨', '💫', '🌟', '⭐', '🤔', '😌', '🙈', '💖', '🌸', '🥺', '😍', '🤤', '😜', '😝', '🤭', '🥵', '💦', '🙏', '💗', '😎', '🤩', '💜', '💙', '🧡', '💛', '🖤', '🤍', '♥️', '😈', '🔒', '🎂', '🎉', '🎊', '🥳', '🤑'];
         $reply = str_replace($bannedEmoji, '', $reply);
         
-        // 2. Smart character limit: max 280 chars, always break at sentence end
-        // Never cut mid-sentence. If no sentence break found, extend to find one.
+        // 2. Hard character limit: max 200 chars (roughly 2 short sentences)
+        // Split on commas and periods to find natural break points
         if (!preg_match('/\[VOICE/', $reply) && !preg_match('/\[PPV/', $reply)) {
-            if (mb_strlen($reply) > 280) {
-                // Try to find sentence end before 280 chars
-                $truncated = mb_substr($reply, 0, 280);
+            if (mb_strlen($reply) > 200) {
+                // Find last good break point before 200 chars
+                $truncated = mb_substr($reply, 0, 200);
+                // Try to break at sentence end
                 $lastPeriod = max(strrpos($truncated, '.'), strrpos($truncated, '!'), strrpos($truncated, '?'));
-                if ($lastPeriod && $lastPeriod > 60) {
+                if ($lastPeriod && $lastPeriod > 50) {
                     $reply = mb_substr($reply, 0, $lastPeriod + 1);
                 } else {
-                    // No sentence break before 280 — look ahead up to 350 for one
-                    $extended = mb_substr($reply, 0, 350);
-                    $nextEnd = null;
-                    foreach (['.', '!', '?'] as $p) {
-                        $pos = strpos($extended, $p, 200);
-                        if ($pos !== false && ($nextEnd === null || $pos < $nextEnd)) $nextEnd = $pos;
-                    }
-                    if ($nextEnd) {
-                        $reply = mb_substr($reply, 0, $nextEnd + 1);
+                    // Break at last comma
+                    $lastComma = strrpos($truncated, ',');
+                    if ($lastComma && $lastComma > 50) {
+                        $reply = mb_substr($reply, 0, $lastComma);
                     } else {
-                        // Last resort: break at last space before 280
-                        $lastSpace = strrpos($truncated, ' ');
-                        $reply = $lastSpace ? mb_substr($reply, 0, $lastSpace) : $truncated;
+                        $reply = $truncated;
                     }
                 }
-                $debug[] = "smart_truncated";
+                $debug[] = "hard_truncated";
             }
         }
         
