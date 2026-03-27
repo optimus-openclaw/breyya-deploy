@@ -12,10 +12,10 @@
       link.id = 'complaints-link';
       link.setAttribute('style',
         'text-align:center;padding:8px;font-size:11px;color:#3d5368;' +
-        'position:fixed;bottom:52px;left:0;right:0;z-index:99;' +
-        'background:linear-gradient(transparent, #0d1b2a 30%);pointer-events:none;');
+        'position:relative;bottom:0;left:0;right:0;z-index:1;margin-top:10px;' +
+        'background:transparent;pointer-events:none;');
       link.innerHTML = '<a href="/complaints" style="color:#3d5368;text-decoration:none;pointer-events:auto;">Report / Complaints</a>';
-      document.body.appendChild(link);
+      var container = document.querySelector("[class*=page]") || document.body; container.appendChild(link);
     }, 1000);
   }
 
