@@ -23,7 +23,7 @@ if ($user) {
 $db = getDB();
 
 // Build query
-$where = "(scheduled_at IS NULL OR scheduled_at <= datetime('now'))";
+$where = "(scheduled_at IS NULL OR scheduled_at <= datetime('now')) AND is_ppv = 0";
 if ($freeOnly || !$showPaid) {
     $where .= " AND is_free = 1";
 }
