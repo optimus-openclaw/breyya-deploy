@@ -541,10 +541,10 @@
             /* Persistent tip button for chat */
             .persistent-tip-btn {
                 position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 56px;
-                height: 56px;
+                bottom: 80px;
+                right: 16px;
+                width: 44px;
+                height: 44px;
                 border-radius: 50%;
                 background: linear-gradient(135deg, #ff1493, #ff69b4);
                 border: none;
