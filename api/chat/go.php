@@ -427,6 +427,9 @@ try {
 
         // ========== POST-PROCESSING: Enforce rules server-side ==========
         
+        // 0. Strip any stray voice closing tags
+        $reply = str_replace('[/VOICE]', '', $reply);
+        
         // 1. Strip ALL emoji not in the approved set
         // Approved: 😘 🥰 😏 🔥 💕 😂 👀 😩 🫶 💋 ❤️
         // Strategy: strip known bad ones explicitly
@@ -498,16 +501,38 @@ try {
         $voiceText = null;
         $audioUrl = null;
         
-        // Match [VOICE:text here] or [VOICE] at start — AI uses both formats
-        if (preg_match('/\[VOICE[:\s]([^\]]+)\]/', $reply, $voiceMatch) || strpos($reply, '[VOICE]') === 0) {
+        // Match ALL voice tag formats the AI might use:
+        // [VOICE:text here] or [VOICE]text[/VOICE] or [VOICE] text
+        // First: strip any [/VOICE] closing tags
+        $reply = str_replace('[/VOICE]', '', $reply);
+        
+        if (preg_match('/\[VOICE[:\s]([^\]]+)\]/', $reply, $voiceMatch) || preg_match('/\[VOICE\]\s*(.+?)$/s', $reply, $voiceMatch)) {
             $isVoiceMessage = true;
-            if (!empty($voiceMatch[1])) {
-                $voiceText = trim($voiceMatch[1]);
-                // Strip voice tag, keep remaining text as regular reply
-                $remainingText = trim(preg_replace('/\[VOICE[:\s][^\]]+\]/', '', $reply));
-                if ($remainingText) { $reply = $remainingText; }
+            $rawVoiceText = trim($voiceMatch[1]);
+            
+            // Voice = one short ASMR thought (3-7 words). If model sent more, take first phrase only.
+            $voiceWords = explode(' ', $rawVoiceText);
+            if (count($voiceWords) > 8) {
+                // Find first natural break: comma, period, emoji, or exclamation
+                $firstPhrase = $rawVoiceText;
+                if (preg_match('/^(.{10,60}?)[,\.!?😏🔥😂💕😘]/', $rawVoiceText, $phraseMatch)) {
+                    $firstPhrase = trim($phraseMatch[1]);
+                } else {
+                    // No natural break — just take first 7 words
+                    $firstPhrase = implode(' ', array_slice($voiceWords, 0, 7));
+                }
+                $voiceText = $firstPhrase;
+                $debug[] = "voice_shortened:" . count($voiceWords) . "->" . str_word_count($voiceText);
             } else {
-                $voiceText = trim(str_replace('[VOICE]', '', $reply));
+                $voiceText = $rawVoiceText;
+            }
+            
+            // Strip ALL voice tags from reply, keep remaining text as separate message
+            $remainingText = trim(preg_replace('/\[VOICE[:\s][^\]]*\]|\[VOICE\][^\n]*/', '', $reply));
+            if ($remainingText && $remainingText !== $rawVoiceText) {
+                $reply = $remainingText;
+            } else {
+                $reply = $voiceText;
             }
             
             // Generate voice note
@@ -656,12 +681,20 @@ try {
         if ($dedupCheck > 0) { $debug[] = "dedup_skipped:fan=$fid"; $doubleTexted = true; }
         if (!$doubleTexted && !$ppvDetected) {
             if ($isVoiceMessage && $audioUrl) {
-                // Insert as audio message
-                $safeText = $db->escapeString($voiceText);
+                // Insert VOICE as its own message (short thought only)
+                $safeVoice = $db->escapeString($voiceText);
                 $safeAudio = $db->escapeString($audioUrl);
                 $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, message_type, is_ai, is_unlocked, created_at) 
-                          VALUES ($CREATOR_ID, $fid, '$safeText', '$safeAudio', 'audio', 1, 1, datetime('now'))");
-                $safe = $safeText;
+                          VALUES ($CREATOR_ID, $fid, '$safeVoice', '$safeAudio', 'audio', 1, 1, datetime('now'))");
+                
+                // If there's remaining text DIFFERENT from voiceText, send as separate text message
+                if ($reply !== $voiceText && !empty($reply) && strlen($reply) > 2) {
+                    $safeReply = $db->escapeString($reply);
+                    $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) 
+                              VALUES ($CREATOR_ID, $fid, '$safeReply', 1, 1, datetime('now', '+2 seconds'))");
+                    $debug[] = "voice_plus_text:fan=$fid";
+                }
+                $safe = $safeVoice;
             } else {
                 // Insert as regular text message
                 $safe = $db->escapeString($reply);

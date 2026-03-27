@@ -1,287 +1,110 @@
 /**
- * Voice Notes Support for Breyya Chat
- * Renders audio messages with playback controls
+ * Voice Notes v2 — Works with React chat component
+ * Detects .mp3 URLs rendered as broken <img> tags and replaces with audio players
  */
 (function() {
   if (window.location.pathname.indexOf('/chat') !== 0) return;
 
-  let audioProcessed = new Set();
+  var processed = new Set();
 
-  function processAudioMessages() {
-    // Find all message elements
-    const messages = document.querySelectorAll('[class*="message"]');
+  function processVoiceNotes() {
+    // Strategy: Find <img> tags with src ending in .mp3 — React renders media_url as img
+    var images = document.querySelectorAll('img[src*="/voice-notes/"], img[src$=".mp3"]');
     
-    messages.forEach(message => {
-      const messageId = message.dataset.messageId;
-      if (!messageId || audioProcessed.has(messageId)) return;
-
-      // Look for data attributes that might contain message data
-      const messageData = JSON.parse(message.dataset.message || '{}');
+    images.forEach(function(img) {
+      var src = img.getAttribute('src');
+      if (!src || processed.has(src)) return;
+      processed.add(src);
       
-      // Check if this is an audio message
-      if (messageData.message_type === 'audio' && messageData.media_url) {
-        audioProcessed.add(messageId);
-        renderAudioMessage(message, messageData);
-      }
-    });
-  }
-
-  function renderAudioMessage(messageElement, messageData) {
-    const textContent = messageElement.querySelector('[class*="content"], [class*="text"]');
-    if (!textContent) return;
-
-    // Create audio player container
-    const audioContainer = document.createElement('div');
-    audioContainer.className = 'voice-note-container';
-    audioContainer.style.cssText = `
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-radius: 18px;
-      padding: 12px 16px;
-      margin: 4px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      max-width: 280px;
-      min-width: 140px;
-      position: relative;
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-    `;
-
-    // Play button
-    const playButton = document.createElement('button');
-    playButton.className = 'voice-note-play-btn';
-    playButton.innerHTML = '▶️';
-    playButton.style.cssText = `
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 14px;
-      transition: all 0.2s;
-      flex-shrink: 0;
-    `;
-
-    // Waveform visualization (fake)
-    const waveform = document.createElement('div');
-    waveform.className = 'voice-note-waveform';
-    waveform.style.cssText = `
-      flex: 1;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      opacity: 0.8;
-    `;
-
-    // Generate fake waveform bars
-    for (let i = 0; i < 12; i++) {
-      const bar = document.createElement('div');
-      bar.style.cssText = `
-        background: rgba(255, 255, 255, 0.7);
-        width: 3px;
-        height: ${Math.random() * 12 + 4}px;
-        border-radius: 1px;
-        transition: all 0.3s;
-      `;
-      waveform.appendChild(bar);
-    }
-
-    // Duration display
-    const duration = document.createElement('span');
-    duration.className = 'voice-note-duration';
-    duration.textContent = '0:00';
-    duration.style.cssText = `
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 12px;
-      font-weight: 500;
-      min-width: 30px;
-      text-align: right;
-    `;
-
-    // Create audio element
-    const audio = document.createElement('audio');
-    audio.src = messageData.media_url;
-    audio.preload = 'metadata';
-
-    // Update duration when metadata loads
-    audio.addEventListener('loadedmetadata', () => {
-      const mins = Math.floor(audio.duration / 60);
-      const secs = Math.floor(audio.duration % 60);
-      duration.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-    });
-
-    // Error fallback - show text content if audio fails
-    audio.addEventListener('error', () => {
-      audioContainer.style.display = 'none';
-      const fallbackText = document.createElement('div');
-      fallbackText.textContent = messageData.content || 'Voice message unavailable';
-      fallbackText.style.cssText = `
-        padding: 8px 12px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        color: #666;
-        font-style: italic;
-      `;
-      textContent.appendChild(fallbackText);
-    });
-
-    let isPlaying = false;
-    let progressInterval = null;
-
-    // Play/pause functionality
-    playButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (isPlaying) {
-        audio.pause();
-        playButton.innerHTML = '▶️';
-        isPlaying = false;
-        clearInterval(progressInterval);
-        
-        // Reset waveform animation
-        waveform.querySelectorAll('div').forEach(bar => {
-          bar.style.background = 'rgba(255, 255, 255, 0.7)';
-        });
-      } else {
-        // Pause other playing voice notes
-        document.querySelectorAll('.voice-note-play-btn').forEach(btn => {
-          if (btn !== playButton && btn.innerHTML === '⏸️') {
-            btn.click();
-          }
-        });
-
-        audio.play().then(() => {
-          playButton.innerHTML = '⏸️';
-          isPlaying = true;
-          
-          // Animate waveform bars
-          const bars = waveform.querySelectorAll('div');
-          progressInterval = setInterval(() => {
-            bars.forEach(bar => {
-              bar.style.background = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.5})`;
-              bar.style.transform = `scaleY(${Math.random() * 0.6 + 0.4})`;
-            });
-          }, 200);
-          
-        }).catch(err => {
-          console.error('Audio play failed:', err);
-          playButton.innerHTML = '❌';
-          setTimeout(() => {
-            audioContainer.style.display = 'none';
-            const fallbackText = document.createElement('div');
-            fallbackText.textContent = messageData.content || 'Voice message unavailable';
-            fallbackText.style.cssText = `
-              padding: 8px 12px;
-              background: rgba(255, 255, 255, 0.1);
-              border-radius: 12px;
-              color: #666;
-              font-style: italic;
-            `;
-            textContent.appendChild(fallbackText);
-          }, 1000);
-        });
-      }
-    });
-
-    // Update progress
-    audio.addEventListener('timeupdate', () => {
-      if (isPlaying) {
-        const mins = Math.floor(audio.currentTime / 60);
-        const secs = Math.floor(audio.currentTime % 60);
-        duration.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-      }
-    });
-
-    // Handle end of audio
-    audio.addEventListener('ended', () => {
-      playButton.innerHTML = '▶️';
-      isPlaying = false;
-      clearInterval(progressInterval);
+      // Create audio player to replace the broken img
+      var container = document.createElement('div');
+      container.style.cssText = 'background:linear-gradient(135deg,#667eea,#764ba2);border-radius:16px;padding:10px 14px;display:flex;align-items:center;gap:8px;max-width:250px;min-width:160px;margin:4px 0;';
       
-      // Reset duration display
-      const mins = Math.floor(audio.duration / 60);
-      const secs = Math.floor(audio.duration % 60);
-      duration.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+      var playBtn = document.createElement('button');
+      playBtn.textContent = '▶';
+      playBtn.style.cssText = 'background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:32px;height:32px;font-size:14px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;';
       
-      // Reset waveform
-      waveform.querySelectorAll('div').forEach(bar => {
-        bar.style.background = 'rgba(255, 255, 255, 0.7)';
-        bar.style.transform = 'scaleY(1)';
+      // Waveform bars
+      var wave = document.createElement('div');
+      wave.style.cssText = 'flex:1;display:flex;align-items:center;gap:2px;height:20px;';
+      for (var i = 0; i < 10; i++) {
+        var bar = document.createElement('div');
+        bar.style.cssText = 'background:rgba(255,255,255,0.6);width:3px;height:' + (Math.random()*12+4) + 'px;border-radius:1px;';
+        wave.appendChild(bar);
+      }
+      
+      var dur = document.createElement('span');
+      dur.textContent = '0:00';
+      dur.style.cssText = 'color:rgba(255,255,255,0.9);font-size:11px;min-width:28px;text-align:right;';
+      
+      var audio = document.createElement('audio');
+      audio.src = src;
+      audio.preload = 'metadata';
+      
+      audio.addEventListener('loadedmetadata', function() {
+        var m = Math.floor(audio.duration / 60);
+        var s = Math.floor(audio.duration % 60);
+        dur.textContent = m + ':' + (s < 10 ? '0' : '') + s;
       });
-    });
-
-    // Assemble the audio player
-    audioContainer.appendChild(playButton);
-    audioContainer.appendChild(waveform);
-    audioContainer.appendChild(duration);
-
-    // Replace text content with audio player
-    textContent.innerHTML = '';
-    textContent.appendChild(audioContainer);
-
-    // Add a small "🎵" indicator next to avatar
-    const avatar = messageElement.querySelector('[class*="avatar"]');
-    if (avatar) {
-      const voiceIndicator = document.createElement('span');
-      voiceIndicator.textContent = '🎵';
-      voiceIndicator.style.cssText = `
-        position: absolute;
-        bottom: -4px;
-        right: -4px;
-        background: #667eea;
-        border-radius: 50%;
-        width: 18px;
-        height: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10px;
-        border: 2px solid #fff;
-      `;
-      avatar.style.position = 'relative';
-      avatar.appendChild(voiceIndicator);
-    }
-  }
-
-  // Monitor for new messages and process audio
-  const observer = new MutationObserver(() => {
-    processAudioMessages();
-  });
-
-  // Start observing when chat container is available
-  function startObserving() {
-    const chatContainer = document.querySelector('[class*="messages"], [class*="chat"]');
-    if (chatContainer) {
-      observer.observe(chatContainer, { 
-        childList: true, 
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['data-message', 'data-message-id']
+      
+      var playing = false;
+      playBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (playing) {
+          audio.pause();
+          playBtn.textContent = '▶';
+          playing = false;
+        } else {
+          // Stop other players
+          document.querySelectorAll('audio').forEach(function(a) { if (a !== audio) a.pause(); });
+          audio.play().catch(function() {});
+          playBtn.textContent = '⏸';
+          playing = true;
+        }
       });
-      processAudioMessages(); // Process any existing messages
-    }
-  }
-
-  // Try to start observing
-  if (document.readyState === 'complete') {
-    setTimeout(startObserving, 500);
-  } else {
-    window.addEventListener('load', () => {
-      setTimeout(startObserving, 500);
+      
+      audio.addEventListener('ended', function() {
+        playBtn.textContent = '▶';
+        playing = false;
+        var m = Math.floor(audio.duration / 60);
+        var s = Math.floor(audio.duration % 60);
+        dur.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+      });
+      
+      audio.addEventListener('timeupdate', function() {
+        if (playing) {
+          var m = Math.floor(audio.currentTime / 60);
+          var s = Math.floor(audio.currentTime % 60);
+          dur.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+        }
+      });
+      
+      container.appendChild(playBtn);
+      container.appendChild(wave);
+      container.appendChild(dur);
+      
+      // Replace the broken img with our player
+      var parent = img.parentElement;
+      if (parent) {
+        parent.replaceChild(container, img);
+      }
     });
   }
-
-  // Also check periodically for new messages
-  setInterval(processAudioMessages, 2000);
-
-  // Cleanup on page unload
-  window.addEventListener('beforeunload', () => {
-    observer.disconnect();
-  });
+  
+  // Run on load and poll for new messages
+  if (document.readyState === 'complete') { setTimeout(processVoiceNotes, 500); }
+  else { window.addEventListener('load', function() { setTimeout(processVoiceNotes, 500); }); }
+  
+  // MutationObserver for dynamic content
+  var obs = new MutationObserver(function() { processVoiceNotes(); });
+  function startObs() {
+    var chat = document.querySelector('[class*="messages"]');
+    if (chat) { obs.observe(chat, {childList:true, subtree:true}); processVoiceNotes(); }
+    else { setTimeout(startObs, 500); }
+  }
+  startObs();
+  
+  // Fallback poll
+  setInterval(processVoiceNotes, 3000);
 })();
