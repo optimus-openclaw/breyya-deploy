@@ -701,8 +701,8 @@ try {
         }
         
         if (!$ppvBlocked && preg_match('/\[PPV:([^:]+):([0-9.]+)\]/', $reply, $ppvMatches)) {
-            $ppvSetTierId = trim($ppvMatches[1]); // Now set_id_tier format
-            $ppvPriceCents = intval($ppvMatches[2]); // Now in cents
+            $ppvItemId = trim($ppvMatches[1]);
+            $ppvPrice = floatval($ppvMatches[2]);
             
             // Load content inventory to get item details
             $inventoryFile = __DIR__ . '/../../data/content-inventory.json';
@@ -710,69 +710,50 @@ try {
                 $inventory = json_decode(file_get_contents($inventoryFile), true);
                 $ppvItem = null;
                 
-                // Find the requested set and tier (v2 format)
-                $ppvSet = null;
-                $ppvTier = null;
-                
-                // Parse set_id_tier format (e.g., "2020-09-14_pink-bra_nonnude")
-                $parts = explode('_', $ppvSetTierId);
-                if (count($parts) >= 3) {
-                    $tier = array_pop($parts); // Last part is tier
-                    $setId = implode('_', $parts); // Everything else is set_id
-                    
-                    // Find the requested set and tier
-                    if ($inventory['version'] == 2 && isset($inventory['sets'])) {
-                        foreach ($inventory['sets'] as $set) {
-                            if ($set['set_id'] === $setId && isset($set['tiers'][$tier])) {
-                                $ppvSet = $set;
-                                $ppvTier = $tier;
-                                break;
-                            }
-                        }
+                // Find the requested item
+                foreach ($inventory['items'] as $item) {
+                    if ($item['id'] === $ppvItemId) {
+                        $ppvItem = $item;
+                        break;
                     }
                 }
                 
-                if ($ppvSet && $ppvTier && $ppvPriceCents > 0) {
-                    $tierData = $ppvSet['tiers'][$ppvTier];
-                    
-                    // Generate preview from first image in the set
+                if ($ppvItem && $ppvPrice > 0) {
+                    // Generate blurred preview if possible
                     $previewUrl = '';
-                    $allItems = array_merge($tierData['images'], $tierData['videos']);
-                    if (!empty($allItems)) {
-                        $firstItem = $allItems[0];
+                    if ($ppvItem['type'] === 'photo') {
+                        // Try to create blurred preview
+                        $previewDir = __DIR__ . '/../../data/ppv-previews/';
+                        if (!is_dir($previewDir)) {
+                            mkdir($previewDir, 0755, true);
+                        }
                         
-                        // For images, try to create blurred preview
-                        if (strpos($firstItem, '.jpg') !== false || strpos($firstItem, '.jpeg') !== false || strpos($firstItem, '.png') !== false) {
-                            $previewDir = __DIR__ . '/../../data/ppv-previews/';
-                            if (!is_dir($previewDir)) {
-                                mkdir($previewDir, 0755, true);
-                            }
-                            
-                            $previewFile = $previewDir . $ppvSetTierId . '_preview.jpg';
-                            if (function_exists('imagecreatefromjpeg') && !file_exists($previewFile)) {
-                                // Create blurred preview using GD
-                                $imageData = @file_get_contents($firstItem);
-                                if ($imageData) {
-                                    $sourceImage = @imagecreatefromstring($imageData);
-                                    if ($sourceImage) {
-                                        // Apply heavy blur
-                                        for ($i = 0; $i < 30; $i++) {
-                                            imagefilter($sourceImage, IMG_FILTER_GAUSSIAN_BLUR);
-                                        }
-                                        imagejpeg($sourceImage, $previewFile, 60);
-                                        imagedestroy($sourceImage);
-                                        $previewUrl = '/data/ppv-previews/' . $ppvSetTierId . '_preview.jpg';
+                        $previewFile = $previewDir . $ppvItemId . '_preview.jpg';
+                        if (function_exists('imagecreatefromjpeg') && !file_exists($previewFile)) {
+                            // Create blurred preview using GD
+                            $sourceUrl = $ppvItem['public_url'];
+                            $imageData = @file_get_contents($sourceUrl);
+                            if ($imageData) {
+                                $sourceImage = @imagecreatefromstring($imageData);
+                                if ($sourceImage) {
+                                    // Apply heavy blur
+                                    for ($i = 0; $i < 30; $i++) {
+                                        imagefilter($sourceImage, IMG_FILTER_GAUSSIAN_BLUR);
                                     }
+                                    imagejpeg($sourceImage, $previewFile, 60);
+                                    imagedestroy($sourceImage);
+                                    $previewUrl = '/data/ppv-previews/' . $ppvItemId . '_preview.jpg';
                                 }
-                            } else if (file_exists($previewFile)) {
-                                $previewUrl = '/data/ppv-previews/' . $ppvSetTierId . '_preview.jpg';
                             }
                         }
                         
-                        // Fallback: use original URL
+                        // Fallback: use original URL but mark for CSS blur
                         if (!$previewUrl) {
-                            $previewUrl = $firstItem;
+                            $previewUrl = $ppvItem['public_url'];
                         }
+                    } else {
+                        // For videos, use a placeholder or first frame
+                        $previewUrl = $ppvItem['public_url'];
                     }
                     
                     // Strip the [PPV:...] tag from the reply text
@@ -785,22 +766,22 @@ try {
                         $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $fid, '$safeTextMsg', 1, 1, datetime('now'))");
                     }
                     
-                    // Insert the PPV message with set info
-                    $safePpvContentKey = $db->escapeString($ppvSetTierId); // Store set_id_tier for unlock
+                    // Insert the PPV message
+                    $ppvPriceCents = intval($ppvPrice * 100);
+                    $safePpvContentKey = $db->escapeString($ppvItem['key']);
                     $safePpvPreviewUrl = $db->escapeString($previewUrl);
-                    $safePpvMediaUrl = $db->escapeString($firstItem ?: 'N/A'); // Use first item as main media
+                    $safePpvMediaUrl = $db->escapeString($ppvItem['public_url']);
                     
                     $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, media_thumbnail, is_ppv, ppv_price_cents, is_unlocked, ppv_preview_url, ppv_content_key, is_ai, created_at) 
-                              VALUES ($CREATOR_ID, $fid, 'Exclusive content set - unlock to view 🔒', '$safePpvMediaUrl', '$safePpvPreviewUrl', 1, $ppvPriceCents, 0, '$safePpvPreviewUrl', '$safePpvContentKey', 1, datetime('now', '+1 second'))");
+                              VALUES ($CREATOR_ID, $fid, 'Exclusive content - unlock to view 🔒', '$safePpvMediaUrl', '$safePpvPreviewUrl', 1, $ppvPriceCents, 0, '$safePpvPreviewUrl', '$safePpvContentKey', 1, datetime('now', '+1 second'))");
                     
                     $ppvDetected = true;
-                    $ppvPrice = $ppvPriceCents / 100;
-                    $debug[] = "ppv_sent:set=$ppvSetTierId,price=$ppvPrice,fan=$fid,items={$tierData['total_items']}";
+                    $debug[] = "ppv_sent:item=$ppvItemId,price=$ppvPrice,fan=$fid";
                     
                     // Update reply for logging purposes
-                    $reply = $cleanReply . " [PPV sent: $ppvSetTierId for \$$ppvPrice]";
+                    $reply = $cleanReply . " [PPV sent: $ppvItemId for $$ppvPrice]";
                 } else {
-                    $debug[] = "ppv_error:set_not_found=$ppvSetTierId";
+                    $debug[] = "ppv_error:item_not_found=$ppvItemId";
                 }
             } else {
                 $debug[] = "ppv_error:no_inventory";

@@ -761,84 +761,47 @@ function buildContentInventory($whaleScore = 0) {
     }
     
     $inventory = json_decode(file_get_contents($inventoryFile), true);
-    
-    // Check for v2 format
-    if (!$inventory || $inventory['version'] != 2 || empty($inventory['sets'])) {
+    if (!$inventory || empty($inventory['items'])) {
         return "";
     }
     
     // Determine available tiers based on whale score
-    $availableTiers = ['nonnude']; // Everyone gets non-nude
+    $availableTiers = [1]; // Everyone gets Tier 1
     if ($whaleScore >= 40) {
-        $availableTiers[] = 'nude'; // Active fans get nude
+        $availableTiers[] = 2; // Active fans get Tier 2
     }
     if ($whaleScore >= 70) {
-        $availableTiers[] = 'sex'; // Whales get sex videos
+        $availableTiers[] = 3; // Whales get videos
     }
     
-    // Collect all available set+tier combinations
-    $availableSets = [];
-    foreach ($inventory['sets'] as $set) {
-        foreach ($set['tiers'] as $tier => $tierData) {
-            if (in_array($tier, $availableTiers) && $tierData['total_items'] > 0) {
-                $availableSets[] = [
-                    'set_id' => $set['set_id'],
-                    'outfit' => $set['outfit'],
-                    'date' => $set['date'],
-                    'tier' => $tier,
-                    'tier_data' => $tierData,
-                    'tier_info' => $inventory['tier_pricing'][$tier]
-                ];
-            }
-        }
-    }
+    // Filter items by available tiers
+    $availableItems = array_filter($inventory['items'], function($item) use ($availableTiers) {
+        return in_array($item['tier'], $availableTiers);
+    });
     
-    if (empty($availableSets)) {
+    if (empty($availableItems)) {
         return "";
     }
     
-    // Select 5-8 random set+tier combinations
+    // Select 5-8 random items
     $selectedCount = rand(5, 8);
-    shuffle($availableSets);
-    $selected = array_slice($availableSets, 0, $selectedCount);
+    $shuffled = $availableItems;
+    shuffle($shuffled);
+    $selected = array_slice($shuffled, 0, $selectedCount);
     
-    // Build the inventory text - new format for Breyya
-    $inventoryText = "\n\n**CONTENT YOU CAN SELL RIGHT NOW:**\n";
+    // Build the inventory text
+    $inventoryText = "\n\n**Your PPV Content Ready to Send:**\n";
+    $inventoryText .= "You have these exclusive photos/videos ready to offer fans. Use the [PPV:item-id:price] tag when you want to send one.\n\n";
     
-    foreach ($selected as $setTier) {
-        $outfit = $setTier['outfit'];
-        $tier = $setTier['tier'];
-        $tierData = $setTier['tier_data'];
-        $price = $tierData['price_cents'] / 100;
-        $setKey = $setTier['set_id'] . '_' . $tier;
-        
-        $itemDescription = '';
-        if ($tierData['image_count'] > 0 && $tierData['video_count'] > 0) {
-            $itemDescription = "{$tierData['image_count']} photos + {$tierData['video_count']} video";
-        } elseif ($tierData['image_count'] > 0) {
-            $itemDescription = "{$tierData['image_count']} photos";
-        } else {
-            $itemDescription = "{$tierData['video_count']} video";
-        }
-        
-        $tierLabel = '';
-        if ($tier === 'nude') {
-            $tierLabel = ' (nude)';
-        } elseif ($tier === 'sex') {
-            $tierLabel = ' (sex)';
-        } else {
-            $tierLabel = ' (non-nude)';
-        }
-        
-        $inventoryText .= "- Set: \"$outfit\"$tierLabel — $itemDescription — \$$price → use [PPV:$setKey:$tierData[price_cents]]\n";
+    foreach ($selected as $item) {
+        $type = ($item['type'] === 'video') ? '🎬' : '📸';
+        $tier = ($item['tier'] === 2) ? ' (nude)' : (($item['tier'] === 3) ? ' (video)' : '');
+        $inventoryText .= "- {$type} **{$item['id']}**: {$item['description']}{$tier}\n";
     }
     
-    $inventoryText .= "\n**PRICING RULES:**\n";
-    $inventoryText .= "- Non-nude sets: \$5 (all photos + videos from that outfit)\n";
-    $inventoryText .= "- Nude sets: \$10 (all photos + videos from that outfit)\n";
-    $inventoryText .= "- Sex videos: \$25 (single video)\n";
-    $inventoryText .= "- NEVER offer individual photos. Always sell the full set.\n";
-    $inventoryText .= "- Say \"I have a set from this shoot for \$5 babe 😏\" — not \"do u want pics or video\"\n";
+    $inventoryText .= "\n**PPV Usage:** When you want to send PPV content, use this exact format: [PPV:ppv-001:15.00]\n";
+    $inventoryText .= "The price should match your pricing ladder based on the fan's purchase history.\n";
+    $inventoryText .= "The [PPV:] tag will be stripped from your message and the content will be sent as a separate unlockable message.\n";
     
     return $inventoryText;
 }

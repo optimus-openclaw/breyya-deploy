@@ -124,56 +124,6 @@ try {
 
     error_log("PPV Unlock Success: Fan $fanUserId unlocked message $messageId for $" . number_format($priceAmount, 2));
 
-    // 7. Deliver set content (v2 format) - insert all items as separate messages
-    $setDelivered = false;
-    $totalItems = 0;
-    
-    if (strpos($message['ppv_content_key'], '_') !== false) {
-        // This is a set_id_tier format - deliver all items in the set
-        $inventoryFile = __DIR__ . '/../../data/content-inventory.json';
-        if (file_exists($inventoryFile)) {
-            $inventory = json_decode(file_get_contents($inventoryFile), true);
-            
-            // Parse set_id_tier format
-            $parts = explode('_', $message['ppv_content_key']);
-            if (count($parts) >= 3) {
-                $tier = array_pop($parts);
-                $setId = implode('_', $parts);
-                
-                // Find the set and tier
-                if ($inventory['version'] == 2 && isset($inventory['sets'])) {
-                    foreach ($inventory['sets'] as $set) {
-                        if ($set['set_id'] === $setId && isset($set['tiers'][$tier])) {
-                            $tierData = $set['tiers'][$tier];
-                            $allItems = array_merge($tierData['images'], $tierData['videos']);
-                            
-                            if (!empty($allItems)) {
-                                // Insert each item as a separate message
-                                foreach ($allItems as $index => $itemUrl) {
-                                    $safeItemUrl = $db->escapeString($itemUrl);
-                                    
-                                    // Determine if it's an image or video
-                                    $isVideo = strpos($itemUrl, '.mp4') !== false || strpos($itemUrl, '.mov') !== false;
-                                    $itemContent = $isVideo ? "📹 Video from your purchased set" : "📸 Photo from your purchased set";
-                                    $safeContent = $db->escapeString($itemContent);
-                                    
-                                    // Insert with slight delay to maintain order
-                                    $delay = $index + 3; // Start 3 seconds after unlock, then 1 second per item
-                                    $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, is_ai, is_unlocked, created_at) 
-                                              VALUES (1, $fanUserId, '$safeContent', '$safeItemUrl', 1, 1, datetime('now', '+$delay seconds'))");
-                                    $totalItems++;
-                                }
-                                $setDelivered = true;
-                                error_log("PPV Set Delivered: $totalItems items from $setId ($tier) to fan $fanUserId");
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     jsonResponse([
         'success' => true,
         'message_id' => $messageId,
@@ -181,9 +131,7 @@ try {
         'content_key' => $message['ppv_content_key'],
         'price' => $priceAmount,
         'subscription_id' => $chargeResult['subscription_id'],
-        'card_last_four' => $chargeResult['card_last_four'] ?? '',
-        'set_delivered' => $setDelivered,
-        'total_items' => $totalItems
+        'card_last_four' => $chargeResult['card_last_four'] ?? ''
     ]);
 
 } catch (\Throwable $e) {
