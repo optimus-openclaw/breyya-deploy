@@ -769,14 +769,8 @@ function buildContentInventory($whaleScore = 0) {
         return "";
     }
     
-    // Determine available tiers based on whale score
-    $availableTiers = ['nonnude']; // Everyone gets non-nude
-    if ($whaleScore >= 40) {
-        $availableTiers[] = 'nude'; // Active fans get nude
-    }
-    if ($whaleScore >= 70) {
-        $availableTiers[] = 'sex'; // Whales get sex videos
-    }
+    // ALL tiers available to ALL fans — if they want to pay, let them
+    $availableTiers = ['nonnude', 'nude', 'sex'];
     
     // Collect all available set+tier combinations
     $availableSets = [];
