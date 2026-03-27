@@ -106,21 +106,17 @@ try {
     $unlockStmt->execute();
 
     // 6. Record PPV purchase event
-    $db->exec("CREATE TABLE IF NOT EXISTS ppv_purchases (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        fan_user_id INTEGER NOT NULL,
-        message_id INTEGER NOT NULL,
-        amount_cents INTEGER NOT NULL,
-        content_key TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )");
-
-    $purchaseStmt = $db->prepare("INSERT INTO ppv_purchases (fan_user_id, message_id, amount_cents, content_key) VALUES (:uid, :mid, :amount, :key)");
-    $purchaseStmt->bindValue(':uid', $fanUserId, SQLITE3_INTEGER);
-    $purchaseStmt->bindValue(':mid', $messageId, SQLITE3_INTEGER);
-    $purchaseStmt->bindValue(':amount', $priceCents, SQLITE3_INTEGER);
-    $purchaseStmt->bindValue(':key', $message['ppv_content_key'], SQLITE3_TEXT);
-    $purchaseStmt->execute();
+    try {
+        @$db->exec("CREATE TABLE IF NOT EXISTS ppv_purchases (id INTEGER PRIMARY KEY AUTOINCREMENT, fan_user_id INTEGER NOT NULL, message_id INTEGER NOT NULL, amount_cents INTEGER NOT NULL, content_key TEXT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
+        $purchaseStmt = $db->prepare("INSERT INTO ppv_purchases (fan_user_id, message_id, amount_cents, content_key) VALUES (:uid, :mid, :amount, :key)");
+        $purchaseStmt->bindValue(':uid', $fanUserId, SQLITE3_INTEGER);
+        $purchaseStmt->bindValue(':mid', $messageId, SQLITE3_INTEGER);
+        $purchaseStmt->bindValue(':amount', $priceCents, SQLITE3_INTEGER);
+        $purchaseStmt->bindValue(':key', $message['ppv_content_key'], SQLITE3_TEXT);
+        $purchaseStmt->execute();
+    } catch (\Throwable $e) {
+        error_log("PPV purchase record failed (non-fatal): " . $e->getMessage());
+    }
 
     error_log("PPV Unlock Success: Fan $fanUserId unlocked message $messageId for $" . number_format($priceAmount, 2));
 
