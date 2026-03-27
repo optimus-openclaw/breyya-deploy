@@ -100,10 +100,7 @@ try {
         ], 402);
     }
 
-    // 5. Success! Unlock the message
-    $unlockStmt = $db->prepare("UPDATE messages SET is_unlocked = 1 WHERE id = :mid");
-    $unlockStmt->bindValue(':mid', $messageId, SQLITE3_INTEGER);
-    $unlockStmt->execute();
+    // 5. Mark unlock AFTER delivery succeeds (moved to step 8)
 
     // 6. Record PPV purchase event
     try {
@@ -169,6 +166,11 @@ try {
             }
         }
     }
+
+    // 8. NOW mark as unlocked (after set delivery succeeded)
+    $unlockStmt = $db->prepare("UPDATE messages SET is_unlocked = 1 WHERE id = :mid");
+    $unlockStmt->bindValue(':mid', $messageId, SQLITE3_INTEGER);
+    $unlockStmt->execute();
 
     jsonResponse([
         'success' => true,
