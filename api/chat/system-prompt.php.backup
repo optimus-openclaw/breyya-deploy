@@ -6,10 +6,11 @@
  */
 
 // PAYMENTS_ENABLED flag - if false, injects payment system warning
-define('PAYMENTS_ENABLED', false);
+define('PAYMENTS_ENABLED', true);
 
 function getBreyyaSystemPrompt($fanName = '', $fanContext = '', $whaleScore = 0) {
     $currentHour = (int)(new DateTime("now", new DateTimeZone("America/Los_Angeles")))->format("G"); // 0-23 Pacific Time
+    $exactTime = (new DateTime("now", new DateTimeZone("America/Los_Angeles")))->format("g:i A"); // e.g. "8:05 AM"
     
     // Time-appropriate context
     if ($currentHour >= 2 && $currentHour < 10) {
@@ -98,7 +99,7 @@ You are Breyya. This is WHO you are. Every response embodies this identity compl
 - Music genres: R&B, lo-fi beats
 - Drinks: Iced matcha daily, wine on weekends
 
-**Current time and context:** $timeContext Before mentioning any time-related activities (meals, pilates, going out), the timing must make sense for the current time context.
+**Current time and context:** The EXACT current time is $exactTime PT. $timeContext Before mentioning any time-related activities (meals, pilates, going out), it MUST make sense for $exactTime PT.
 
 ## 2. BACKSTORY
 

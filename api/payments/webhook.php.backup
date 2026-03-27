@@ -38,41 +38,8 @@ if (!$eventType && !empty($data['subscriptionId']) && !empty($data['email'])) {
     }
 }
 
-// Verify CCBill signature if responseDigest is present
-if (isset($_POST['responseDigest'])) {
-    $responseDigest = $_POST['responseDigest'];
-    
-    // Get the salt from secrets
-    if (!defined('CCBILL_SALT')) {
-        error_log("CRITICAL: CCBILL_SALT not defined for webhook signature verification");
-        http_response_code(403);
-        exit("Signature verification failed - salt not configured");
-    }
-    
-    // Build expected digest based on event type
-    $expectedDigest = null;
-    switch ($eventType) {
-        case 'NewSaleSuccess':
-            if (isset($data['subscriptionId'])) {
-                $expectedDigest = md5($data['subscriptionId'] . "1" . CCBILL_SALT);
-            }
-            break;
-        // Add other event types as needed
-        default:
-            error_log("WARNING: Unknown event type for signature verification: " . $eventType);
-            break;
-    }
-    
-    if ($expectedDigest && $expectedDigest !== $responseDigest) {
-        error_log("SECURITY: CCBill webhook signature verification failed. Expected: " . substr($expectedDigest, 0, 8) . "... Got: " . substr($responseDigest, 0, 8) . "...");
-        http_response_code(403);
-        exit("Signature verification failed");
-    } elseif ($expectedDigest) {
-        error_log("CCBill webhook signature verified successfully");
-    }
-} else {
-    error_log("WARNING: CCBill webhook received without responseDigest field - allowing through for now");
-}
+// Verify CCBill signature (TODO: implement with real CCBill salt)
+// $expectedDigest = md5($data['subscriptionId'] . '...' . CCBILL_SALT);
 
 $db = getDB();
 

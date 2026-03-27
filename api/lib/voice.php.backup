@@ -1,18 +1,19 @@
 <?php
+/**
+ * Breyya.com — ElevenLabs Voice Note Integration
+ * 
+ * Generates voice notes using ElevenLabs TTS API
+ * Stores MP3 files and returns public URLs
+ */
 
-require_once dirname(__FILE__) . '/config.php';
-
-$_sf = dirname(__FILE__) . '/../.secrets.php';
+// Load credentials from .secrets.php or fallback to hardcoded
+$_sf = __DIR__ . '/../../.secrets.php';
 if (file_exists($_sf)) require_once $_sf;
 
 if (!defined('ELEVENLABS_API_KEY')) {
-    error_log('CRITICAL: ELEVENLABS_API_KEY not defined. Check .secrets.php');
-    return null;
+    define('ELEVENLABS_API_KEY', 'sk_d84ef329204034030732ba135dadcc7c82ff242243770fc0');
 }
 
-if (!defined('ELEVENLABS_VOICE_ID')) {
-    define('ELEVENLABS_VOICE_ID', 'j05EIz3iI3JmBTWC3CsA');
-}
 if (!defined('ELEVENLABS_VOICE_ID')) {
     define('ELEVENLABS_VOICE_ID', 'j05EIz3iI3JmBTWC3CsA');
 }
