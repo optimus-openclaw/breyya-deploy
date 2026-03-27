@@ -311,7 +311,7 @@ try {
                 // Voice message — stored as JSON during Phase 2
                 $sv = $db->escapeString($voiceData['voice_text'] ?? '');
                 $su = $db->escapeString($voiceData['voice_url'] ?? '');
-                $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, message_type, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $dfid, '$sv', '$su', 'audio', 1, 1, datetime('now'))");
+                $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, message_type, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $dfid, '', '$su', 'audio', 1, 1, datetime('now'))");
                 if (!empty($voiceData['text_reply'])) {
                     $st = $db->escapeString($voiceData['text_reply']);
                     $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $dfid, '$st', 1, 1, datetime('now', '+2 seconds'))");
