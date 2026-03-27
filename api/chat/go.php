@@ -288,7 +288,7 @@ try {
     // Queue new messages
     $r = $db->query("SELECT m.id, m.sender_id, m.content, m.created_at FROM messages m WHERE m.receiver_id = $CREATOR_ID AND m.sender_id != $CREATOR_ID AND m.is_ai = 0 AND m.id NOT IN (SELECT fan_message_id FROM chat_queue) ORDER BY m.created_at ASC LIMIT 20");
     while ($row = $r->fetchArray(SQLITE3_ASSOC)) {
-        $delay = ($row['sender_id'] == 3) ? 0 : 1800;
+        $delay = ($row["sender_id"] == 3) ? 5 : 1800;
         $sched = date('Y-m-d H:i:s', strtotime($row['created_at']) + $delay);
         $db->exec("INSERT OR IGNORE INTO chat_queue (fan_message_id, fan_user_id, status, scheduled_at) VALUES ({$row['id']}, {$row['sender_id']}, 'scheduled', '$sched')");
         $queued++;
@@ -324,6 +324,10 @@ try {
 
     foreach ($processItems as $item) {
         // Get history (including media_url for vision support)
+        // Set typing state so frontend can detect it
+        $qid = intval($item['qid']);
+        $typingSecs = max(3, min(15, intval(strlen($item['fan_msg']) / 5)));
+        $db->exec("UPDATE chat_queue SET status='typing', typing_until=datetime('now', '+" . $typingSecs . " seconds') WHERE id=$qid");
         $fid = intval($item['fan_id']);
         
         // Load fan profile and build context
