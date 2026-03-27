@@ -1,1674 +1,1541 @@
 {
-  "version": 2,
-  "generated_at": "2026-03-27T19:30:00Z",
-  "tier_pricing": {
-    "nonnude": {
-      "price_cents": 500,
-      "label": "Non-nude set",
-      "description": "All non-nude photos + videos from this outfit"
-    },
-    "nude": {
-      "price_cents": 1000,
-      "label": "Nude set",
-      "description": "All nude photos + videos from this outfit"
-    },
-    "sex": {
-      "price_cents": 2500,
-      "label": "Sex video",
-      "description": "Full sex video"
+  "generated": "2026-03-27T23:30:05Z",
+  "total_files":      726,
+  "folders": {
+    "2020-08-03 sorted": {
+      "file_count":        4,
+      "files": [
+        {"name": "gray-tank-denim-shorts/videos-nonnude/compressed_IMG_1435 no.MOV", "size": 35048359}
+,
+        {"name": "green-tank-dark-denim-shorts/videos-nonnude/compressed_IMG_1371 d.MOV", "size": 72660096}
+,
+        {"name": "pink-bra-cream-cardigan/videos-nonnude/IMG_1362.mp4", "size": 10219781}
+,
+        {"name": "pink-bra-cream-cardigan/videos-nonnude/compressed_IMG_1362.MOV", "size": 86875049}
+      ]
     }
-  },
-  "sets": [
-    {
-      "set_id": "2020-08-03_gray-tank-denim-shorts",
-      "date": "2020-08-03",
-      "outfit": "gray-tank-denim-shorts",
-      "tiers": {
-        "nonnude": {
-          "images": [],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-03%20sorted/gray-tank-denim-shorts/videos-nonnude/IMG_1435%20no.mp4"
-          ],
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-08-03_green-tank-dark-denim-shorts",
-      "date": "2020-08-03",
-      "outfit": "green-tank-dark-denim-shorts",
-      "tiers": {
-        "nonnude": {
-          "images": [],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-03%20sorted/green-tank-dark-denim-shorts/videos-nonnude/IMG_1371%20d.mp4"
-          ],
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-08-03_pink-bra-cream-cardigan",
-      "date": "2020-08-03",
-      "outfit": "pink-bra-cream-cardigan",
-      "tiers": {
-        "nonnude": {
-          "images": [],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-03%20sorted/pink-bra-cream-cardigan/videos-nonnude/IMG_1362.mp4"
-          ],
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-08-04_bathtub-nude-solo",
-      "date": "2020-08-04",
-      "outfit": "bathtub-nude-solo",
-      "tiers": {
-        "nude": {
-          "images": [],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-04%20sorted/bathtub-nude-solo/videos-nude/IMG_1479.mp4"
-          ],
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_!-01-jpeg",
-      "date": "2020-09-14",
-      "outfit": "!-01-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/%21-01-jpeg/images-nonnude/IMG_0352.jpeg"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_!-03-jpeg",
-      "date": "2020-09-14",
-      "outfit": "!-03-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/%21-03-jpeg/images-nonnude/IMG_0374.jpeg"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_!-05-jpeg",
-      "date": "2020-09-14",
-      "outfit": "!-05-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/%21-05-jpeg/images-nonnude/IMG_0057.jpeg"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_!-08-jpeg",
-      "date": "2020-09-14",
-      "outfit": "!-08-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/%21-08-jpeg/images-nonnude/IMG_0075.jpeg"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_!-10-jpeg",
-      "date": "2020-09-14",
-      "outfit": "!-10-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/%21-10-jpeg/images-nonnude/IMG_0223.jpeg"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_!-12-jpeg",
-      "date": "2020-09-14",
-      "outfit": "!-12-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/%21-12-jpeg/images-nonnude/IMG_0265.jpeg"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_grey-white-tank",
-      "date": "2020-09-14",
-      "outfit": "grey-white-tank",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/grey-white-tank/images-nonnude/IMG_0265.HEIC"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_lavender-button",
-      "date": "2020-09-14",
-      "outfit": "lavender-button",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/lavender-button/images-nonnude/IMG_0075.HEIC"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_pink-white-tank",
-      "date": "2020-09-14",
-      "outfit": "pink-white-tank",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/pink-white-tank/images-nonnude/IMG_0057.HEIC"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_vid",
-      "date": "2020-09-14",
-      "outfit": "vid",
-      "tiers": {
-        "nonnude": {
-          "images": [],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/vid/videos-nonnude/IMG_2781.mp4"
-          ],
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_yellow-cross-shirt",
-      "date": "2020-09-14",
-      "outfit": "yellow-cross-shirt",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/yellow-cross-shirt/images-nonnude/IMG_0223.HEIC"
-          ],
-          "videos": [],
-          "image_count": 1,
-          "video_count": 0,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_!-03-jpeg",
-      "date": "2020-09-28",
-      "outfit": "!-03-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_0296.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_0417.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_0716.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_1255.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_1826.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_2065.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_2278.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_2875.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_3804.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_4407.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_6417.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_6700.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_6955.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_7199.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_7432.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_8073.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_8470.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_8627.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_9015.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_9303.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_9516.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-03-jpeg/images-nonnude/IMG_9884.jpeg"
-          ],
-          "videos": [],
-          "image_count": 22,
-          "video_count": 0,
-          "total_items": 22,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_!-05-jpeg",
-      "date": "2020-09-28",
-      "outfit": "!-05-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_0073.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_0326.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_0389.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_0670.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_0827.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_1152.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_1415.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_1960.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_2483.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_2520.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_3702.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_3743.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_5663.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_5999.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_6623.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_7765.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-05-jpeg/images-nonnude/IMG_8619.jpeg"
-          ],
-          "videos": [],
-          "image_count": 17,
-          "video_count": 0,
-          "total_items": 17,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_!-06-jpeg",
-      "date": "2020-09-28",
-      "outfit": "!-06-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_0622.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_3363.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_3685.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_3756.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_3851.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_5738.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_6259.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_6323.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_7436.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_7453.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_8557.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_9042.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_9043.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-06-jpeg/images-nonnude/IMG_9768.jpeg"
-          ],
-          "videos": [],
-          "image_count": 14,
-          "video_count": 0,
-          "total_items": 14,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_!-09-jpeg",
-      "date": "2020-09-28",
-      "outfit": "!-09-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_0299.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_0710.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_1008.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_1395.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_1599.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_3311.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_4366.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_4463.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_4902.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_5464.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_5806.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_6079.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_6506.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_7043.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_7223.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_7605.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_7963.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_8208.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_9246.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-09-jpeg/images-nonnude/IMG_9550.jpeg"
-          ],
-          "videos": [],
-          "image_count": 20,
-          "video_count": 0,
-          "total_items": 20,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_!-11-jpeg",
-      "date": "2020-09-28",
-      "outfit": "!-11-jpeg",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_0478.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_0702.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_1033.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_1696.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_1742.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_2615.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_3212.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_3324.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_3951.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_4378.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_5941.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_6047.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_6880.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_7073.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_8143.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_8665.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_8678.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-11-jpeg/images-nonnude/IMG_9008.jpeg"
-          ],
-          "videos": [],
-          "image_count": 18,
-          "video_count": 0,
-          "total_items": 18,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_!-14",
-      "date": "2020-09-28",
-      "outfit": "!-14",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_0326.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_0982.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_2105.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_2806.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_3607.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_5343.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_6473.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_7016.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_7282.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/%21-14/images-nonnude/IMG_7719.jpeg"
-          ],
-          "videos": [],
-          "image_count": 10,
-          "video_count": 0,
-          "total_items": 10,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_extra",
-      "date": "2020-09-28",
-      "outfit": "extra",
-      "tiers": {
-        "nonnude": {
-          "images": [],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/extra/videos-nonnude/IMG_3492.mp4"
-          ],
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_grey-cross-shirt-low-qty",
-      "date": "2020-09-28",
-      "outfit": "grey-cross-shirt-low-qty",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_0296.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_0417.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_0716.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_1255.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_1826.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_2056.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_2065.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_2278.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_2875.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_3804.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_4407.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_6417.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_6700.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_6955.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_7199.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_7432.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_7587.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_8073.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_8470.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_8627.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_8770.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_9015.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_9303.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_9516.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_9682.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/images-nonnude/IMG_9884.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-cross-shirt-low-qty/videos-nonnude/IMG_3470.mp4"
-          ],
-          "image_count": 26,
-          "video_count": 1,
-          "total_items": 27,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_grey-tied-under-low-qty",
-      "date": "2020-09-28",
-      "outfit": "grey-tied-under-low-qty",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_0299.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_0710.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_1008.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_1395.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_1599.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_3311.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_4366.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_4463.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_4902.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_5464.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_5806.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_6079.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_6506.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_7043.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_7223.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_7605.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_7963.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_8208.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_9246.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/images-nonnude/IMG_9550.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/grey-tied-under-low-qty/videos-nonnude/IMG_3537.mp4"
-          ],
-          "image_count": 20,
-          "video_count": 1,
-          "total_items": 21,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_pink-silk-no-nude",
-      "date": "2020-09-28",
-      "outfit": "pink-silk-no-nude",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_0326.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_0982.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_2105.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_2806.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_3607.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_5159.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_5343.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_6473.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_7016.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_7282.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_7719.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/images-nude/IMG_8270.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/pink-silk-no-nude/videos-nude/IMG_3575.mp4"
-          ],
-          "image_count": 12,
-          "video_count": 1,
-          "total_items": 13,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_rose-string-tank-no-nude-pic",
-      "date": "2020-09-28",
-      "outfit": "rose-string-tank-no-nude-pic",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_0622.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_3363.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_3685.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_3756.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_3851.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_5738.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_6259.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_6323.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_7436.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_7453.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_8557.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_9042.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_9043.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/images-nude/IMG_9768.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-string-tank-no-nude-pic/videos-nude/IMG_3512.mp4"
-          ],
-          "image_count": 14,
-          "video_count": 1,
-          "total_items": 15,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_rose-tube-top",
-      "date": "2020-09-28",
-      "outfit": "rose-tube-top",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_0478.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_0702.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_1033.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_1696.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_1742.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_2615.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_3212.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_3324.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_3951.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_4378.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_5941.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_6047.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_6880.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_7073.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_8143.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_8665.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_8678.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/rose-tube-top/images-nonnude/IMG_9008.HEIC"
-          ],
-          "videos": [],
-          "image_count": 18,
-          "video_count": 0,
-          "total_items": 18,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_selfie",
-      "date": "2020-09-28",
-      "outfit": "selfie",
-      "tiers": {
-        "nonnude": {
-          "images": [],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/selfie/videos-nonnude/720p.mp4",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/selfie/videos-nonnude/IMG_3513.mp4"
-          ],
-          "image_count": 0,
-          "video_count": 2,
-          "total_items": 2,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_vid",
-      "date": "2020-09-28",
-      "outfit": "vid",
-      "tiers": {
-        "nonnude": {
-          "images": [],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/vid/videos-nonnude/IMG_3559.mp4"
-          ],
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_walk",
-      "date": "2020-09-28",
-      "outfit": "walk",
-      "tiers": {
-        "nonnude": {
-          "images": [],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/walk/videos-nonnude/IMG_3536.mp4"
-          ],
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_white-shirt-low-qty",
-      "date": "2020-09-28",
-      "outfit": "white-shirt-low-qty",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-shirt-low-qty/images-nonnude/IMG_3722.JPG",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-shirt-low-qty/images-nonnude/IMG_4378.JPG",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-shirt-low-qty/images-nonnude/IMG_7210.JPG",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-shirt-low-qty/images-nonnude/IMG_9788.JPG"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-shirt-low-qty/videos-nonnude/IMG_3439.mp4"
-          ],
-          "image_count": 4,
-          "video_count": 1,
-          "total_items": 5,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-28_white-string-tank-boobrop",
-      "date": "2020-09-28",
-      "outfit": "white-string-tank-boobrop",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_0073.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_0326.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_0389.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_0670.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_0827.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_1130.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_1152.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_1415.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_1960.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_2483.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_2520.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_3702.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_3743.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_5663.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_5999.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_6623.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_7765.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/images-nude/IMG_8619.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-28%20sorted/white-string-tank-boobrop/videos-nude/IMG_3493.mp4"
-          ],
-          "image_count": 18,
-          "video_count": 1,
-          "total_items": 19,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-18_beige-underboob",
-      "date": "2020-10-18",
-      "outfit": "beige-underboob",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_0063.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_0269.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_0929.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_1077.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_1338.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_1652.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_2389.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_2637.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_2767.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_3113.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_3208.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_3299.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_3505.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_3508.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_3672.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_4171.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_4394.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_4519.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_5039.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_5185.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_5250.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_5252.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_5321.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_6196.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_6645.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_6852.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_7682.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_7726.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_8412.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_8809.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_8814.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_9049.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_9343.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_9773.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/images-nude/IMG_9812.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/beige-underboob/videos-nude/IMG_4902.mp4"
-          ],
-          "image_count": 35,
-          "video_count": 1,
-          "total_items": 36,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-18_blue-romper",
-      "date": "2020-10-18",
-      "outfit": "blue-romper",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_0308.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_0426.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_0462.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_0470.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_0588.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_0764.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_0769.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_1222.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_2031.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_2467.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_2943.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_2955.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_3536.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_3619.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_3735.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_3744.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_3926.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_4114.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_4227.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_4796.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_4998.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_6574.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_6724.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_7713.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_7868.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_7977.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_8023.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_8052.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_8321.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_8896.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_9250.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_9589.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_9629.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/images-nude/IMG_9732.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/videos-nude/IMG_4805.mp4",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/blue-romper/videos-nude/IMG_4827.mp4"
-          ],
-          "image_count": 34,
-          "video_count": 2,
-          "total_items": 36,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-18_fairy",
-      "date": "2020-10-18",
-      "outfit": "fairy",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/fairy/images-nonnude/IMG_0421.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/fairy/images-nonnude/IMG_3998.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/fairy/images-nonnude/IMG_4074.JPG",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/fairy/images-nonnude/IMG_4677.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/fairy/images-nonnude/IMG_5689.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/fairy/images-nonnude/IMG_7662.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/fairy/images-nonnude/IMG_8811.HEIC"
-          ],
-          "videos": [],
-          "image_count": 7,
-          "video_count": 0,
-          "total_items": 7,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-18_maroon-cross-shirt",
-      "date": "2020-10-18",
-      "outfit": "maroon-cross-shirt",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_0806.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_1253.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_1931.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_2325.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_3005.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_3050.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_3300.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_3382.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_3606.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_3729.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_3915.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_3959.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_4430.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_5045.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_5261.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_5755.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_5793.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_5933.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_6006.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_6349.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_6747.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_7434.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_7993.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_8125.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_8817.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_9203.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/images-nude/IMG_9780.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/maroon-cross-shirt/videos-nude/IMG_4904.mp4"
-          ],
-          "image_count": 27,
-          "video_count": 1,
-          "total_items": 28,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-18_pink-romper",
-      "date": "2020-10-18",
-      "outfit": "pink-romper",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_0780.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_1160.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_1742.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_1759.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_2075.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_2603.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_3339.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_3811.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_4007.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_4567.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_5004.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_5207.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_5317.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_5682.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_5708.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_5737.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_5976.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_6120.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_6203.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_6369.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_6618.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_6798.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_7202.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_7899.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_8290.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_8387.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_8509.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_8537.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_8853.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_9424.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/images-nude/IMG_9557.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/pink-romper/videos-nude/IMG_4864.mp4"
-          ],
-          "image_count": 31,
-          "video_count": 1,
-          "total_items": 32,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-18_purple-zip-long-sleeve",
-      "date": "2020-10-18",
-      "outfit": "purple-zip-long-sleeve",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_0149.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_0456.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_0457.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_0505.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_0886.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_1183.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_1838.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_2035.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_2375.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_2460.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_2513%202.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_2513.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_2724.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_2830.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_2937.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_3584.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_4280.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_4389.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_4424.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_5430.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_5601.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_5726.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_5851.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_6269.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_7052.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_7127.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_7529.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_7578.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_7653.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_7675.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_8790.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_8984.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_9052.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_9104.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_9253.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/images-nude/IMG_9506.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-18%20sorted/purple-zip-long-sleeve/videos-nude/IMG_4751.mp4"
-          ],
-          "image_count": 36,
-          "video_count": 1,
-          "total_items": 37,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-26_baby-blue-tank",
-      "date": "2020-10-26",
-      "outfit": "baby-blue-tank",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5338.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5338.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5339.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5339.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5340.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5340.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5341.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5341.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5342.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5342.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5343.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5343.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5344.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5344.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5345.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5345.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5346.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5346.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5347.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5347.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5348.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5348.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5349.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5349.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5350.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5350.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5351.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5351.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5352.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5352.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5353.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/images-nonnude/IMG_5353.jpeg"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/videos-nonnude/IMG_5355.mp4",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/baby-blue-tank/videos-nonnude/IMG_5520.mp4"
-          ],
-          "image_count": 32,
-          "video_count": 2,
-          "total_items": 34,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-26_fortune-tank",
-      "date": "2020-10-26",
-      "outfit": "fortune-tank",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5405.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5405.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5406.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5406.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5407.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5407.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5408.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5408.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5409.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5409.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5410.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5410.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5411.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5411.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5412.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5412.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5413.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5413.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5414.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5414.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5415.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5415.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5416.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5416.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5417.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5417.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5418.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5418.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5419.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5419.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5420.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5420.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5421.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5421.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5422.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5422.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5423.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5423.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5424.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5424.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5425.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5425.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5426.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5426.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5427.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5427.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5428.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5428.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5429.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5429.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5430.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5430.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5431.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5431.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5432.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5432.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5433.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5433.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5434.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5434.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5435.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5435.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5436.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5436.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5437.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5437.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5438.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5438.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5439.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5439.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5440.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5440.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5441.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5441.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5442.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5442.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5443.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5443.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5444.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5444.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5445.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5445.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5446.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5446.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5452.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5452.jpg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5453.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5453.jpg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5454.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5454.jpg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5455.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5455.jpg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5456.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5456.jpg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5457.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5457.jpg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5458.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5458.jpg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5459.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5459.jpg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5460.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/images-nude/IMG_5460.jpg"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/videos-nude/IMG_5451.mp4",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/fortune-tank/videos-nude/IMG_5522.mp4"
-          ],
-          "image_count": 102,
-          "video_count": 2,
-          "total_items": 104,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-26_orange-underboob-tank",
-      "date": "2020-10-26",
-      "outfit": "orange-underboob-tank",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5462.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5462.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5463.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5463.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5464.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5464.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5465.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5465.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5466.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5466.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5467.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5467.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5468.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5468.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5469.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5469.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5470.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5470.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5471.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5471.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5472.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5472.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5473.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5473.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5474.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5474.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5475.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/images-nonnude/IMG_5475.jpeg"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/orange-underboob-tank/videos-nonnude/IMG_5477.mp4"
-          ],
-          "image_count": 28,
-          "video_count": 1,
-          "total_items": 29,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-26_pink-underboob-tank",
-      "date": "2020-10-26",
-      "outfit": "pink-underboob-tank",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5385.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5385.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5386.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5386.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5387.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5387.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5388.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5388.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5389.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5389.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5390.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5390.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5391.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5391.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5392.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5392.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5393.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5393.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5394.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5394.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5395.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5395.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5396.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5396.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5397.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5397.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5398.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5398.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5399.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5399.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5400.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5400.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5401.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5401.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5402.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/images-nude/IMG_5402.jpeg"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/pink-underboob-tank/videos-nude/IMG_5404.mp4"
-          ],
-          "image_count": 36,
-          "video_count": 1,
-          "total_items": 37,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-26_purple-v-neck-tank",
-      "date": "2020-10-26",
-      "outfit": "purple-v-neck-tank",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5357.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5357.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5358.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5358.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5359.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5359.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5360.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5360.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5361.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5361.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5362.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5362.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5363.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5363.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5364.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5364.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5365.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5365.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5366.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5366.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5367.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5367.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5368.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5368.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5369.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5369.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5370.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5370.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5371.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5371.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5372.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5372.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5373.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5373.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5374.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5374.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5375.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5375.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5376.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5376.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5377.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5377.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5378.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5378.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5379.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/images-nonnude/IMG_5379.jpg"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/videos-nonnude/IMG_5382.mp4",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/purple-v-neck-tank/videos-nonnude/IMG_5384.mp4"
-          ],
-          "image_count": 46,
-          "video_count": 2,
-          "total_items": 48,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2020-10-26_red-lingerie-garter",
-      "date": "2020-10-26",
-      "outfit": "red-lingerie-garter",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5481.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5482.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5483.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5484.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5484.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5485.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5486.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5486.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5487.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5487.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5488.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5488.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5489.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5489.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5490.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5491.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5491.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5492.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5492.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5493.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5493.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5494.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5494.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5495.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5495.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5496.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5496.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5497.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5497.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5498.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5498.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5499.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5499.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5500.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5500.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5501.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5501.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5502.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5502.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5503.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5503.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5504.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5504.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5505.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5505.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5506.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5506.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5507.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5507.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5508.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5508.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5509.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5509.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5510.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5510.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5511.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5511.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5512.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5512.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5513.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5513.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5514.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5514.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5515.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5515.jpeg",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5516.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/images-nonnude/IMG_5516.jpeg"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-10-26%20sorted/red-lingerie-garter/videos-nonnude/IMG_5518.mp4"
-          ],
-          "image_count": 67,
-          "video_count": 1,
-          "total_items": 68,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2021-01-23_green-tee-light-denim-shorts",
-      "date": "2021-01-23",
-      "outfit": "green-tee-light-denim-shorts",
-      "tiers": {
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-01-23%20sorted/green-tee-light-denim-shorts/images-nude/IMG_9522.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-01-23%20sorted/green-tee-light-denim-shorts/images-nude/IMG_9522.jpg"
-          ],
-          "videos": [],
-          "image_count": 2,
-          "video_count": 0,
-          "total_items": 2,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2021-01-23_white-tank-light-denim-shorts",
-      "date": "2021-01-23",
-      "outfit": "white-tank-light-denim-shorts",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-01-23%20sorted/white-tank-light-denim-shorts/images-nonnude/IMG_9474.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-01-23%20sorted/white-tank-light-denim-shorts/images-nonnude/IMG_9474.jpg"
-          ],
-          "videos": [],
-          "image_count": 2,
-          "video_count": 0,
-          "total_items": 2,
-          "price_cents": 500
-        }
-      }
-    },
-    {
-      "set_id": "2021-02-09_pink-knit-bodysuit-red-bikini",
-      "date": "2021-02-09",
-      "outfit": "pink-knit-bodysuit-red-bikini",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nonnude/IMG_0073.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nonnude/IMG_0075.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nonnude/IMG_0076.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nonnude/IMG_0077.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/videos-nonnude/IMG_0074.mp4"
-          ],
-          "image_count": 4,
-          "video_count": 1,
-          "total_items": 5,
-          "price_cents": 500
-        },
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0078.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0079.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0080.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0081.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0082.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0083.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0084.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0085.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0086.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0087.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0088.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0089.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0090.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0091.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0092.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0093.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0094.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0095.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0096.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0097.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0098.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0099.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0100.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0101.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0102.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0103.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0104.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0105.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0106.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0107.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0108.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0109.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0110.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0111.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/images-nude/IMG_0112.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/videos-nude/IMG_0114.mp4",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/pink-knit-bodysuit-red-bikini/videos-nude/IMG_0116.mp4"
-          ],
-          "image_count": 35,
-          "video_count": 2,
-          "total_items": 37,
-          "price_cents": 1000
-        }
-      }
-    },
-    {
-      "set_id": "2021-02-09_white-sheer-micro-bikini",
-      "date": "2021-02-09",
-      "outfit": "white-sheer-micro-bikini",
-      "tiers": {
-        "nonnude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0120.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0121.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0122.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0123.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0124.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0125.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0126.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0127.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0128.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0129.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0131.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0132.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0133.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0134.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0135.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0136.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0137.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0138.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0139.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0140.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0141.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0142.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0143.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0144.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0145.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0146.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0147.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0148.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0149.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0150.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0151.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0152.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0153.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0154.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0155.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0156.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0157.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0158.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0159.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0160.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nonnude/IMG_0161.HEIC"
-          ],
-          "videos": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/videos-nonnude/IMG_0178.mp4"
-          ],
-          "image_count": 41,
-          "video_count": 1,
-          "total_items": 42,
-          "price_cents": 500
-        },
-        "nude": {
-          "images": [
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0162.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0163.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0164.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0165.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0166.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0167.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0168.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0169.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0170.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0171.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0172.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0173.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0174.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0175.HEIC",
-            "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2021-02-09%20sorted/white-sheer-micro-bikini/images-nude/IMG_0176.HEIC"
-          ],
-          "videos": [],
-          "image_count": 15,
-          "video_count": 0,
-          "total_items": 15,
-          "price_cents": 1000
-        }
-      }
+,
+    "2020-08-04 sorted": {
+      "file_count":        2,
+      "files": [
+        {"name": "bathtub-nude-solo/videos-nude/IMG_1479.mp4", "size": 8473215}
+,
+        {"name": "bathtub-nude-solo/videos-nude/compressed_IMG_1479.MOV", "size": 19658708}
+      ]
     }
-  ],
-  "summary": {
-    "total_sets": 48,
-    "total_nonnude_sets": 36,
-    "total_nude_sets": 14,
-    "total_sex_sets": 0,
-    "total_files": 838
+,
+    "2020-09-14 sorted": {
+      "file_count":      364,
+      "files": [
+        {"name": "!-01-jpeg/images-nonnude/IMG_0352.jpeg", "size": 269909}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_0448.jpeg", "size": 339489}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_1077.jpeg", "size": 245569}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_1132.jpeg", "size": 275041}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_1365.jpeg", "size": 401849}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_1517.jpeg", "size": 353721}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_1702.jpeg", "size": 361675}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_1803.jpeg", "size": 542234}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_1939.jpeg", "size": 354036}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_2147.jpeg", "size": 320575}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_2374.jpeg", "size": 357001}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_2717.jpeg", "size": 354943}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_3187.jpeg", "size": 434044}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_4147.jpeg", "size": 296696}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_5198.jpeg", "size": 316295}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_5830.jpeg", "size": 332325}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_6202.jpeg", "size": 354328}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_8583.jpeg", "size": 277979}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_8886.jpeg", "size": 407227}
+,
+        {"name": "!-01-jpeg/images-nonnude/IMG_8937.jpeg", "size": 382451}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_0374.jpeg", "size": 317637}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_0616.jpeg", "size": 299881}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_1003.jpeg", "size": 360034}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_1223.jpeg", "size": 303010}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_1306.jpeg", "size": 361367}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_1324.jpeg", "size": 463273}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_1355.jpeg", "size": 366044}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_2092.jpeg", "size": 358650}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_2542.jpeg", "size": 460434}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_5097.jpeg", "size": 386266}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_5253.jpeg", "size": 456945}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_5564.jpeg", "size": 340654}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_5698.jpeg", "size": 316374}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_5717.jpeg", "size": 511570}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_5811.jpeg", "size": 342732}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_6196.jpeg", "size": 451896}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_6578.jpeg", "size": 356347}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_6742.jpeg", "size": 467141}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_7465.jpeg", "size": 352375}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_7585.jpeg", "size": 467327}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_7613.jpeg", "size": 331631}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_8787.jpeg", "size": 406095}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_9033.jpeg", "size": 504608}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_9568.jpeg", "size": 488513}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_0057.jpeg", "size": 385855}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_0170.jpeg", "size": 357006}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_0673.jpeg", "size": 445192}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_1116.jpeg", "size": 353578}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_1544.jpeg", "size": 317452}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_1569.jpeg", "size": 369235}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_1570.jpeg", "size": 355206}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_1587.jpeg", "size": 410056}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_2927.jpeg", "size": 384777}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_3404.jpeg", "size": 315660}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_3643.jpeg", "size": 288782}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_3699.jpeg", "size": 356036}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_4282.jpeg", "size": 312011}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_4505.jpeg", "size": 447348}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_5000.jpeg", "size": 444973}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_5797.jpeg", "size": 398240}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_6240.jpeg", "size": 430256}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_6731.jpeg", "size": 341895}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_6733.jpeg", "size": 442608}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_6799.jpeg", "size": 328100}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_6861.jpeg", "size": 415812}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_7495.jpeg", "size": 359272}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_7669.jpeg", "size": 324435}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_7828.jpeg", "size": 321514}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_8024.jpeg", "size": 400641}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_8322.jpeg", "size": 559138}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_8650.jpeg", "size": 346318}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_9901.jpeg", "size": 425437}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_0075.jpeg", "size": 457190}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_0555.jpeg", "size": 372299}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_0558.jpeg", "size": 332434}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_0575.jpeg", "size": 644201}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_0767.jpeg", "size": 431145}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_0793.jpeg", "size": 341964}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_0795.jpeg", "size": 385525}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_0885.jpeg", "size": 330113}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_0990.jpeg", "size": 496346}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_1224.jpeg", "size": 594039}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_1456.jpeg", "size": 365573}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_2176.jpeg", "size": 455148}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_2289.jpeg", "size": 578767}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_2502.jpeg", "size": 317369}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_2650.jpeg", "size": 322800}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_2656.jpeg", "size": 390862}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_2694.jpeg", "size": 315907}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_3000.jpeg", "size": 377200}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_3007.jpeg", "size": 369376}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_4013.jpeg", "size": 564117}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_4019.jpeg", "size": 373015}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_4100.jpeg", "size": 482849}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_4256.jpeg", "size": 322004}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_4301.jpeg", "size": 294071}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_4721.jpeg", "size": 487522}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_4932.jpeg", "size": 297162}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_5295.jpeg", "size": 400296}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_5405.jpeg", "size": 330065}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_5887.jpeg", "size": 405389}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_6473.jpeg", "size": 451392}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_6583.jpeg", "size": 368761}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_7333.jpeg", "size": 363348}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_7454.jpeg", "size": 405445}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_7600.jpeg", "size": 415566}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_7832.jpeg", "size": 557349}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_7923.jpeg", "size": 533012}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_8516.jpeg", "size": 284990}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_8978.jpeg", "size": 367652}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_9037.jpeg", "size": 377777}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_9226.jpeg", "size": 421590}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_9349.jpeg", "size": 429780}
+,
+        {"name": "!-08-jpeg/images-nonnude/IMG_9634.jpeg", "size": 648086}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_0223.jpeg", "size": 499552}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_0906.jpeg", "size": 502322}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_0924.jpeg", "size": 382492}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_0934.jpeg", "size": 496904}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_1127.jpeg", "size": 285572}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_1147.jpeg", "size": 387671}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_1480.jpeg", "size": 356885}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_1527.jpeg", "size": 406754}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_1531.jpeg", "size": 529706}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_1545.jpeg", "size": 355784}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_1671.jpeg", "size": 357461}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_1907.jpeg", "size": 378401}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_2127.jpeg", "size": 448531}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_2137.jpeg", "size": 341049}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_2249.jpeg", "size": 434118}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_3121.jpeg", "size": 568505}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_3190.jpeg", "size": 341357}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_3378.jpeg", "size": 517289}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_3416.jpeg", "size": 566729}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_3420.jpeg", "size": 481154}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_3933.jpeg", "size": 359953}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_3940.jpeg", "size": 364656}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_4284.jpeg", "size": 400452}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_5392.jpeg", "size": 509410}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_5643.jpeg", "size": 362093}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_6923.jpeg", "size": 569721}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_7386.jpeg", "size": 377937}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_7532.jpeg", "size": 567432}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_8151.jpeg", "size": 576635}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_8367.jpeg", "size": 481499}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_8686.jpeg", "size": 561483}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_8844.jpeg", "size": 576091}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_8936.jpeg", "size": 300616}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_9553.jpeg", "size": 298778}
+,
+        {"name": "!-10-jpeg/images-nonnude/IMG_9596.jpeg", "size": 489791}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_0265.jpeg", "size": 637497}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_0352.jpeg", "size": 369335}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_0825.jpeg", "size": 317604}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_0948.jpeg", "size": 432316}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_1199.jpeg", "size": 419901}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_1440.jpeg", "size": 379767}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_1557.jpeg", "size": 430107}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_1631.jpeg", "size": 343147}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_2005.jpeg", "size": 262070}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_2453.jpeg", "size": 349396}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_3374.jpeg", "size": 548644}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_3838.jpeg", "size": 604424}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_4220.jpeg", "size": 276731}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_4403.jpeg", "size": 456389}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_4927.jpeg", "size": 382017}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_5341.jpeg", "size": 358379}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_6419.jpeg", "size": 429665}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_6533.jpeg", "size": 431205}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_6561.jpeg", "size": 443582}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_6687.jpeg", "size": 364143}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_7243.jpeg", "size": 396810}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_7310.jpeg", "size": 493675}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_7474.jpeg", "size": 436511}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_7822.jpeg", "size": 317305}
+,
+        {"name": "!-12-jpeg/images-nonnude/IMG_8527.jpeg", "size": 399077}
+,
+        {"name": "black-bralette/images-nude/IMG_0352.jpg.jpg", "size": 1518696}
+,
+        {"name": "black-bralette/images-nude/IMG_0448.jpg.jpg", "size": 3132554}
+,
+        {"name": "black-bralette/images-nude/IMG_1077.jpg.jpg", "size": 1338187}
+,
+        {"name": "black-bralette/images-nude/IMG_1132.jpg.jpg", "size": 2772966}
+,
+        {"name": "black-bralette/images-nude/IMG_1365.jpg.jpg", "size": 3653027}
+,
+        {"name": "black-bralette/images-nude/IMG_1517.jpg.jpg", "size": 3707245}
+,
+        {"name": "black-bralette/images-nude/IMG_1702.jpg.jpg", "size": 3370724}
+,
+        {"name": "black-bralette/images-nude/IMG_1803.jpg.jpg", "size": 4073093}
+,
+        {"name": "black-bralette/images-nude/IMG_1939.jpg.jpg", "size": 3288656}
+,
+        {"name": "black-bralette/images-nude/IMG_2147.jpg.jpg", "size": 3103254}
+,
+        {"name": "black-bralette/images-nude/IMG_2374.jpg.jpg", "size": 1812560}
+,
+        {"name": "black-bralette/images-nude/IMG_2717.jpg.jpg", "size": 1721681}
+,
+        {"name": "black-bralette/images-nude/IMG_3187.jpg.jpg", "size": 3922865}
+,
+        {"name": "black-bralette/images-nude/IMG_4147.jpg.jpg", "size": 1417500}
+,
+        {"name": "black-bralette/images-nude/IMG_5198.jpg.jpg", "size": 1615248}
+,
+        {"name": "black-bralette/images-nude/IMG_5830.jpg.jpg", "size": 2889418}
+,
+        {"name": "black-bralette/images-nude/IMG_6202.jpg.jpg", "size": 3346152}
+,
+        {"name": "black-bralette/images-nude/IMG_8583.jpg.jpg", "size": 1344006}
+,
+        {"name": "black-bralette/images-nude/IMG_8886.jpg.jpg", "size": 3854620}
+,
+        {"name": "black-bralette/images-nude/IMG_8937.jpg.jpg", "size": 3767067}
+,
+        {"name": "boobrop/videos-nude/compressed_IMG_2894 boob drop.MOV", "size": 44708303}
+,
+        {"name": "boodrop/videos-nude/compressed_IMG_2934 boob drop.MOV", "size": 32480483}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_0265.jpg.jpg", "size": 4686771}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_0352.jpg.jpg", "size": 3570776}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_0825.jpg.jpg", "size": 3132753}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_0948.jpg.jpg", "size": 3822609}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_1199.jpg.jpg", "size": 3511618}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_1440.jpg.jpg", "size": 3638418}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_1557.jpg.jpg", "size": 3801617}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_1631.jpg.jpg", "size": 3411053}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_2005.jpg.jpg", "size": 3003395}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_2453.jpg.jpg", "size": 3304124}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_3374.jpg.jpg", "size": 4225088}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_3838.jpg.jpg", "size": 4519998}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_4220.jpg.jpg", "size": 3572550}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_4403.jpg.jpg", "size": 3780648}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_4927.jpg.jpg", "size": 3587101}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_5341.jpg.jpg", "size": 3341321}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_6419.jpg.jpg", "size": 3783975}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_6533.jpg.jpg", "size": 3842405}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_6561.jpg.jpg", "size": 3761730}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_6687.jpg.jpg", "size": 3578364}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_7243.jpg.jpg", "size": 3429193}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_7310.jpg.jpg", "size": 4101909}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_7474.jpg.jpg", "size": 3801221}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_7822.jpg.jpg", "size": 3508536}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_8527.jpg.jpg", "size": 3556996}
+,
+        {"name": "grey-white-tank/images-nonnude/IMG_9489.jpg.jpg", "size": 3949247}
+,
+        {"name": "lavender-button/images-nonnude/IMG_0075.jpg.jpg", "size": 3997109}
+,
+        {"name": "lavender-button/images-nonnude/IMG_0555.jpg.jpg", "size": 3428775}
+,
+        {"name": "lavender-button/images-nonnude/IMG_0558.jpg.jpg", "size": 2806729}
+,
+        {"name": "lavender-button/images-nonnude/IMG_0575.jpg.jpg", "size": 4508886}
+,
+        {"name": "lavender-button/images-nonnude/IMG_0767.jpg.jpg", "size": 3894168}
+,
+        {"name": "lavender-button/images-nonnude/IMG_0793.jpg.jpg", "size": 3381258}
+,
+        {"name": "lavender-button/images-nonnude/IMG_0795.jpg.jpg", "size": 3529348}
+,
+        {"name": "lavender-button/images-nonnude/IMG_0885.jpg.jpg", "size": 3270746}
+,
+        {"name": "lavender-button/images-nonnude/IMG_0990.jpg.jpg", "size": 3587393}
+,
+        {"name": "lavender-button/images-nonnude/IMG_1224.jpg.jpg", "size": 4563756}
+,
+        {"name": "lavender-button/images-nonnude/IMG_1456.jpg.jpg", "size": 3395164}
+,
+        {"name": "lavender-button/images-nonnude/IMG_2176.jpg.jpg", "size": 3884014}
+,
+        {"name": "lavender-button/images-nonnude/IMG_2289.jpg.jpg", "size": 4011188}
+,
+        {"name": "lavender-button/images-nonnude/IMG_2502.jpg.jpg", "size": 3011154}
+,
+        {"name": "lavender-button/images-nonnude/IMG_2650.jpg.jpg", "size": 3210104}
+,
+        {"name": "lavender-button/images-nonnude/IMG_2656.jpg.jpg", "size": 3610374}
+,
+        {"name": "lavender-button/images-nonnude/IMG_2694.jpg.jpg", "size": 3359785}
+,
+        {"name": "lavender-button/images-nonnude/IMG_3000.jpg.jpg", "size": 3519870}
+,
+        {"name": "lavender-button/images-nonnude/IMG_3007.jpg.jpg", "size": 3234278}
+,
+        {"name": "lavender-button/images-nonnude/IMG_4013.jpg.jpg", "size": 4335293}
+,
+        {"name": "lavender-button/images-nonnude/IMG_4019.jpg.jpg", "size": 3405791}
+,
+        {"name": "lavender-button/images-nonnude/IMG_4100.jpg.jpg", "size": 3830592}
+,
+        {"name": "lavender-button/images-nonnude/IMG_4256.jpg.jpg", "size": 2987574}
+,
+        {"name": "lavender-button/images-nonnude/IMG_4301.jpg.jpg", "size": 3187931}
+,
+        {"name": "lavender-button/images-nonnude/IMG_4721.jpg.jpg", "size": 3861993}
+,
+        {"name": "lavender-button/images-nonnude/IMG_4932.jpg.jpg", "size": 2722337}
+,
+        {"name": "lavender-button/images-nonnude/IMG_5295.jpg.jpg", "size": 3266347}
+,
+        {"name": "lavender-button/images-nonnude/IMG_5405.jpg.jpg", "size": 3356241}
+,
+        {"name": "lavender-button/images-nonnude/IMG_5887.jpg.jpg", "size": 3548551}
+,
+        {"name": "lavender-button/images-nonnude/IMG_6473.jpg.jpg", "size": 3736463}
+,
+        {"name": "lavender-button/images-nonnude/IMG_6583.jpg.jpg", "size": 3387730}
+,
+        {"name": "lavender-button/images-nonnude/IMG_7333.jpg.jpg", "size": 3350526}
+,
+        {"name": "lavender-button/images-nonnude/IMG_7454.jpg.jpg", "size": 3410442}
+,
+        {"name": "lavender-button/images-nonnude/IMG_7600.jpg.jpg", "size": 3721251}
+,
+        {"name": "lavender-button/images-nonnude/IMG_7832.jpg.jpg", "size": 4225075}
+,
+        {"name": "lavender-button/images-nonnude/IMG_7923.jpg.jpg", "size": 4162311}
+,
+        {"name": "lavender-button/images-nonnude/IMG_8516.jpg.jpg", "size": 2793750}
+,
+        {"name": "lavender-button/images-nonnude/IMG_8978.jpg.jpg", "size": 3334744}
+,
+        {"name": "lavender-button/images-nonnude/IMG_9037.jpg.jpg", "size": 3232938}
+,
+        {"name": "lavender-button/images-nonnude/IMG_9226.jpg.jpg", "size": 3388195}
+,
+        {"name": "lavender-button/images-nonnude/IMG_9349.jpg.jpg", "size": 3588365}
+,
+        {"name": "lavender-button/images-nonnude/IMG_9634.jpg.jpg", "size": 4612506}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_0374.jpg.jpg", "size": 1955407}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_0616.jpg.jpg", "size": 1591182}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_1003.jpg.jpg", "size": 3131197}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_1223.jpg.jpg", "size": 2928239}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_1306.jpg.jpg", "size": 3508395}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_1324.jpg.jpg", "size": 3705449}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_1355.jpg.jpg", "size": 3217180}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_2092.jpg.jpg", "size": 3600886}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_2542.jpg.jpg", "size": 3973091}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_5097.jpg.jpg", "size": 3295619}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_5253.jpg.jpg", "size": 3995052}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_5564.jpg.jpg", "size": 1774281}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_5698.jpg.jpg", "size": 2965152}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_5717.jpg.jpg", "size": 3955888}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_5811.jpg.jpg", "size": 1912976}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_6196.jpg.jpg", "size": 3705684}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_6578.jpg.jpg", "size": 3165829}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_6742.jpg.jpg", "size": 3930911}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_7465.jpg.jpg", "size": 3576791}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_7585.jpg.jpg", "size": 4065560}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_7613.jpg.jpg", "size": 1727598}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_8787.jpg.jpg", "size": 3502313}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_9033.jpg.jpg", "size": 4185683}
+,
+        {"name": "pink-bralette-pics/images-nude/IMG_9568.jpg.jpg", "size": 3790995}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_0057.jpg.jpg", "size": 3653931}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_0170.jpg.jpg", "size": 3270517}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_0673.jpg.jpg", "size": 3803557}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_0907.jpg.jpg", "size": 2969394}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_1116.jpg.jpg", "size": 3210007}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_1544.jpg.jpg", "size": 3112644}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_1569.jpg.jpg", "size": 3541379}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_1570.jpg.jpg", "size": 3401384}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_1587.jpg.jpg", "size": 3744323}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_2927.jpg.jpg", "size": 3479118}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_3404.jpg.jpg", "size": 3066111}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_3643.jpg.jpg", "size": 2887062}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_3699.jpg.jpg", "size": 3235535}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_4282.jpg.jpg", "size": 3599427}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_4505.jpg.jpg", "size": 3923637}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_5000.jpg.jpg", "size": 3796706}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_5797.jpg.jpg", "size": 3730263}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_6240.jpg.jpg", "size": 3677478}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_6731.jpg.jpg", "size": 3145071}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_6733.jpg.jpg", "size": 3764994}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_6799.jpg.jpg", "size": 3229702}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_6861.jpg.jpg", "size": 3672615}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_7495.jpg.jpg", "size": 3578665}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_7669.jpg.jpg", "size": 3118406}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_7828.jpg.jpg", "size": 3350530}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_7847.jpg.jpg", "size": 3024486}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_8024.jpg.jpg", "size": 3655864}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_8322.jpg.jpg", "size": 4306820}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_8650.jpg.jpg", "size": 3285127}
+,
+        {"name": "pink-white-tank/images-nonnude/IMG_9901.jpg.jpg", "size": 3704761}
+,
+        {"name": "pink-white-tank/videos-nonnude/compressed_IMG_2843.MOV", "size": 60308680}
+,
+        {"name": "selfie-halfd/videos-nonnude/compressed_720p.MOV", "size": 1812311}
+,
+        {"name": "selfie-halfd/videos-nonnude/compressed_IMG_2845.MOV", "size": 2506007}
+,
+        {"name": "selfie/videos-nonnude/IMG_2990 face.mp4", "size": 1452795}
+,
+        {"name": "selfie/videos-nonnude/compressed_720p.MOV", "size": 2607430}
+,
+        {"name": "selfie/videos-nonnude/compressed_IMG_2991.MOV", "size": 504383}
+,
+        {"name": "unknown-outfit/videos-nonnude/compressed_IMG_2964.MOV", "size": 19425155}
+,
+        {"name": "vid/videos-nonnude/IMG_2781.mp4", "size": 7450434}
+,
+        {"name": "vid/videos-nonnude/compressed_IMG_2781.MOV", "size": 49294286}
+,
+        {"name": "vid/videos-nonnude/compressed_IMG_2809.MOV", "size": 23875408}
+,
+        {"name": "vid/videos-nonnude/compressed_IMG_2935.MOV", "size": 38015678}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_0223.jpg.jpg", "size": 3854266}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_0906.jpg.jpg", "size": 3933898}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_0924.jpg.jpg", "size": 3258919}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_0934.jpg.jpg", "size": 3994743}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_1127.jpg.jpg", "size": 3026169}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_1147.jpg.jpg", "size": 3386279}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_1480.jpg.jpg", "size": 3267814}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_1527.jpg.jpg", "size": 3091736}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_1531.jpg.jpg", "size": 4028080}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_1545.jpg.jpg", "size": 3434617}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_1671.jpg.jpg", "size": 3213396}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_1907.jpg.jpg", "size": 3544422}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_2127.jpg.jpg", "size": 3728472}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_2137.jpg.jpg", "size": 3696388}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_2249.jpg.jpg", "size": 3755939}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_3121.jpg.jpg", "size": 4299140}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_3190.jpg.jpg", "size": 3220668}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_3378.jpg.jpg", "size": 3974081}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_3416.jpg.jpg", "size": 4297868}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_3420.jpg.jpg", "size": 3923689}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_3933.jpg.jpg", "size": 3263099}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_3940.jpg.jpg", "size": 3248387}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_4284.jpg.jpg", "size": 3748024}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_5392.jpg.jpg", "size": 4002644}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_5643.jpg.jpg", "size": 3284259}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_6923.jpg.jpg", "size": 4273411}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_7386.jpg.jpg", "size": 3400987}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_7532.jpg.jpg", "size": 4304760}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_8151.jpg.jpg", "size": 4356615}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_8367.jpg.jpg", "size": 4074046}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_8686.jpg.jpg", "size": 4266462}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_8844.jpg.jpg", "size": 4342092}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_8936.jpg.jpg", "size": 3202063}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_9553.jpg.jpg", "size": 3131702}
+,
+        {"name": "yellow-cross-shirt/images-nonnude/IMG_9596.jpg.jpg", "size": 3934326}
+      ]
+    }
+,
+    "2020-09-28 sorted": {
+      "file_count":      141,
+      "files": [
+        {"name": "!-03-jpeg/images-nonnude/IMG_0296.jpeg", "size": 529795}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_0417.jpeg", "size": 539653}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_0716.jpeg", "size": 390846}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_1255.jpeg", "size": 595080}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_1826.jpeg", "size": 631425}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_2065.jpeg", "size": 334683}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_2278.jpeg", "size": 452555}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_2875.jpeg", "size": 486788}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_3804.jpeg", "size": 465394}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_4407.jpeg", "size": 577914}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_6417.jpeg", "size": 471421}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_6700.jpeg", "size": 491472}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_6955.jpeg", "size": 408486}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_7199.jpeg", "size": 356603}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_7432.jpeg", "size": 499238}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_8073.jpeg", "size": 404389}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_8470.jpeg", "size": 462841}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_8627.jpeg", "size": 344325}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_9015.jpeg", "size": 479069}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_9303.jpeg", "size": 514412}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_9516.jpeg", "size": 370659}
+,
+        {"name": "!-03-jpeg/images-nonnude/IMG_9884.jpeg", "size": 400716}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_0073.jpeg", "size": 372411}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_0326.jpeg", "size": 522547}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_0389.jpeg", "size": 544796}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_0670.jpeg", "size": 577523}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_0827.jpeg", "size": 412957}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_1152.jpeg", "size": 527564}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_1415.jpeg", "size": 278419}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_1960.jpeg", "size": 389024}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_2483.jpeg", "size": 389260}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_2520.jpeg", "size": 493572}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_3702.jpeg", "size": 491310}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_3743.jpeg", "size": 597833}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_5663.jpeg", "size": 384227}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_5999.jpeg", "size": 540759}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_6623.jpeg", "size": 445632}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_7765.jpeg", "size": 516294}
+,
+        {"name": "!-05-jpeg/images-nonnude/IMG_8619.jpeg", "size": 411052}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_0622.jpeg", "size": 486302}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_3363.jpeg", "size": 633596}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_3685.jpeg", "size": 658757}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_3756.jpeg", "size": 774532}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_3851.jpeg", "size": 710493}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_5738.jpeg", "size": 572405}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_6259.jpeg", "size": 415645}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_6323.jpeg", "size": 461890}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_7436.jpeg", "size": 729809}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_7453.jpeg", "size": 727520}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_8557.jpeg", "size": 530493}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_9042.jpeg", "size": 454296}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_9043.jpeg", "size": 459682}
+,
+        {"name": "!-06-jpeg/images-nonnude/IMG_9768.jpeg", "size": 488850}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_0299.jpeg", "size": 470393}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_0710.jpeg", "size": 449751}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_1008.jpeg", "size": 439770}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_1395.jpeg", "size": 555292}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_1599.jpeg", "size": 405146}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_3311.jpeg", "size": 603249}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_4366.jpeg", "size": 455438}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_4463.jpeg", "size": 392679}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_4902.jpeg", "size": 422472}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_5464.jpeg", "size": 554800}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_5806.jpeg", "size": 461009}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_6079.jpeg", "size": 332215}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_6506.jpeg", "size": 475420}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_7043.jpeg", "size": 451657}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_7223.jpeg", "size": 421555}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_7605.jpeg", "size": 442798}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_7963.jpeg", "size": 561400}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_8208.jpeg", "size": 450481}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_9246.jpeg", "size": 580753}
+,
+        {"name": "!-09-jpeg/images-nonnude/IMG_9550.jpeg", "size": 448087}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_0478.jpeg", "size": 388076}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_0702.jpeg", "size": 359219}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_1033.jpeg", "size": 655893}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_1696.jpeg", "size": 423110}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_1742.jpeg", "size": 392354}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_2615.jpeg", "size": 580656}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_3212.jpeg", "size": 578506}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_3324.jpeg", "size": 563027}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_3951.jpeg", "size": 811860}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_4378.jpeg", "size": 594329}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_5941.jpeg", "size": 614114}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_6047.jpeg", "size": 515004}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_6880.jpeg", "size": 453989}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_7073.jpeg", "size": 620076}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_8143.jpeg", "size": 583102}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_8665.jpeg", "size": 540287}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_8678.jpeg", "size": 414170}
+,
+        {"name": "!-11-jpeg/images-nonnude/IMG_9008.jpeg", "size": 389239}
+,
+        {"name": "!-14/images-nonnude/IMG_0326.jpeg", "size": 2669005}
+,
+        {"name": "grey-cross-shirt-low-qty/images-nonnude/IMG_0296.jpg.jpg", "size": 4214463}
+,
+        {"name": "grey-tied-under-low-qty/images-nonnude/IMG_0299.jpg.jpg", "size": 4002350}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_0326.jpg.jpg", "size": 3186856}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_0982.jpg.jpg", "size": 4242065}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_2105.jpg.jpg", "size": 4003280}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_2806.jpg.jpg", "size": 4212556}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_3607.jpg.jpg", "size": 3187198}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_5159.jpg.jpg", "size": 4002676}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_5343.jpg.jpg", "size": 3909843}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_6473.jpg.jpg", "size": 4429898}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_7016.jpg.jpg", "size": 3117310}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_7282.jpg.jpg", "size": 4155378}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_7719.jpg.jpg", "size": 3341334}
+,
+        {"name": "pink-silk-no-nude/images-nude/IMG_8270.jpg.jpg", "size": 4076607}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_0622.jpg.jpg", "size": 4160348}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_3363.jpg.jpg", "size": 4192612}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_3685.jpg.jpg", "size": 4236502}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_3756.jpg.jpg", "size": 4757408}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_3851.jpg.jpg", "size": 4519613}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_5738.jpg.jpg", "size": 3912372}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_6259.jpg.jpg", "size": 3815481}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_6323.jpg.jpg", "size": 3422180}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_7436.jpg.jpg", "size": 5076868}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_7453.jpg.jpg", "size": 4574662}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_8557.jpg.jpg", "size": 4497635}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_9042.jpg.jpg", "size": 4085833}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_9043.jpg.jpg", "size": 4097731}
+,
+        {"name": "rose-string-tank-no-nude-pic/images-nude/IMG_9768.jpg.jpg", "size": 3482176}
+,
+        {"name": "rose-tube-top/images-nonnude/IMG_0478.jpg.jpg", "size": 3692127}
+,
+        {"name": "white-shirt-low-qty/images-nonnude/IMG_3722.JPG", "size": 4460628}
+,
+        {"name": "white-shirt-low-qty/videos-nonnude/IMG_3439.mp4", "size": 6969111}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_0073.jpg.jpg", "size": 3380353}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_0326.jpg.jpg", "size": 4380669}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_0389.jpg.jpg", "size": 4474305}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_0670.jpg.jpg", "size": 4639925}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_0827.jpg.jpg", "size": 3785929}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_1130.jpg.jpg", "size": 4700662}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_1152.jpg.jpg", "size": 4376153}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_1415.jpg.jpg", "size": 2804159}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_1960.jpg.jpg", "size": 3417304}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_2483.jpg.jpg", "size": 3605199}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_2520.jpg.jpg", "size": 3802944}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_3702.jpg.jpg", "size": 4224607}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_3743.jpg.jpg", "size": 4727506}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_5663.jpg.jpg", "size": 3403429}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_5999.jpg.jpg", "size": 4442104}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_6623.jpg.jpg", "size": 3816338}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_7765.jpg.jpg", "size": 4338771}
+,
+        {"name": "white-string-tank-boobrop/images-nude/IMG_8619.jpg.jpg", "size": 3963790}
+      ]
+    }
+,
+    "2020-10-18 sorted": {
+      "file_count":       45,
+      "files": [
+        {"name": "Feed/fairy/images/IMG_0421.jpg.jpg", "size": 3499954}
+,
+        {"name": "beige-underboob/videos-nude/IMG_4902.mp4", "size": 3608552}
+,
+        {"name": "fairy/images-nonnude/IMG_0421.jpg.jpg", "size": 3499954}
+,
+        {"name": "fairy/images-nonnude/IMG_3998.jpg.jpg", "size": 3565371}
+,
+        {"name": "fairy/images-nonnude/IMG_7662.jpg.jpg", "size": 3344586}
+,
+        {"name": "fairy/images-nonnude/IMG_8811.jpg.jpg", "size": 3369113}
+,
+        {"name": "ppv-nonnude/fairy/images/IMG_0421.jpg.jpg", "size": 3499954}
+,
+        {"name": "ppv-nonnude/fairy/images/IMG_3998.jpg.jpg", "size": 3565371}
+,
+        {"name": "ppv-nonnude/fairy/images/IMG_4074.JPG", "size": 1941844}
+,
+        {"name": "ppv-nonnude/fairy/images/IMG_4677.jpg.jpg", "size": 3275894}
+,
+        {"name": "ppv-nonnude/fairy/images/IMG_5689.jpg.jpg", "size": 3493187}
+,
+        {"name": "ppv-nonnude/fairy/images/IMG_7662.jpg.jpg", "size": 3344586}
+,
+        {"name": "ppv-nonnude/fairy/images/IMG_8811.jpg.jpg", "size": 3369113}
+,
+        {"name": "ppv-nude/beige-underboob/images/IMG_0063.jpg.jpg", "size": 4259209}
+,
+        {"name": "ppv-nude/beige-underboob/images/IMG_0269.jpg.jpg", "size": 4096746}
+,
+        {"name": "ppv-nude/beige-underboob/images/IMG_0929.jpg.jpg", "size": 3341854}
+,
+        {"name": "ppv-nude/beige-underboob/images/IMG_1077.jpg.jpg", "size": 3810427}
+,
+        {"name": "ppv-nude/beige-underboob/images/IMG_1338.jpg.jpg", "size": 3789835}
+,
+        {"name": "ppv-nude/beige-underboob/images/IMG_1652.jpg.jpg", "size": 3992645}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_0806.jpg.jpg", "size": 4477974}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_1253.jpg.jpg", "size": 3020555}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_1931.jpg.jpg", "size": 3879994}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_2325.jpg.jpg", "size": 3673938}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_3005.jpg.jpg", "size": 4252398}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_3050.jpg.jpg", "size": 3138803}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_3300.jpg.jpg", "size": 4348252}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_3382.jpg.jpg", "size": 4527100}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_3606.jpg.jpg", "size": 3735675}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_3729.jpg.jpg", "size": 3676794}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_3915.jpg.jpg", "size": 4150927}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_3959.jpg.jpg", "size": 3703744}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_4430.jpg.jpg", "size": 3831448}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_5045.jpg.jpg", "size": 3381058}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_5261.jpg.jpg", "size": 3627250}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_5755.jpg.jpg", "size": 3243763}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_5793.jpg.jpg", "size": 3665121}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_5933.jpg.jpg", "size": 3432083}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_6006.jpg.jpg", "size": 4294103}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_6349.jpg.jpg", "size": 3361973}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_6747.jpg.jpg", "size": 3804943}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_7434.jpg.jpg", "size": 4143792}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_7993.jpg.jpg", "size": 3672452}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_8125.jpg.jpg", "size": 3737714}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_8817.jpg.jpg", "size": 3193649}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_9203.jpg.jpg", "size": 4733829}
+,
+        {"name": "ppv-nude/maroon-cross-shirt/images/IMG_9780.jpg.jpg", "size": 4686600}
+      ]
+    }
+,
+    "2020-10-26 sorted": {
+      "file_count":      141,
+      "files": [
+        {"name": "Feed/baby-blue-tank/IMG_5338.jpg.jpg", "size": 4026112}
+,
+        {"name": "Feed/orange-underboob-tank/IMG_5462.jpg.jpg", "size": 3079634}
+,
+        {"name": "Feed/purple-v-neck-tank/IMG_5379.jpg", "size": 314079}
+,
+        {"name": "Feed/red-lingerie-garter/IMG_5481.jpg.jpg", "size": 2849174}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5338.jpeg", "size": 485995}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5338.jpg.jpg", "size": 4026112}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5339.jpeg", "size": 585555}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5339.jpg.jpg", "size": 2943848}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5340.jpeg", "size": 403424}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5340.jpg.jpg", "size": 2275568}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5341.jpeg", "size": 428468}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5341.jpg.jpg", "size": 3472794}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5342.jpeg", "size": 473367}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5342.jpg.jpg", "size": 3214853}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5343.jpeg", "size": 639861}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5343.jpg.jpg", "size": 3087044}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5344.jpeg", "size": 449395}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5344.jpg.jpg", "size": 2522665}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5345.jpeg", "size": 481803}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5345.jpg.jpg", "size": 2649019}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5346.jpeg", "size": 448963}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5346.jpg.jpg", "size": 3349840}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5347.jpeg", "size": 335882}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5347.jpg.jpg", "size": 2607558}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5348.jpeg", "size": 351902}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5348.jpg.jpg", "size": 2997457}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5349.jpeg", "size": 381894}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5349.jpg.jpg", "size": 3143101}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5350.jpeg", "size": 311890}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5350.jpg.jpg", "size": 1938997}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5351.jpeg", "size": 309578}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5351.jpg.jpg", "size": 2030528}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5352.jpeg", "size": 298497}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5352.jpg.jpg", "size": 1630970}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5353.jpeg", "size": 234221}
+,
+        {"name": "ppv-nonnude/baby-blue-tank/images/IMG_5353.jpg.jpg", "size": 1744628}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5462.jpeg", "size": 692785}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5462.jpg.jpg", "size": 3079634}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5463.jpeg", "size": 484712}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5463.jpg.jpg", "size": 2341013}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5464.jpeg", "size": 376092}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5464.jpg.jpg", "size": 1975732}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5465.jpeg", "size": 474169}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5465.jpg.jpg", "size": 2348800}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5466.jpeg", "size": 547318}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5466.jpg.jpg", "size": 2606507}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5467.jpeg", "size": 421988}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5467.jpg.jpg", "size": 2107024}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5468.jpeg", "size": 331298}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5468.jpg.jpg", "size": 2045158}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5469.jpeg", "size": 339762}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5469.jpg.jpg", "size": 1874738}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5470.jpeg", "size": 439565}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5470.jpg.jpg", "size": 2040912}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5471.jpeg", "size": 546322}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5471.jpg.jpg", "size": 2669858}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5472.jpeg", "size": 355425}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5472.jpg.jpg", "size": 2084474}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5473.jpeg", "size": 366456}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5473.jpg.jpg", "size": 1960141}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5474.jpeg", "size": 314330}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5474.jpg.jpg", "size": 1850643}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5475.jpeg", "size": 341034}
+,
+        {"name": "ppv-nonnude/orange-underboob-tank/images/IMG_5475.jpg.jpg", "size": 1891246}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5357.jpeg", "size": 459487}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5357.jpg.jpg", "size": 2337004}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5358.jpeg", "size": 365198}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5358.jpg.jpg", "size": 2706384}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5359.jpeg", "size": 381224}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5359.jpg.jpg", "size": 3285702}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5360.jpeg", "size": 402274}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5360.jpg.jpg", "size": 2002310}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5361.jpeg", "size": 448408}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5361.jpg.jpg", "size": 2517083}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5362.jpeg", "size": 559539}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5362.jpg.jpg", "size": 2923976}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5363.jpeg", "size": 531845}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5363.jpg.jpg", "size": 2749872}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5364.jpeg", "size": 578358}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5364.jpg.jpg", "size": 2477967}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5365.jpeg", "size": 623207}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5365.jpg.jpg", "size": 3022092}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5366.jpeg", "size": 610543}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5366.jpg.jpg", "size": 2739999}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5367.jpeg", "size": 579833}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5367.jpg.jpg", "size": 2693818}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5368.jpeg", "size": 458528}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5368.jpg.jpg", "size": 3386092}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5369.jpeg", "size": 351492}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5369.jpg.jpg", "size": 2938957}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5370.jpeg", "size": 334825}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5370.jpg.jpg", "size": 2814613}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5371.jpeg", "size": 247065}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5371.jpg.jpg", "size": 1335240}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5372.jpeg", "size": 273381}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5372.jpg.jpg", "size": 1460459}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5373.jpeg", "size": 541790}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5373.jpg.jpg", "size": 2901094}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5374.jpeg", "size": 443474}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5374.jpg.jpg", "size": 2457587}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5375.jpeg", "size": 347305}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5375.jpg.jpg", "size": 1835138}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5376.jpeg", "size": 331254}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5376.jpg.jpg", "size": 2448435}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5377.jpeg", "size": 272940}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5377.jpg.jpg", "size": 1415583}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5378.jpeg", "size": 336065}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5378.jpg.jpg", "size": 1815819}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5379.jpg.jpg", "size": 1831402}
+,
+        {"name": "ppv-nonnude/purple-v-neck-tank/images/IMG_5379.jpg", "size": 314079}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5385.jpeg", "size": 350058}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5385.jpg.jpg", "size": 2324481}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5386.jpeg", "size": 275239}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5386.jpg.jpg", "size": 1880934}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5387.jpeg", "size": 275280}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5387.jpg.jpg", "size": 1763654}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5388.jpeg", "size": 307192}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5388.jpg.jpg", "size": 2289512}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5389.jpeg", "size": 350591}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5389.jpg.jpg", "size": 1915483}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5390.jpeg", "size": 288534}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5390.jpg.jpg", "size": 1696545}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5391.jpeg", "size": 287177}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5391.jpg.jpg", "size": 1719989}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5392.jpeg", "size": 321316}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5392.jpg.jpg", "size": 1913799}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5393.jpg.jpg", "size": 2899549}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5394.jpeg", "size": 389675}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5394.jpg.jpg", "size": 2180001}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5395.jpeg", "size": 389494}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5395.jpg.jpg", "size": 2213695}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5396.jpeg", "size": 287616}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5396.jpg.jpg", "size": 1593241}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5397.jpeg", "size": 330859}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5397.jpg.jpg", "size": 1956168}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5398.jpeg", "size": 289471}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5398.jpg.jpg", "size": 1617046}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5399.jpeg", "size": 288243}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5399.jpg.jpg", "size": 1717811}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5400.jpeg", "size": 321126}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5400.jpg.jpg", "size": 1776568}
+,
+        {"name": "ppv-nude/pink-underboob-tank/images/IMG_5401.jpeg", "size": 295033}
+      ]
+    }
+,
+    "2021-01-23 sorted": {
+      "file_count":        5,
+      "files": [
+        {"name": "Feed/white-tank-light-denim-shorts/images/IMG_9474.jpg", "size": 567175}
+,
+        {"name": "ppv-nonnude/white-tank-light-denim-shorts/images/IMG_9474.jpg.jpg", "size": 3991136}
+,
+        {"name": "ppv-nonnude/white-tank-light-denim-shorts/images/IMG_9474.jpg", "size": 567175}
+,
+        {"name": "ppv-nude/green-tee-light-denim-shorts/images/IMG_9522.jpg.jpg", "size": 2772928}
+,
+        {"name": "ppv-nude/green-tee-light-denim-shorts/images/IMG_9522.jpg", "size": 597157}
+      ]
+    }
+,
+    "2021-02-09 sorted": {
+      "file_count":       43,
+      "files": [
+        {"name": "Feed/pink-knit-bodysuit-red-bikini/images/IMG_0073.jpg.jpg", "size": 4679094}
+,
+        {"name": "Feed/white-sheer-micro-bikini/images/IMG_0120.jpg.jpg", "size": 4671657}
+,
+        {"name": "pink-knit-bodysuit-red-bikini/videos-nonnude/IMG_0074.mp4", "size": 2713372}
+,
+        {"name": "ppv-nonnude/pink-knit-bodysuit-red-bikini/images/IMG_0073.jpg.jpg", "size": 4679094}
+,
+        {"name": "ppv-nonnude/pink-knit-bodysuit-red-bikini/images/IMG_0075.jpg.jpg", "size": 4568608}
+,
+        {"name": "ppv-nonnude/pink-knit-bodysuit-red-bikini/images/IMG_0076.jpg.jpg", "size": 4267030}
+,
+        {"name": "ppv-nonnude/pink-knit-bodysuit-red-bikini/images/IMG_0077.jpg.jpg", "size": 3411805}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0078.jpg.jpg", "size": 3471196}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0079.jpg.jpg", "size": 3902851}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0080.jpg.jpg", "size": 3685803}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0081.jpg.jpg", "size": 3668834}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0082.jpg.jpg", "size": 3558163}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0083.jpg.jpg", "size": 3318584}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0084.jpg.jpg", "size": 3401629}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0085.jpg.jpg", "size": 3371953}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0086.jpg.jpg", "size": 2788778}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0087.jpg.jpg", "size": 3020963}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0088.jpg.jpg", "size": 3483328}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0089.jpg.jpg", "size": 2925836}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0090.jpg.jpg", "size": 2888943}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0091.jpg.jpg", "size": 3625934}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0092.jpg.jpg", "size": 4944631}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0093.jpg.jpg", "size": 3613900}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0094.jpg.jpg", "size": 2844511}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0096.jpg.jpg", "size": 3947644}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0097.jpg.jpg", "size": 3016892}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0098.jpg.jpg", "size": 3113092}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0100.jpg.jpg", "size": 3422138}
+,
+        {"name": "ppv-nude/pink-knit-bodysuit-red-bikini/images/IMG_0101.jpg.jpg", "size": 3162769}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0162.jpg.jpg", "size": 2803670}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0163.jpg.jpg", "size": 2711383}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0164.jpg.jpg", "size": 2738849}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0165.jpg.jpg", "size": 2845122}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0166.jpg.jpg", "size": 2338635}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0167.jpg.jpg", "size": 2025219}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0168.jpg.jpg", "size": 2185567}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0169.jpg.jpg", "size": 1839127}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0170.jpg.jpg", "size": 2498102}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0171.jpg.jpg", "size": 2765428}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0172.jpg.jpg", "size": 2833166}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0173.jpg.jpg", "size": 2859156}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0174.jpg.jpg", "size": 3029564}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0175.jpg.jpg", "size": 2852997}
+,
+        {"name": "ppv-nude/white-sheer-micro-bikini/images/IMG_0176.jpg.jpg", "size": 3022426}
+      ]
+    }
   }
 }

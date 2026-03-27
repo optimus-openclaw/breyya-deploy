@@ -837,6 +837,14 @@ try {
 
         // Insert reply (only if not double-texted and no PPV)
         // DEDUP: prevent duplicate messages within 10 seconds
+        // Strip any unmatched PPV tags so they never show as raw text to the fan
+        if (!$ppvDetected && preg_match('/\[PPV:[^\]]+\]/', $reply)) {
+            $reply = preg_replace('/\[PPV:[^\]]+\]/', '', $reply);
+            $reply = trim($reply);
+            if (empty($reply)) $reply = "mmm I have some hot content babe, let me find the right set for you";
+            $debug[] = "ppv_tag_stripped:no_match_in_inventory";
+        }
+
         // ===== PHASE 2 SAVE: Store reply in queue, set typing state =====
         $dedupSafe = $db->escapeString($reply);
         $dedupCheck = $db->querySingle("SELECT COUNT(*) FROM messages WHERE sender_id = $CREATOR_ID AND receiver_id = $fid AND content = '$dedupSafe' AND created_at >= datetime('now', '-10 seconds')");
