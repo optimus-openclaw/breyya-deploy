@@ -1,8 +1,8 @@
 {
   "version": 2,
   "generated": "2026-03-28T00:10:26Z",
-  "total_sets": 48,
-  "total_files": 542,
+  "total_sets": 44,
+  "total_files": 527,
   "tier_pricing": {
     "nonnude": {
       "price_cents": 500,
@@ -22,65 +22,20 @@
   },
   "sets": [
     {
-      "set_id": "2020-08-03_gray-tank-denim-shorts",
-      "outfit": "gray tank denim shorts",
-      "date": "2020-08-03",
-      "tiers": {
-        "nonnude": {
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500,
-          "files": [
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-03%20sorted/gray-tank-denim-shorts/videos-nonnude/compressed_IMG_1435%20no.MOV",
-              "type": "video",
-              "size": 35048359
-            }
-          ]
-        }
-      }
-    },
-    {
-      "set_id": "2020-08-03_green-tank-dark-denim-shorts",
-      "outfit": "green tank dark denim shorts",
-      "date": "2020-08-03",
-      "tiers": {
-        "nonnude": {
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500,
-          "files": [
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-03%20sorted/green-tank-dark-denim-shorts/videos-nonnude/compressed_IMG_1371%20d.MOV",
-              "type": "video",
-              "size": 72660096
-            }
-          ]
-        }
-      }
-    },
-    {
       "set_id": "2020-08-03_pink-bra-cream-cardigan",
       "outfit": "pink bra cream cardigan",
       "date": "2020-08-03",
       "tiers": {
         "nonnude": {
           "image_count": 0,
-          "video_count": 2,
-          "total_items": 2,
+          "video_count": 1,
+          "total_items": 1,
           "price_cents": 500,
           "files": [
             {
               "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-03%20sorted/pink-bra-cream-cardigan/videos-nonnude/IMG_1362.mp4",
               "type": "video",
               "size": 10219781
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-03%20sorted/pink-bra-cream-cardigan/videos-nonnude/compressed_IMG_1362.MOV",
-              "type": "video",
-              "size": 86875049
             }
           ]
         }
@@ -93,19 +48,14 @@
       "tiers": {
         "nude": {
           "image_count": 0,
-          "video_count": 2,
-          "total_items": 2,
+          "video_count": 1,
+          "total_items": 1,
           "price_cents": 1000,
           "files": [
             {
               "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-04%20sorted/bathtub-nude-solo/videos-nude/IMG_1479.mp4",
               "type": "video",
               "size": 8473215
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-08-04%20sorted/bathtub-nude-solo/videos-nude/compressed_IMG_1479.MOV",
-              "type": "video",
-              "size": 19658708
             }
           ]
         }
@@ -1193,39 +1143,14 @@
       "tiers": {
         "nude": {
           "image_count": 0,
-          "video_count": 2,
-          "total_items": 2,
+          "video_count": 1,
+          "total_items": 1,
           "price_cents": 1000,
           "files": [
             {
               "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/boobrop/videos-nude/IMG_2894%20boob%20drop.mp4",
               "type": "video",
               "size": 7609194
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/boobrop/videos-nude/compressed_IMG_2894%20boob%20drop.MOV",
-              "type": "video",
-              "size": 44708303
-            }
-          ]
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_boodrop",
-      "outfit": "boodrop",
-      "date": "2020-09-14",
-      "tiers": {
-        "nude": {
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 1000,
-          "files": [
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/boodrop/videos-nude/compressed_IMG_2934%20boob%20drop.MOV",
-              "type": "video",
-              "size": 32480483
             }
           ]
         }
@@ -1743,8 +1668,8 @@
       "tiers": {
         "nonnude": {
           "image_count": 30,
-          "video_count": 1,
-          "total_items": 31,
+          "video_count": 0,
+          "total_items": 30,
           "price_cents": 500,
           "files": [
             {
@@ -1896,11 +1821,6 @@
               "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/pink-white-tank/images-nonnude/IMG_9901.jpg.jpg",
               "type": "image",
               "size": 3704761
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/pink-white-tank/videos-nonnude/compressed_IMG_2843.MOV",
-              "type": "video",
-              "size": 60308680
             }
           ]
         }
@@ -1913,8 +1833,8 @@
       "tiers": {
         "nonnude": {
           "image_count": 0,
-          "video_count": 4,
-          "total_items": 4,
+          "video_count": 2,
+          "total_items": 2,
           "price_cents": 500,
           "files": [
             {
@@ -1926,16 +1846,6 @@
               "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/selfie/videos-nonnude/IMG_2992.mp4",
               "type": "video",
               "size": 3054160
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/selfie/videos-nonnude/compressed_720p.MOV",
-              "type": "video",
-              "size": 2607430
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/selfie/videos-nonnude/compressed_IMG_2991.MOV",
-              "type": "video",
-              "size": 504383
             }
           ]
         }
@@ -1948,8 +1858,8 @@
       "tiers": {
         "nonnude": {
           "image_count": 0,
-          "video_count": 4,
-          "total_items": 4,
+          "video_count": 2,
+          "total_items": 2,
           "price_cents": 500,
           "files": [
             {
@@ -1961,36 +1871,6 @@
               "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/selfie-halfd/videos-nonnude/IMG_2846.mp4",
               "type": "video",
               "size": 1300562
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/selfie-halfd/videos-nonnude/compressed_720p.MOV",
-              "type": "video",
-              "size": 1812311
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/selfie-halfd/videos-nonnude/compressed_IMG_2845.MOV",
-              "type": "video",
-              "size": 2506007
-            }
-          ]
-        }
-      }
-    },
-    {
-      "set_id": "2020-09-14_unknown-outfit",
-      "outfit": "unknown outfit",
-      "date": "2020-09-14",
-      "tiers": {
-        "nonnude": {
-          "image_count": 0,
-          "video_count": 1,
-          "total_items": 1,
-          "price_cents": 500,
-          "files": [
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/unknown-outfit/videos-nonnude/compressed_IMG_2964.MOV",
-              "type": "video",
-              "size": 19425155
             }
           ]
         }
@@ -2003,8 +1883,8 @@
       "tiers": {
         "nonnude": {
           "image_count": 0,
-          "video_count": 6,
-          "total_items": 6,
+          "video_count": 3,
+          "total_items": 3,
           "price_cents": 500,
           "files": [
             {
@@ -2021,21 +1901,6 @@
               "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/vid/videos-nonnude/IMG_2890.mp4",
               "type": "video",
               "size": 15591404
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/vid/videos-nonnude/compressed_IMG_2781.MOV",
-              "type": "video",
-              "size": 49294286
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/vid/videos-nonnude/compressed_IMG_2809.MOV",
-              "type": "video",
-              "size": 23875408
-            },
-            {
-              "url": "https://pub-24f8d05ca30745b496a897793321ddf1.r2.dev/2020-09-14%20sorted/vid/videos-nonnude/compressed_IMG_2935.MOV",
-              "type": "video",
-              "size": 38015678
             }
           ]
         }
