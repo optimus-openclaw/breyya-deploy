@@ -31,7 +31,7 @@
 
   // Add CSS protection
   var style = document.createElement('style');
-  style.textContent = 'img, video { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; pointer-events: none; } [class*="postMedia"] { -webkit-user-select: none; user-select: none; }';
+  style.textContent = 'img { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; pointer-events: none; } video { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; } [class*="postMedia"] { -webkit-user-select: none; user-select: none; }';
   document.head.appendChild(style);
 })();
 
