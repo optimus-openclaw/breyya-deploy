@@ -8,7 +8,7 @@
 // PAYMENTS_ENABLED flag - if false, injects payment system warning
 define('PAYMENTS_ENABLED', false);
 
-function getBreyyaSystemPrompt($fanName = '', $fanContext = '', $whaleScore = 0) {
+function getBreyyaSystemPrompt($fanName = '', $fanContext = '', $whaleScore = 0, $fanId = 0) {
     $currentHour = (int)(new DateTime("now", new DateTimeZone("America/Los_Angeles")))->format("G"); // 0-23 Pacific Time
     
     // Time-appropriate context
@@ -742,7 +742,7 @@ PROMPT;
     }
     
     // Add PPV content inventory
-    $prompt .= buildContentInventory($whaleScore);
+    $prompt .= buildContentInventory($whaleScore, $fanId ?? 0);
     
     // Add dynamic fan context (memory, PPV timing, content inventory)
     if ($fanContext) {
@@ -760,7 +760,7 @@ function getTemporaryRules() {
  * Build PPV Content Inventory for AI Injection
  * Selects appropriate content based on fan's whale tier and injects into system prompt
  */
-function buildContentInventory($whaleScore = 0) {
+function buildContentInventory($whaleScore = 0, $fanId = 0) {
     $inventoryFile = __DIR__ . '/../../data/content-inventory.json';
     
     if (!file_exists($inventoryFile)) {
@@ -796,6 +796,38 @@ function buildContentInventory($whaleScore = 0) {
     
     if (empty($availableSets)) {
         return "";
+    }
+    
+    // Per-fan purchase exclusion: remove sets this fan already bought
+    $purchasedKeys = [];
+    if ($fanId > 0) {
+        $dbPath = __DIR__ . '/../../data/breyya.db';
+        if (file_exists($dbPath)) {
+            try {
+                $pdb = new SQLite3($dbPath);
+                $pStmt = $pdb->prepare("SELECT DISTINCT content_key FROM ppv_purchases WHERE fan_user_id = :fid");
+                $pStmt->bindValue(':fid', $fanId, SQLITE3_INTEGER);
+                $pResult = $pStmt->execute();
+                while ($row = $pResult->fetchArray(SQLITE3_ASSOC)) {
+                    if (!empty($row['content_key'])) $purchasedKeys[] = $row['content_key'];
+                }
+                $pdb->close();
+            } catch (\Throwable $e) {
+                // Non-fatal: if lookup fails, offer everything
+            }
+        }
+    }
+    
+    if (!empty($purchasedKeys)) {
+        $availableSets = array_filter($availableSets, function($s) use ($purchasedKeys) {
+            $key = $s['set_id'] . '_' . $s['tier'];
+            return !in_array($key, $purchasedKeys);
+        });
+        $availableSets = array_values($availableSets);
+    }
+    
+    if (empty($availableSets)) {
+        return "\n\n**CONTENT STATUS:** This fan has purchased ALL available sets. Focus on conversation, tips, and engagement. Do NOT offer PPV.";
     }
     
     // Select 5-8 random set+tier combinations, GUARANTEEING tier diversity

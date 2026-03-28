@@ -489,7 +489,7 @@ try {
         $apiError = null;
         
         // Primary model attempt
-        $payload = json_encode(['model'=>$MODEL,'max_tokens'=>300,'temperature'=>0.9,'system'=>getBreyyaSystemPrompt('', $fanContext, $whaleScore),'messages'=>$msgs]);
+        $payload = json_encode(['model'=>$MODEL,'max_tokens'=>300,'temperature'=>0.9,'system'=>getBreyyaSystemPrompt('', $fanContext, $whaleScore, $fid),'messages'=>$msgs]);
 
         $ch = curl_init('https://api.anthropic.com/v1/messages');
         curl_setopt_array($ch, [CURLOPT_POST=>true, CURLOPT_HTTPHEADER=>['Content-Type: application/json','x-api-key: '.$ANTHROPIC_KEY,'anthropic-version: 2023-06-01'], CURLOPT_POSTFIELDS=>$payload, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>25]);
@@ -507,7 +507,7 @@ try {
         // Fallback to claude-haiku if primary failed
         if (!$reply && $MODEL !== 'claude-haiku-3-20240307') {
             $fallbackModel = 'claude-haiku-3-20240307';
-            $payload = json_encode(['model'=>$fallbackModel,'max_tokens'=>300,'temperature'=>0.9,'system'=>getBreyyaSystemPrompt('', $fanContext, $whaleScore),'messages'=>$msgs]);
+            $payload = json_encode(['model'=>$fallbackModel,'max_tokens'=>300,'temperature'=>0.9,'system'=>getBreyyaSystemPrompt('', $fanContext, $whaleScore, $fid),'messages'=>$msgs]);
             
             $ch = curl_init('https://api.anthropic.com/v1/messages');
             curl_setopt_array($ch, [CURLOPT_POST=>true, CURLOPT_HTTPHEADER=>['Content-Type: application/json','x-api-key: '.$ANTHROPIC_KEY,'anthropic-version: 2023-06-01'], CURLOPT_POSTFIELDS=>$payload, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>25]);
