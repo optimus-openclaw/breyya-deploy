@@ -1,7 +1,7 @@
 <?php
 /**
  * POST /api/messages/unlock
- * Pay to unlock a PPV message — routes to ppv-unlock.php for full set delivery
+ * Pay to unlock a PPV message — full set delivery with burst
  */
 
 require_once __DIR__ . "/../lib/auth.php";
@@ -44,7 +44,6 @@ $priceCents = intval($message["ppv_price_cents"]);
 $priceAmount = $priceCents / 100.0;
 
 // --- CHARGE ---
-// Test accounts skip CBPT
 if ($fanUserId == 3 || $fanUserId == 4) {
     $charged = true;
     error_log("PPV test unlock: fan $fanUserId skipped CBPT (test account)");
@@ -61,6 +60,7 @@ if ($fanUserId == 3 || $fanUserId == 4) {
 // --- DELIVER SET (burst all images as individual messages) ---
 $totalItems = 0;
 $contentKey = $message["ppv_content_key"] ?? "";
+error_log("PPV_BURST: Starting. msg=$messageId key=$contentKey fan=$fanUserId");
 
 if ($contentKey && strpos($contentKey, "_") !== false) {
     $inventoryFile = __DIR__ . "/../../data/content-inventory.json";
@@ -71,23 +71,25 @@ if ($contentKey && strpos($contentKey, "_") !== false) {
             $parts = explode("_", $contentKey);
             $tier = array_pop($parts);
             $setId = implode("_", $parts);
+            error_log("PPV_BURST: Looking for setId=$setId tier=$tier");
             
             foreach ($inventory["sets"] as $set) {
                 if ($set["set_id"] === $setId && isset($set["tiers"][$tier])) {
                     $files = $set["tiers"][$tier]["files"] ?? [];
+                    error_log("PPV_BURST: Found set with " . count($files) . " files");
                     
                     foreach ($files as $index => $file) {
-                        $url = $db->escapeString($file["url"]);
+                        $safeUrl = $db->escapeString($file["url"]);
                         $isVideo = ($file["type"] ?? "") === "video";
-                        $delay = $index + 2; // stagger 1 per second starting at +2s
+                        $delay = $index + 2;
                         $msgType = $isVideo ? "video" : "image";
                         
-                        $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, message_type, is_ai, is_unlocked, created_at) 
-                                  VALUES (1, $fanUserId, , , , 1, 1, datetime(now, + seconds))");
+                        $insertSql = "INSERT INTO messages (sender_id, receiver_id, content, media_url, message_type, is_ai, is_unlocked, created_at) VALUES (1, $fanUserId, '', '$safeUrl', '$msgType', 1, 1, datetime('now', '+$delay seconds'))";
+                        $db->exec($insertSql);
                         $totalItems++;
                     }
                     
-                    error_log("PPV Set Delivered: $totalItems items from $setId ($tier) to fan $fanUserId");
+                    error_log("PPV_BURST: Delivered $totalItems items from $setId ($tier) to fan $fanUserId");
                     break;
                 }
             }
