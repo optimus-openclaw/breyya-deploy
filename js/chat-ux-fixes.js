@@ -67,7 +67,7 @@
 
     var img = document.createElement("img");
     img.id = "lightbox-main-img";
-    img.style.cssText = "max-width:95vw;max-height:90vh;object-fit:contain;border-radius:4px;user-select:none;-webkit-user-drag:none";
+    img.style.cssText = "max-width:75vw;max-height:80vh;object-fit:contain;border-radius:12px;user-select:none;-webkit-user-drag:none;box-shadow:0 8px 40px rgba(0,0,0,0.6)";
 
     var closeBtn = document.createElement("div");
     closeBtn.innerHTML = "&times;";
@@ -190,7 +190,7 @@
     video.controls = true;
     video.autoplay = true;
     video.playsInline = true;
-    video.style.cssText = "max-width:95vw;max-height:90vh;border-radius:8px";
+    video.style.cssText = "max-width:75vw;max-height:80vh;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,0.6)";
     video.currentTime = startTime || 0;
 
     var closeBtn = document.createElement("div");
