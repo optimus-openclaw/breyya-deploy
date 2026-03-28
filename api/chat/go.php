@@ -737,7 +737,7 @@ try {
                     
                     // Generate preview from first image in the set
                     $previewUrl = '';
-                    $allItems = array_merge($tierData['images'], $tierData['videos']);
+                    $allItems = array_map(function($f) { return $f["url"]; }, $tierData["files"] ?? []);
                     if (!empty($allItems)) {
                         $firstItem = $allItems[0];
                         

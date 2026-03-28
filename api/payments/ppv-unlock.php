@@ -138,7 +138,7 @@ try {
                     foreach ($inventory['sets'] as $set) {
                         if ($set['set_id'] === $setId && isset($set['tiers'][$tier])) {
                             $tierData = $set['tiers'][$tier];
-                            $allItems = array_merge($tierData['images'], $tierData['videos']);
+                            $allItems = array_map(function($f) { return $f["url"]; }, $tierData["files"] ?? []);
                             
                             if (!empty($allItems)) {
                                 // Insert each item as a separate message
