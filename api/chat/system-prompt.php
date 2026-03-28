@@ -798,10 +798,29 @@ function buildContentInventory($whaleScore = 0) {
         return "";
     }
     
-    // Select 5-8 random set+tier combinations
+    // Select 5-8 random set+tier combinations, GUARANTEEING tier diversity
     $selectedCount = rand(5, 8);
-    shuffle($availableSets);
-    $selected = array_slice($availableSets, 0, $selectedCount);
+    
+    // Separate by tier to guarantee diversity
+    $byTier = ['nonnude' => [], 'nude' => [], 'sex' => []];
+    foreach ($availableSets as $s) {
+        $t = $s['tier'];
+        if (isset($byTier[$t])) $byTier[$t][] = $s;
+    }
+    
+    $selected = [];
+    // Always include 2 nude if available
+    shuffle($byTier['nude']);
+    $nudeCount = min(2, count($byTier['nude']));
+    for ($i = 0; $i < $nudeCount; $i++) $selected[] = $byTier['nude'][$i];
+    // Always include 1 sex if available
+    shuffle($byTier['sex']);
+    if (!empty($byTier['sex'])) $selected[] = $byTier['sex'][0];
+    // Fill rest with non-nude
+    shuffle($byTier['nonnude']);
+    $remaining = $selectedCount - count($selected);
+    for ($i = 0; $i < $remaining && $i < count($byTier['nonnude']); $i++) $selected[] = $byTier['nonnude'][$i];
+    shuffle($selected); // Randomize final order
     
     // Build the inventory text - new format for Breyya
     $inventoryText = "\n\n**CONTENT YOU CAN SELL RIGHT NOW:**\n";
