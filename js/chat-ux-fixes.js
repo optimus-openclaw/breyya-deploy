@@ -177,3 +177,124 @@
     setTimeout(attachLightboxHandlers, 1500);
   });
 })();
+
+
+// ============ VIDEO LIGHTBOX ============
+(function() {
+  function attachVideoHandlers() {
+    var container = document.querySelector("[class*=messages]");
+    if (!container) return;
+
+    var videos = container.querySelectorAll("video");
+    videos.forEach(function(vid) {
+      if (vid._lightboxAttached) return;
+      vid._lightboxAttached = true;
+
+      var wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+      wrapper.style.display = "inline-block";
+      wrapper.style.maxWidth = "100%";
+
+      var expandBtn = document.createElement("div");
+      expandBtn.textContent = "\u26F6";
+      expandBtn.style.position = "absolute";
+      expandBtn.style.top = "8px";
+      expandBtn.style.right = "8px";
+      expandBtn.style.background = "rgba(0,0,0,0.7)";
+      expandBtn.style.color = "white";
+      expandBtn.style.width = "32px";
+      expandBtn.style.height = "32px";
+      expandBtn.style.borderRadius = "8px";
+      expandBtn.style.display = "flex";
+      expandBtn.style.alignItems = "center";
+      expandBtn.style.justifyContent = "center";
+      expandBtn.style.cursor = "pointer";
+      expandBtn.style.fontSize = "18px";
+      expandBtn.style.zIndex = "10";
+      expandBtn.style.opacity = "0.7";
+      expandBtn.onmouseenter = function() { this.style.opacity = "1"; };
+      expandBtn.onmouseleave = function() { this.style.opacity = "0.7"; };
+
+      expandBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        vid.pause();
+        openVideoLightbox(vid.src, vid.currentTime);
+      });
+
+      vid.parentNode.insertBefore(wrapper, vid);
+      wrapper.appendChild(vid);
+      wrapper.appendChild(expandBtn);
+    });
+  }
+
+  function openVideoLightbox(src, startTime) {
+    var overlay = document.createElement("div");
+    overlay.id = "video-lightbox";
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0,0,0,0.95)";
+    overlay.style.zIndex = "99999";
+    overlay.style.display = "flex";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+
+    var video = document.createElement("video");
+    video.src = src;
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.currentTime = startTime || 0;
+    video.style.maxWidth = "95vw";
+    video.style.maxHeight = "90vh";
+    video.style.borderRadius = "8px";
+
+    var closeBtn = document.createElement("div");
+    closeBtn.innerHTML = "&times;";
+    closeBtn.style.position = "absolute";
+    closeBtn.style.top = "16px";
+    closeBtn.style.right = "20px";
+    closeBtn.style.color = "white";
+    closeBtn.style.fontSize = "32px";
+    closeBtn.style.fontWeight = "bold";
+    closeBtn.style.cursor = "pointer";
+    closeBtn.style.zIndex = "100000";
+    closeBtn.style.padding = "8px";
+    closeBtn.style.lineHeight = "1";
+
+    function closeLightbox() {
+      video.pause();
+      overlay.remove();
+      document.body.style.overflow = "";
+    }
+
+    closeBtn.addEventListener("click", closeLightbox);
+    overlay.addEventListener("click", function(e) {
+      if (e.target === overlay) closeLightbox();
+    });
+    document.addEventListener("keydown", function handler(e) {
+      if (e.key === "Escape") {
+        closeLightbox();
+        document.removeEventListener("keydown", handler);
+      }
+    });
+
+    overlay.appendChild(video);
+    overlay.appendChild(closeBtn);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
+  }
+
+  setTimeout(function() {
+    attachVideoHandlers();
+    var container = document.querySelector("[class*=messages]");
+    if (container) {
+      new MutationObserver(function() {
+        setTimeout(attachVideoHandlers, 300);
+      }).observe(container, { childList: true, subtree: true });
+    }
+  }, 3000);
+})();
