@@ -1,75 +1,98 @@
 /**
- * Scroll Fix v2 — track user scroll intent, not position.
+ * Scroll Fix v3 — Nuclear option.
  * 
- * Logic:
- * - User scrolls UP at all → set userScrolledUp = true → block ALL auto-scrolls
- * - User sends a message → clear flag → auto-scroll resumes
- * - Page load → allow initial scroll to bottom
- *
- * This is the only reliable approach because image loads change scrollHeight
- * after React's scroll fires, making position-based checks unreliable.
+ * 1. Reserve min-height on all chat images so layout doesn't shift
+ * 2. Track scroll direction — ANY upward scroll = freeze
+ * 3. Block BOTH scrollIntoView AND scrollTop setter on messages container
+ * 4. Only resume on: fan sends message OR manually scrolls to very bottom
  */
 (function() {
-  var userScrolledUp = false;
+  var frozen = false;
   var initialLoad = true;
   var lastScrollTop = 0;
 
-  // Patch scrollIntoView before React hydrates
-  var orig = Element.prototype.scrollIntoView;
+  // === PATCH scrollIntoView immediately (before React) ===
+  var origSIV = Element.prototype.scrollIntoView;
   Element.prototype.scrollIntoView = function(opts) {
-    // Allow during initial page load
-    if (initialLoad) return orig.call(this, opts);
-    // Block if user has scrolled up
-    if (userScrolledUp) return;
-    return orig.call(this, opts);
+    if (initialLoad) return origSIV.call(this, opts);
+    if (frozen) return;
+    return origSIV.call(this, opts);
   };
 
-  // After page loads, start tracking scroll direction
-  function initScrollTracking() {
-    var container = document.querySelector("[class*=messages]");
-    if (!container) { setTimeout(initScrollTracking, 500); return; }
+  // === INJECT CSS: reserve space for images ===
+  var style = document.createElement("style");
+  style.textContent = [
+    // All chat media images get min-height to prevent layout shift
+    "[class*=messages] img[src*='r2.dev'] { min-height: 280px; object-fit: contain; }",
+    "[class*=messages] img[src*='/data/'] { min-height: 280px; object-fit: contain; }",
+    "[class*=messages] img[src*='/uploads/'] { min-height: 280px; object-fit: contain; }",
+    // PPV images already have aspect-ratio from ppvImageWrap
+    "[class*=ppvImageWrap] img { min-height: auto; }"
+  ].join("\n");
+  document.head.appendChild(style);
 
-    // Allow initial scroll to bottom
+  function setup() {
+    var container = document.querySelector("[class*=messages]");
+    if (!container) { setTimeout(setup, 300); return; }
+
+    // Allow initial scroll, then lock down
     setTimeout(function() { initialLoad = false; }, 3000);
 
+    // === PATCH scrollTop on this specific container ===
+    var desc = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "scrollTop") ||
+               Object.getOwnPropertyDescriptor(Element.prototype, "scrollTop");
+    if (desc && desc.set) {
+      var origSet = desc.set;
+      var origGet = desc.get;
+      Object.defineProperty(container, "scrollTop", {
+        get: function() { return origGet.call(this); },
+        set: function(val) {
+          if (initialLoad) return origSet.call(this, val);
+          if (frozen) return; // Block programmatic scroll
+          return origSet.call(this, val);
+        },
+        configurable: true
+      });
+    }
+
+    // === Track scroll direction ===
     lastScrollTop = container.scrollTop;
-
     container.addEventListener("scroll", function() {
-      var st = container.scrollTop;
-      var atBottom = container.scrollHeight - st - container.clientHeight < 80;
+      // Use the raw getter to avoid our override
+      var st = desc ? desc.get.call(container) : container.scrollTop;
+      var distFromBottom = container.scrollHeight - st - container.clientHeight;
 
-      if (st < lastScrollTop && !atBottom) {
-        // User scrolled UP
-        userScrolledUp = true;
-      } else if (atBottom) {
-        // User scrolled to bottom manually
-        userScrolledUp = false;
+      if (st < lastScrollTop - 5) {
+        // Scrolled UP — freeze
+        frozen = true;
+      }
+      if (distFromBottom < 30) {
+        // Manually reached bottom — unfreeze
+        frozen = false;
       }
       lastScrollTop = st;
-    });
-  }
+    }, { passive: true });
 
-  // Resume auto-scroll when fan sends a message
-  function watchSend() {
+    // === Resume on message send ===
     var form = document.querySelector("[class*=inputBar]");
-    if (!form) { setTimeout(watchSend, 500); return; }
-    form.addEventListener("submit", function() {
-      userScrolledUp = false;
-      initialLoad = false;
-    });
+    if (form) {
+      form.addEventListener("submit", function() {
+        frozen = false;
+        // Scroll to bottom after a tick
+        setTimeout(function() {
+          if (desc && desc.set) {
+            desc.set.call(container, container.scrollHeight);
+          }
+          var sentinel = container.querySelector("[class*=messagesInner] > div:last-child");
+          if (sentinel) origSIV.call(sentinel, { behavior: "smooth" });
+        }, 100);
+      });
+    }
   }
-
-  // Expose for PPV burst integration
-  window._chatScrollPause = function() { userScrolledUp = true; };
-  window._chatScrollResume = function() { userScrolledUp = false; };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function() {
-      initScrollTracking();
-      watchSend();
-    });
+    document.addEventListener("DOMContentLoaded", setup);
   } else {
-    initScrollTracking();
-    watchSend();
+    setup();
   }
 })();
