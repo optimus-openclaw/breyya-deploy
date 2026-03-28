@@ -735,14 +735,11 @@ try {
                 if ($ppvSet && $ppvTier && $ppvPriceCents > 0) {
                     $tierData = $ppvSet['tiers'][$ppvTier];
                     
-                    // Generate preview — prefer images over videos for thumbnail
+                    // Generate preview from first image in the set
                     $previewUrl = '';
-                    $imageFiles = array_values(array_filter($tierData["files"] ?? [], function($f) { return $f["type"] === "image"; }));
-                    $videoFiles = array_values(array_filter($tierData["files"] ?? [], function($f) { return $f["type"] === "video"; }));
                     $allItems = array_map(function($f) { return $f["url"]; }, $tierData["files"] ?? []);
-                    $firstItem = !empty($imageFiles) ? $imageFiles[0]["url"] : (!empty($allItems) ? $allItems[0] : '');
-                    $isVideoOnly = empty($imageFiles) && !empty($videoFiles);
                     if (!empty($allItems)) {
+                        $firstItem = $allItems[0];
                         
                         // For images, try to create blurred preview
                         if (strpos($firstItem, '.jpg') !== false || strpos($firstItem, '.jpeg') !== false || strpos($firstItem, '.png') !== false) {
@@ -772,13 +769,9 @@ try {
                             }
                         }
                         
-                        // Fallback: for video-only sets, use a video placeholder; otherwise use original URL
+                        // Fallback: use original URL
                         if (!$previewUrl) {
-                            if ($isVideoOnly) {
-                                $previewUrl = '/images/video-preview-placeholder.jpg';
-                            } else {
-                                $previewUrl = $firstItem;
-                            }
+                            $previewUrl = $firstItem;
                         }
                     }
                     
@@ -795,9 +788,7 @@ try {
                     // Insert the PPV message with set info
                     $safePpvContentKey = $db->escapeString($ppvSetTierId); // Store set_id_tier for unlock
                     $safePpvPreviewUrl = $db->escapeString($previewUrl);
-                    // Prefer first image for media_url (frontend renders as <img>); videos only if no images
-                    $ppvMediaItem = !empty($imageFiles) ? $imageFiles[0]["url"] : ($firstItem ?: 'N/A');
-                    $safePpvMediaUrl = $db->escapeString($ppvMediaItem);
+                    $safePpvMediaUrl = $db->escapeString($firstItem ?: 'N/A'); // Use first item as main media
                     
                     $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, media_thumbnail, is_ppv, ppv_price_cents, is_unlocked, ppv_preview_url, ppv_content_key, is_ai, created_at) 
                               VALUES ($CREATOR_ID, $fid, 'Exclusive content set - unlock to view 🔒', '$safePpvMediaUrl', '$safePpvPreviewUrl', 1, $ppvPriceCents, 0, '$safePpvPreviewUrl', '$safePpvContentKey', 1, datetime('now', '+1 second'))");
