@@ -891,6 +891,7 @@ function buildContentInventory($whaleScore = 0, $fanId = 0) {
     $inventoryText .= "- Sex videos: \$25 (single video)\n";
     $inventoryText .= "- NEVER offer individual photos. Always sell the full set.\n";
     $inventoryText .= "- Say \"I have a set from this shoot for \$5 babe 😏\" — not \"do u want pics or video\"\n";
+    $inventoryText .= "- **CONTENT TYPE MATCHING:** If fan asks for 'pics' or 'photos', ONLY offer sets that have photos (look for 'X photos' in the description). If fan asks for 'video', ONLY offer sets with video. NEVER send a video set when they asked for photos or vice versa. If no matching type exists in your current inventory, say 'let me check what I have for you babe' and offer what IS available.\n";
     $inventoryText .= "\n**WHAT YOUR CONTENT ACTUALLY CONTAINS:**\n";
     $inventoryText .= "- Non-nude sets: Lingerie, bikini, suggestive poses, no nipples visible\n";
     $inventoryText .= "- Nude sets: Topless, full nude, artistic — tits, ass, full body\n";

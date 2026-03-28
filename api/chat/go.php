@@ -83,6 +83,15 @@ try {
     )");
 
     // Load or create fan profile
+    // Universal sanitizer: strip ALL [bracket tags] from fan-visible messages
+    function sanitizeForFan($text) {
+        // Remove all [...] tags: [PPV:...], [VOICE:...], [SYSTEM:...], [PPV sent:...], etc.
+        $text = preg_replace('/\[[^\]]*\]/', '', $text);
+        // Clean up double spaces and trim
+        $text = preg_replace('/\s{2,}/', ' ', trim($text));
+        return $text;
+    }
+
     function loadFanProfile($db, $fanId) {
         $stmt = $db->prepare("SELECT * FROM fan_profiles WHERE fan_id = :fid");
         if (!$stmt) { error_log("BREYYA_ERROR: fan_profiles prepare failed: " . $db->lastErrorMsg()); return ["fan_id" => $fanId, "display_name" => "", "conversation_stage" => "new", "onboarding_step" => 1]; }
@@ -313,12 +322,12 @@ try {
                 $su = $db->escapeString($voiceData['voice_url'] ?? '');
                 $db->exec("INSERT INTO messages (sender_id, receiver_id, content, media_url, message_type, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $dfid, '', '$su', 'audio', 1, 1, datetime('now'))");
                 if (!empty($voiceData['text_reply'])) {
-                    $st = $db->escapeString($voiceData['text_reply']);
+                    $st = $db->escapeString(sanitizeForFan($voiceData['text_reply']));
                     $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $dfid, '$st', 1, 1, datetime('now', '+2 seconds'))");
                 }
             } else {
                 // Regular text
-                $safe = $db->escapeString($dreply);
+                $safe = $db->escapeString(sanitizeForFan($dreply));
                 $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $dfid, '$safe', 1, 1, datetime('now'))");
             }
             $db->exec("UPDATE chat_queue SET status='delivered', delivered_at=datetime('now') WHERE id=$dqid");
@@ -788,7 +797,7 @@ try {
                     
                     // Insert the text message first (if there's text content)
                     if (!empty($cleanReply)) {
-                        $safeTextMsg = $db->escapeString($cleanReply);
+                        $safeTextMsg = $db->escapeString(sanitizeForFan($cleanReply));
                         $db->exec("INSERT INTO messages (sender_id, receiver_id, content, is_ai, is_unlocked, created_at) VALUES ($CREATOR_ID, $fid, '$safeTextMsg', 1, 1, datetime('now'))");
                     }
                     
@@ -810,7 +819,7 @@ try {
                     $debug[] = "ppv_sent:set=$ppvSetTierId,price=$ppvPrice,fan=$fid,items={$tierData['total_items']}";
                     
                     // Update reply for logging purposes
-                    $reply = $cleanReply . " [PPV sent: $ppvSetTierId for \$$ppvPrice]";
+                    $reply = $cleanReply; // Don't append internal tags to reply
                 } else {
                     $debug[] = "ppv_error:set_not_found=$ppvSetTierId";
                 }
@@ -855,9 +864,14 @@ try {
         }
 
         // ===== PHASE 2 SAVE: Store reply in queue, set typing state =====
+        // Sanitize before dedup check
+        $reply = sanitizeForFan($reply);
         $dedupSafe = $db->escapeString($reply);
-        $dedupCheck = $db->querySingle("SELECT COUNT(*) FROM messages WHERE sender_id = $CREATOR_ID AND receiver_id = $fid AND content = '$dedupSafe' AND created_at >= datetime('now', '-10 seconds')");
-        if ($dedupCheck > 0) { $debug[] = "dedup_skipped:fan=$fid"; $doubleTexted = true; }
+        // Check for exact duplicate within 60 seconds
+        $dedupCheck = $db->querySingle("SELECT COUNT(*) FROM messages WHERE sender_id = $CREATOR_ID AND receiver_id = $fid AND content = '$dedupSafe' AND created_at >= datetime('now', '-60 seconds')");
+        // Also check if this exact reply is already queued (typing state)
+        $queueDupe = $db->querySingle("SELECT COUNT(*) FROM chat_queue WHERE fan_user_id = $fid AND ai_response = '$dedupSafe' AND status IN ('typing','delivered') AND created_at >= datetime('now', '-60 seconds')");
+        if ($dedupCheck > 0 || $queueDupe > 0) { $debug[] = "dedup_skipped:fan=$fid"; $doubleTexted = true; }
         if (!$doubleTexted && !$ppvDetected) {
             // Calculate typing duration based on reply length (3-20 seconds)
             // BigTipper69 = instant (no typing sim)
@@ -876,7 +890,7 @@ try {
                 $debug[] = "phase2_voice_typing:fan=$fid,secs=$typingDuration";
             } else {
                 // Store text reply for Phase 1 to deliver
-                $safe = $db->escapeString($reply);
+                $safe = $db->escapeString(sanitizeForFan($reply));
                 $db->exec("UPDATE chat_queue SET status='typing', ai_response='$safe', typing_until=datetime('now', '+" . $typingDuration . " seconds') WHERE id=" . intval($item['qid']));
                 $debug[] = "phase2_text_typing:fan=$fid,secs=$typingDuration";
             }
